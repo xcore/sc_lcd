@@ -1,0 +1,4 @@
+The LCD module is designed to drive Graphics LCD panel of resolution upto VGA.
+The component can support various LCD panels (LCD modules with no inbuilt memory).
+The user should configure the files lcd_defines.h and lcd_ports.xc according 
+to the LCD used.
