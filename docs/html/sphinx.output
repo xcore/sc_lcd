@@ -1,0 +1,34 @@
+Running Sphinx v1.0.7
+loading pickled environment... not yet created
+building [html]: targets for 8 source files that are out of date
+updating environment: 8 added, 0 changed, 0 removed
+reading sources... [ 12%] api
+Rendering Doxygen function void lcd
+reading sources... [ 25%] executing_proj
+reading sources... [ 37%] index
+reading sources... [ 50%] overview
+reading sources... [ 62%] programming
+reading sources... [ 75%] software_requirements
+reading sources... [ 87%] structure
+reading sources... [100%] system
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [ 12%] api
+writing output... [ 25%] executing_proj
+writing output... [ 37%] index
+writing output... [ 50%] overview
+writing output... [ 62%] programming
+writing output... [ 75%] software_requirements
+writing output... [ 87%] structure
+writing output... [100%] system
+
+writing additional files... genindex search
+copying images... [100%] images/lcd_timing.png
+
+copying static files... done
+dumping search index... done
+dumping object inventory... done
+build succeeded.

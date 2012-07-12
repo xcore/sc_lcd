@@ -1,0 +1,193 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview &mdash; ZLG Graphics Display v documentation</title>
+    <link rel="stylesheet" href="_static/xdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/xcomment.js"></script>
+    <link rel="top" title="ZLG Graphics Display v documentation" href="index.html" />
+    <link rel="next" title="Component Description" href="system.html" />
+    <link rel="prev" title="ZLG Graphics Display" href="index.html" /> 
+
+<script>
+function setheight() {
+h1 = document.getElementById('d1').style.height;
+h2 = document.getElementById('d2').style.height;
+
+if (parseInt(h1) > parseInt(h2)) {
+document.getElementById('d2').style.height=h1 + "px";
+}
+else {
+document.getElementById('d1').style.height=h2 + "px";
+}
+
+}
+</script>
+</head>
+
+<body onload="setheight();">
+
+  
+
+    <div class="document" id='d1'>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+<div style="float: right">
+<a href="index.html"
+                        title="previous chapter"> &lt&lt </a>
+<a href="system.html"
+                        title="next chapter"> &gt&gt </a></p>
+</div>
+
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>The LCD module is used to drive single graphics LCD module with the XMOS silicon. The component can drive graphics LCD modules of size upto 800 * 600 pixels. The graphics LCD module used in the project does not include an in-built memory. Hence the LCD image buffer is stored separately in an external memory.
+The external memory used depends on the project needs. The memory should be sufficiently large enough to store atleast 1 LCD image or 2 LCD images in case of double buffering.</p>
+<div class="section" id="component-summary">
+<h2>Component Summary<a class="headerlink" href="#component-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr><td colspan="2">** Functionality **</td>
+</tr>
+<tr><td colspan="2">Component driving a graphics LCD module</td>
+</tr>
+<tr><td colspan="2">** Supported Device **</td>
+</tr>
+<tr><td><div class="first last line-block">
+<div class="line">XMOS devices</div>
+</div>
+</td>
+<td><div class="first last line-block">
+<div class="line">XS1-L1</div>
+<div class="line">XS1-L2</div>
+<div class="line">XS1-G4</div>
+</div>
+</td>
+</tr>
+<tr><td colspan="2">** Requirements **</td>
+</tr>
+<tr><td>XMOS Desktop Tools</td>
+<td>V11.11.0 or later</td>
+</tr>
+<tr><td>XMOS LCD component</td>
+<td>1v0</td>
+</tr>
+<tr><td colspan="2"><strong>Licensing and Support</strong></td>
+</tr>
+<tr><td colspan="2">Component code provided without charge from XMOS.
+Component code is maintained by XMOS.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lcd-display-component-properties">
+<h2>LCD Display component properties<a class="headerlink" href="#lcd-display-component-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Standard component to support different LCD modules</li>
+<li>Once the LCD properties are configured the component can be directly used</li>
+<li>Different color depths 24 bpp, 18 bpp, 16 bpp based on user configuration</li>
+<li>Resolution upto 800 * 600 pixels (480 * 272 pixel is used in the provided code)</li>
+<li>Frame rate of upto 20  Fps for the resolution used in the sample code (480 * 272 pixels)</li>
+<li>Uses one thread</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="resource-requirements">
+<h1>Resource requirements<a class="headerlink" href="#resource-requirements" title="Permalink to this headline">¶</a></h1>
+<p>The resource requirements for the LCD component are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Resource</th>
+<th class="head">Usage</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Channels</td>
+<td>1</td>
+</tr>
+<tr><td>Timers</td>
+<td>1 (for deciding the LCD signal write timings)</td>
+</tr>
+<tr><td>Clocks</td>
+<td>1 (the LCD clock)</td>
+</tr>
+<tr><td>Threads</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" id='d2'>
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">ZLG Graphics Display</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#component-summary">Component Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lcd-display-component-properties">LCD Display component properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#resource-requirements">Resource requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">Component Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming Guide</a></li>
+</ul>
+
+<div id="searchbox" style="display: none;margin-bottom: 10px;">
+  <h3>Search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+
+
+    <div class="footer">
+    </div>
+  </body>
+</html>
+
+
+
