@@ -8,8 +8,7 @@ The 'module_lcd' is a standalone module. It can be used by the application to dr
 Configuration Defines
 ---------------------
 
-The following defines must be configured for the LCD component based on the Graphics LCD module used.
-The defines can be seen in the file ``lcd_defines.h`` and ``lcd_ports.xc``
+The following defines must be configured for the LCD component based on the Graphics LCD module used and can be found in the files ``lcd_defines.h`` and ``lcd_ports.xc``
 
 .. list-table:: LCD Defines
    :header-rows: 1
@@ -52,22 +51,21 @@ The defines can be seen in the file ``lcd_defines.h`` and ``lcd_ports.xc``
 API
 ---
 
-The LCD display module functionalities can be seen in
+The LCD display module functionality is defined in
         * ``lcd.xc``
         * ``lcd.h``
         * ``lcd_defines.h``
 
 The function :c:func:`lcd` in lcd.xc is handled in the thread.
-This sections explains only the important APIs that are frequently used. Other static APIs are not discussed in this section.
+This section explains only the important APIs that are frequently used. Other static APIs are not discussed in this section.
 The other APIs can be seen in the files ``lcd.xc`` and ``lcd.h``.
 
-Note that to enable the application use the LCD module, the module should be added to the build options of the project. 
-To achieve that, the following is done:
+Note that to enable the application to use the LCD module, the module should be added to the build options of the project, as follows:
 
-  #. The file ``BuildOptions`` available in ..\app_graphics_demo folder is opened
-  #. The name ``module_lcd`` is added to the option ``MODULE`` in the BuildOptions. This will enable the application project to use the LCD module		   
-  #. The object names 'lcd' and 'lcd_ports' are added to the option ``OBJNAMES``
-  #. The module ``module_lcd`` is added to the ``References`` option in the project settings of the application project
+  #. Open the file ``BuildOptions`` available in ..\app_graphics_demo folder 
+  #. Add the name ``module_lcd`` to the option ``MODULE`` in the BuildOptions. This will enable the application project to use the LCD module		   
+  #. Add the object names 'lcd' and 'lcd_ports' to the option ``OBJNAMES``
+  #. Add the module ``module_lcd`` to the ``References`` option in the project settings of the application project
 
 
 .. doxygenfunction:: lcd
