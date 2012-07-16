@@ -69,4 +69,13 @@ Note that to enable the application to use the LCD module, the module should be 
 
 
 .. doxygenfunction:: lcd
+.. only:: html
 
+  .. figure:: images/lcd_function.png
+     :align: center
+
+.. only:: latex
+
+  .. figure:: images/lcd_function.pdf
+     :figwidth: 50%
+     :align: center
