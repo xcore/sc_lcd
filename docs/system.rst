@@ -50,3 +50,4 @@ The buffer size is computed using rows * columns * size of each pixel. The LCD m
 inbuilt frame buffer. Refer to the sw_display_controller application for an example of an integration of this component with an external SDRAM controller and frame buffer management code.
 
 
+

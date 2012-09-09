@@ -1,27 +1,51 @@
 #ifndef __LCD_DEFINES_H__
 #define __LCD_DEFINES_H__
 
-/* Defines for LCD panel */
+/* This file is included when the target selected is TM043NDH02
+ * This LCD panel is supplied by SHANGHAI TIANMA MICRO-ELECTRONICS corporation
+ * This is a 272 * 480 LCD panel with no memory buffer  */
+
+#ifdef __lcd_conf_h_exists__
+#include "lcd_conf.h"
+#endif
+
+/* Structure to hold the port details */
+
+struct lcd_ports_struct
+{
+	/* The clock line */
+	out port p_lcd_clk;
+
+	/* The LCD signal lines */
+	out port p_lcd_tim;
+
+	/* 32 bit data port */
+	out port p_lcd_rgb;
+
+	/* Clock block used for LCD clock */
+	clock clk_lcd;
+};
+
+typedef struct lcd_ports_struct lcd_ports;
 
 /*
  *  This define is used to represent the width of the LCD panel in pixels
- *  User configuration required: YES
  */
-#define LCD_WIDTH 480
+#define LCD_WIDTH (480)
 
 /*
  *  This define is used to represent the height of the LCD panel in terms of lines
- *  User configuration required: YES
  */
-#define LCD_HEIGHT 272
+#define LCD_HEIGHT (272)
 
+
+#define LCD_BITS_PER_PIXEL (16)
 /*
  *  This define is used to represent the width of the LCD panel in words
  *  The LCD row width is used in terms of words because the SDRAM used along with
  *  the lcd module is accessed as words
- *  User configuration required: YES (if the SDRAM word size changes)
  */
-#define LCD_ROW_WORDS (LCD_WIDTH/2)
+#define LCD_ROW_WORDS ((LCD_WIDTH*LCD_BITS_PER_PIXEL)/32)
 
 /*
  * The horizontal porch timings are very important to decide the LCD refresh
@@ -32,16 +56,14 @@
  * example: Horizontal pulse = 41 clk, horizontal front porch = 2 clk,
  * horizontal back porch = 2 clk
  * Total porch timings = 41 + 2 + 2 = 45 clk
- * User configuration required: YES depending on the LCD used
  */
-#define HOR_PORCH  (45)
-
+#ifndef LCD_HOR_PORCH
+#define LCD_HOR_PORCH  (45)
+#endif
 /* The total time for HSYNC in terms of clock.
  * HSYNC is calculated as sum of Horizontal Porch + LCD Width
- * User configuration required: YES (if the HYSNC time calculation varies
- * depending on the LCD used)
  */
-#define HSYNC_TIME LCD_WIDTH + HOR_PORCH
+#define LCD_HSYNC_TIME (LCD_WIDTH + LCD_HOR_PORCH)
 
 /* The vertical porch timings are very important to decide the LCD refresh
  * The vertical timings include - vertical pulse period + vertical front porch
@@ -50,16 +72,19 @@
  * To calculate the vertical timings
  * Vert_porch = HSYNC_TIME * (Vertical pulse period + vertical front porch +
  * Optional Vertical back porch)
- * User configuration required: YES depending on the LCD used
  */
-#define VERT_PORCH HSYNC_TIME * (10 + 2 + 2)
-
+#ifndef LCD_VERT_PORCH
+#define LCD_VERT_PORCH (LCD_HSYNC_TIME * 5)
+#endif
 /* The defines FREQ_DIVIDEND and FREQ_DIVISOR are used to calculate the
  * frequency of the clock used for LCD.
  * The frequency configured = (FREQ_DIVIDEND / FREQ_DIVISOR) in MHz
- * User configuration required: YES depending on the LCD used
  */
-#define FREQ_DIVIDEND 100
-#define FREQ_DIVISOR 8
+#ifndef LCD_FREQ_DIVIDEND
+#define LCD_FREQ_DIVIDEND 100
+#endif
 
+#ifndef LCD_FREQ_DIVISOR
+#define LCD_FREQ_DIVISOR 8
+#endif
 #endif
