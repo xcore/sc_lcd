@@ -97,7 +97,7 @@ void graphics_demo(chanend client)
 		  }
 		  else
 		  {
-		     put_image_BW(client, 125 , 60, IMAGE_HEIGHT, IMAGE_WIDTH);
+		     put_image_BW(client, 130 , 60, IMAGE_HEIGHT, IMAGE_WIDTH);
 		  }
 		  write_text_16x16_color(client, 110, 60, welcometext);
 		  display_counter++;

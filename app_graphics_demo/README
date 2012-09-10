@@ -1,1 +1,2 @@
-TBD
+The application shows how to do character and text writes on the LCD screen.
+The application uses the standalone graphics LCD module and has no image buffer to store the data, thereby writing directly to the LCD screen

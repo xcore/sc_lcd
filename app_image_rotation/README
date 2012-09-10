@@ -1,0 +1,2 @@
+The application does a simple rotation of a 2D image across the LCD screen.
+The application doesn't have an image buffer to update the frame data, thereby writing directly to the LCD screen.
