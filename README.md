@@ -1,8 +1,10 @@
 sc_lcd
 ======
 
-The LCD component used to drive Graphics LCD module.
-To add this component to project, the following should be done
-- Add the object names "lcd" and "lcd_ports" to the option OBJNAMES
-- Add the module name "module_lcd" to the list of modules
-- Add the project as "References" in the Project settings of the Applcation project
+The LCD component used to drive the Graphics LCD screen of resolution upto 800 * 600 pixels.
+The component includes 1 module - module_lcd.
+It functions as a standalone component - so that the pixel data can be directly sent to the LCD incase there is no image buffer available.
+
+Example applications have been provided with the component
+ - app_graphics_demo - highlighting the capability of XCORE to write character and text using a standalone LCD component
+ - app_image_rotation - simple movement of a 2D image across the LCD screen
