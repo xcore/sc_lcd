@@ -34,7 +34,7 @@ typedef enum
 #define WIDTH_16x16 (ALPHA_WIDTH_16x16/SIZE_OF_BYTE)
 /**********************************************************************/
 
-/* \brief Gets the character data from the look up table for the specified character (size of 6 * 6 pixels)
+/** \brief Gets the character data from the look up table for the specified character (size of 6 * 6 pixels)
  *
  * \param alpha The character whose pixel data is required
  * \param char_buffer[][] The character buffer to hold the pixel data for the mentioned character
@@ -42,7 +42,7 @@ typedef enum
  */
 void get_character_6x6(char alpha, unsigned short char_buffer[ALPHA_HEIGHT_6x6][ALPHA_WIDTH_6x6]);
 
-/* \brief Gets the character data from the look up table for the specified character (size of 6 * 6 pixels)
+/** \brief Gets the character data from the look up table for the specified character (size of 6 * 6 pixels)
  *
  * \param alpha The character whose pixel data is required
  * \param char_buffer[][] The character buffer to hold the pixel data for the mentioned character
@@ -50,7 +50,7 @@ void get_character_6x6(char alpha, unsigned short char_buffer[ALPHA_HEIGHT_6x6][
  */
 void get_character_16x16(char alpha, unsigned short char_buffer[ALPHA_HEIGHT_16x16][ALPHA_WIDTH_16x16]);
 
-/* \brief The set the feature for the text
+/** \brief To set the feature for the text
  *
  * \param txt_ft The text feature (defined as enum text_feature)
  *
@@ -58,10 +58,14 @@ void get_character_16x16(char alpha, unsigned short char_buffer[ALPHA_HEIGHT_16x
  */
 void set_text_feature(text_feature txt_ft);
 
-
+/** \brief The read back the feature set for text
+ *
+ * \return The feature set (defined as enum text_feature)
+ *
+ */
 text_feature get_text_feature(void);
 
-/* \brief To set the space between characters in a text
+/** \brief To set the space between characters in a text
  *
  * \param space space between the characters
  * \note The size should be mentioned as multiples of 2 (as the LCD is updated as words)

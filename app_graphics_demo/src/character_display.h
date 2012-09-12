@@ -3,7 +3,7 @@
 
 #include "character_specific_includes.h"
 
-/* \brief To write a text with fonts of pixel size 6 * 6
+/** \brief To write a text with fonts of pixel size 6 * 6
  *
  * \param client The LCD channel number
  * \param start_row Start row for the text
@@ -19,7 +19,7 @@
 void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col,
 		char text_to_type[]);
 
-/* \brief To write a text with fonts of pixel size 6 * 6
+/** \brief To write a text with fonts of pixel size 6 * 6
  *
  * \param client The LCD channel number
  * \param start_row Start row for the text
@@ -35,7 +35,7 @@ void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col,
 void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col,
 		char text_to_type[]);
 
-/* \brief To write a single character of pixel size 6 * 6
+/** \brief To write a single character of pixel size 6 * 6
  *
  * \param client The LCD channel number
  * \param start_row Start row for the text
@@ -50,7 +50,7 @@ void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col
 void write_character_6x6_bw(chanend client, unsigned start_row, unsigned start_col,
 		             unsigned short char_buffer[ALPHA_HEIGHT_6x6][ALPHA_WIDTH_6x6]);
 
-/* \brief To write a single character of pixel size 6 * 6
+/** \brief To write a single character of pixel size 6 * 6
  *
  * \param client The LCD channel number
  * \param start_row Start row for the text
@@ -65,7 +65,7 @@ void write_character_6x6_bw(chanend client, unsigned start_row, unsigned start_c
 void write_character_6x6_color(chanend client, unsigned start_row, unsigned start_col,
 		             unsigned short char_buffer[ALPHA_HEIGHT_6x6][ALPHA_WIDTH_6x6]);
 
-/* \brief To write a text with fonts of pixel size 16 * 16
+/** \brief To write a text with fonts of pixel size 16 * 16
  *
  * \param client The LCD channel number
  * \param start_row Start row for the text

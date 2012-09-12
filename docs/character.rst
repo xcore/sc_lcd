@@ -35,6 +35,9 @@ The general graphics functionalities are available in the files
 
 The character specific functionalities are available in the files
 
+.. list-table:: Project structure
+  :header-rows: 1
+  
   * - File
     - Description
   * - ``character_display.h``
@@ -44,8 +47,7 @@ The character specific functionalities are available in the files
   * - ``alphabet.c``
     - File containing the pixel data for 6 * 6 characters. Currently the file includes only A-Z (upper case) and space
   * - ``alphabet_16x16.c``
-    - File containing the pixel data for 16 * 16 characters. Currently the file includes only A-Z (upper case) and space
-      It also includes the font with no formatting and in Italics
+    - File containing the pixel data for 16 * 16 characters. Currently the file includes only A-Z (upper case) and space. It also includes the font with no formatting and in Italics
   * - ``alphabet_lookup_table.c``
     - File containing the lookup table for the characters and APIs to find the pixel data for a character    
   * - ``character_specific_includes.h``
