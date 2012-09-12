@@ -18,6 +18,9 @@ Project structure
 
 The application includes the following files
 
+.. list-table:: Project structure
+  :header-rows: 1
+  
   * - File
     - Description
   * - ``rotate.h``
@@ -28,7 +31,7 @@ The application includes the following files
 APIs
 ----
 
-The demo is executed in the API c:func::`demo` which takes of the image rotation and check for LCD limits
+The demo is executed in the API :c:func::`demo` which takes of the image rotation and check for LCD limits
 
 Executing the application
 -------------------------

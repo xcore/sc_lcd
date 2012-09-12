@@ -73,9 +73,9 @@ Resource requirements
 The resource requirements for the LCD component are:
 
 +--------------+-----------------------------------------------+
-| Resource     | Usage                            	       |
+| Resource     | Usage                                         |
 +==============+===============================================+
-| Channels     | 1 		                               |
+| Channels     | 1                                             |
 +--------------+-----------------------------------------------+
 | Timers       | 1 (for deciding the LCD signal write timings) |
 +--------------+-----------------------------------------------+
@@ -85,8 +85,9 @@ The resource requirements for the LCD component are:
 +--------------+-----------------------------------------------+
 
 The memory requirements for the component are as shown below:
+
 +--------------+-----------------------------------------------+
-| Resource     | Usage                            	       |
+| Resource     | Usage                                         |
 +==============+===============================================+
 | Setting      | No Optimization                               |
 +--------------+-----------------------------------------------+
@@ -96,5 +97,4 @@ The memory requirements for the component are as shown below:
 +--------------+-----------------------------------------------+
 | Program      | 212 bytes                                     |
 +--------------+-----------------------------------------------+
-
 

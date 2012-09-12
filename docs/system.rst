@@ -3,7 +3,7 @@ Component Description
 
 Basics of Graphics LCD
 ----------------------
-Crstals in LCD screens are organized in some random pattern when there is no electric field and aligns to the field when there is an electric field.
+Crystals in LCD screens are organized in some random pattern when there is no electric field and aligns to the field when there is an electric field.
 The crystals themselves do not emit light, but they gate the amount of light that can pass through them. For example, a crystal which is perpendicualr to a light source will block the light from passing through it. Since the crystals do not emit light on their own, a light source or a backlight is required to get the images on the LCD screen.
 
 The LCDs are classified into Super Twisted Nematic (STN displays) displays and Thin Filn Transistor displays (TFT displays) depending on the technology. This cmoponent uses only TFT displays.
