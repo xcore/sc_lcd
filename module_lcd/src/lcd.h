@@ -3,26 +3,35 @@
 
 #include "lcd_defines.h"
 
-/** \brief The function handles the LCD graphics module. It handles the LCD module's clock, vertical sync and horizontal sync and data parameters
-* 
-* \param c_lcd The channel end number
-*/
-void lcd_server(chanend c_lcd, lcd_ports &ports);
+struct lcd_ports
+{
+  /* The clock line */
+  out port lcd_clk;
 
-/** \brief The function to initialize the LCD data write
-*
-* \param c_lcd The channel end number
-*/
+  /* The LCD signal lines */
+  out port lcd_data_enabled;
+
+  /* 16 bit data port */
+  out port lcd_rgb;
+
+  /* The hsync line */
+  out buffered port:32 lcd_hsync;
+
+  /* The vsync line */
+  out buffered port:32 lcd_vsync;
+
+  /* Clock block used for LCD clock */
+  clock clk_lcd;
+};
+
+void lcd_server(chanend c_lcd, struct lcd_ports &ports);
+
 void lcd_init(chanend c_lcd);
 
-/** \brief The function updates the LCD channel with the data in the buffer
-*
-* \param c_lcd The channel end number
-* \param buffer[] The buffer containing the data to be updated
-*
-* \note The function should be called for each line of LCD data.
-* \note There should be no delay between writes for consecutive lines of data as the LCD server expects continuous data till the entire screen is refreshed
-*/
-void lcd_update(chanend c_lcd, unsigned buffer[]);
+static inline void lcd_update(chanend c_lcd, unsigned buffer[]){
+	unsigned buffer_pointer;
+	asm  ("mov %0, %1" : "=r"(buffer_pointer) : "r"(buffer));
+	c_lcd <: buffer_pointer;
+}
 
 #endif

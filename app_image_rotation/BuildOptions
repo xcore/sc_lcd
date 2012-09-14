@@ -3,6 +3,5 @@ COMPILEFLAGS  = $(OPTIMISATION) -Wall -Xmapper --retain -g -save-temps
 LINKFLAGS     = $(OPTIMISATION) -Wcodes -Xmapper --retain -Wall -g
 OBJNAMES      = lcd main
 APPNAME       = app_image_rotation
-XNFILENAME    = Customer_board.xn
+XNFILENAME    = XS1-L02A-QF124-C5.xn
 MODULE		  = module_lcd
-LCD_TARGET    = TM043NDH02

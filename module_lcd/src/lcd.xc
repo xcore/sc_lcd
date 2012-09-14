@@ -1,108 +1,116 @@
 #include <platform.h>
+#include <xs1.h>
 #include "lcd.h"
+#include <print.h>
+#include <stdlib.h>
 
-/**
- * \brief The assembly instruction to load the value of the word to the mentioned destination address
- */
 #define LDW(dst, mem, ind) asm("ldw %0, %1[%2]" : "=r"(dst) : "r"(mem), "r"(ind))
+
+// Turn this on for debug only. It will cause the driver to error if timing in not met.
+//#define TIMING_DEBUG
 
 void lcd_init(chanend c_lcd){
 	c_lcd <: 0;
 }
 
-
-void lcd_update(chanend c_lcd, unsigned buffer[])
-{
-	unsigned buffer_pointer;
-	asm  ("mov %0, %1" : "=r"(buffer_pointer) : "r"(buffer));
-
-	/* Send the buffer contents over the LCD channel */
-	c_lcd <: buffer_pointer;
-}
-
-
 #pragma unsafe arrays
-void lcd_server(chanend c_lcd, lcd_ports &p)
-{
+void lcd_server(chanend c_lcd, struct lcd_ports &p) {
   unsigned time;
-  unsigned x;
-
+#ifdef TIMING_DEBUG
+  timer t;
+  unsigned now;
+  unsigned started = 0;
+#endif
   configure_clock_rate_at_least( p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
-  set_port_clock(p.p_lcd_clk, p.clk_lcd);
-  set_port_mode_clock(p.p_lcd_clk);
+  set_port_clock(p.lcd_clk, p.clk_lcd);
+  set_port_mode_clock(p.lcd_clk);
 
-  /* RGB port controlled by the clock */
-  configure_out_port(p.p_lcd_rgb, p.clk_lcd, 0);
-  /* Timing port controlled by the clock */
-  configure_out_port(p.p_lcd_tim, p.clk_lcd, 0);
+  configure_out_port(p.lcd_rgb, p.clk_lcd, 0);
+  configure_out_port(p.lcd_data_enabled, p.clk_lcd, 0);
+  configure_out_port(p.lcd_hsync, p.clk_lcd, 0);
+  configure_out_port(p.lcd_vsync, p.clk_lcd, 0);
+
   start_clock(p.clk_lcd);
 
   /* wait until buffers are ready */
   c_lcd :> int;
-  p.p_lcd_tim <: 0 @ time;
+  partout(p.lcd_vsync, 1, 1);
+  partout(p.lcd_hsync, 1, 1);
+  p.lcd_data_enabled <: 0 @ time;
 
-  /* wait a bit for the first data to arrive */
   time += 1000;
 
   while(1){
     unsigned ptr;
+    unsigned x;
 
-    /* Update the time for the Vertical Porch which includes the
-     * Vertical pulse and porch timings
-     * Each Vertical Sync will include write of the whole image
-     * i.e.: All the "LCD_HEIGHT" rows of the screen will be updated
-     * The total refresh timing is handled inside the below "for" loop
-     * The addition of LCD_VERT_PORCH is used only to indicate the start timings
-     */
-    time += LCD_VERT_PORCH;
+    if (LCD_VERT_PULSE_WIDTH>0)
+      partout_timed(p.lcd_vsync, 1, 0, time);
 
-    /* Loop running for each row of the LCD screen */
+    for(unsigned i=0;i<LCD_VERT_PULSE_WIDTH;i++){
+      if (LCD_HOR_PULSE_WIDTH>0)
+        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+      time += LCD_HSYNC_TIME;
+    }
+    if (LCD_VERT_PULSE_WIDTH>0)
+      partout_timed(p.lcd_vsync, 1, 1, time);
+
+    for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++){
+      if (LCD_HOR_PULSE_WIDTH>0)
+        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+
+      time += LCD_HSYNC_TIME;
+    }
     for (int y = 0; y < LCD_HEIGHT; y++)
     {
-      c_lcd :> ptr;
+      if (LCD_HOR_PULSE_WIDTH>0)
+        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
 
-      /* Update the time for the Horizontal Porch which include the
-       * horizontal pulse and porch timings
-       * Within each horizontal Sync, all the "LCD_WIDTH" pixels of a row is
-       * refreshed.
-       */
-      time += LCD_HOR_PORCH;
+      time += LCD_HOR_BACK_PORCH;
+
+#ifdef TIMING_DEBUG
+#define TIME_STEP (LCD_FREQ_DIVISOR*LCD_HSYNC_TIME*100)/(LCD_FREQ_DIVIDEND)
+#pragma ordered
+      select {
+    		case c_lcd :> ptr:
+				t:> now;
+			  started = 1;
+    		now += TIME_STEP;
+    			break;
+    		case started => t when timerafter(now)  :> int:
+    		  printstrln("LCD timing fail");
+    		  _Exit(1);
+    		  break;
+    	}
+#else
+     c_lcd :> ptr;
+#endif
 
       LDW(x, ptr, 0);
 
-      /* Enable the data by writing to the LCD signals */
-      p.p_lcd_tim @ time <: 0xf;
+      p.lcd_data_enabled @ time <: 1;
 
-      /* Copy the 16 bit RGB data to the data lines
-       * The first byte is written seperately to indicate the start of the
-       * LCD screen update at the required time by using the @time command
-       * The update of the rest of the pixel automatically follows after
-       * the mentioned time  */
-      p.p_lcd_rgb @ time <: x;
+      p.lcd_rgb @ time <: x;
 
-      /* Copy the next 16 bit RGB data to the data lines. XMOS uses a 32 bit
-       * port for the LCD data. Hence the data should be split into 2 - 16bit data
-       */
-      p.p_lcd_rgb <: (x>>16);
+      p.lcd_rgb <: (x>>16);
 
-      /* Update the time to include the width of the LCD screen */
       time += LCD_WIDTH;
 
-      /* Disable the data when a row is complete.
-       * The data is enabled again before copying the next row of data
-       * in the "for" loop
-       */
-      p.p_lcd_tim @ time <: 0 ;
+      p.lcd_data_enabled @ time <: 0;
 
-      /* clock out a line of pixels. The loop iteration is for the number of words (and not for the
-       * number of pixels) in each row of the LCD */
-      for (int i = 1; i <  (LCD_WIDTH / 2); i++)
+      for (unsigned i = 1; i <  (LCD_WIDTH / 2); i++)
       {
         LDW(x, ptr, i);
-        p.p_lcd_rgb <: x;
-        p.p_lcd_rgb <: (x>>16);
-      } /* End of loop for number of pixels in a row in the LCD screen */
+        p.lcd_rgb <: x;
+        p.lcd_rgb <: (x>>16);
+      }
+      time += LCD_HOR_FRONT_PORCH;
+    }
 
-    } /* End of loop for rows in the LCD screen */
-  } /* End of while loop */
-} /* End of LCD thread */
+    for(unsigned i=0;i<LCD_VERT_FRONT_PORCH;i++){
+      if (LCD_HOR_PULSE_WIDTH>0)
+        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+      time += LCD_HSYNC_TIME;
+    }
+  }
+}
