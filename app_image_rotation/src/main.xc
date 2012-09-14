@@ -3,12 +3,16 @@
 #include "rotate.h"
 
 /* The LCD port used in the hardware. The current setting is as per the customer hardware used */
-lcd_ports lcd_ports_init =
-                 { XS1_PORT_1O,
-                   XS1_PORT_4F,
-                   XS1_PORT_32A,
-                   XS1_CLKBLK_3
-                 };
+#define CORE 0
+#define TYPE 0
+
+#if TYPE
+on stdcore[CORE]: struct lcd_ports lcd_ports = {
+	XS1_PORT_1I, XS1_PORT_1L, XS1_PORT_16B,XS1_PORT_1K, XS1_PORT_1J, XS1_CLKBLK_1};
+#else
+on stdcore[CORE]: struct lcd_ports lcd_ports = {
+	XS1_PORT_1G, XS1_PORT_1F, XS1_PORT_16A,XS1_PORT_1B, XS1_PORT_1C, XS1_CLKBLK_1};
+#endif
 
 #pragma unsafe arrays
 
@@ -79,8 +83,8 @@ int main()
   chan c_lcd;
 
   par {
-	lcd_server(c_lcd, lcd_ports_init);
-	demo(c_lcd);
+	on stdcore[CORE]:lcd_server(c_lcd, lcd_ports);
+	on stdcore[CORE]:demo(c_lcd);
   }
   return 0;
 }
