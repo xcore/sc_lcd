@@ -1,0 +1,543 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Character display Application &mdash; Graphics LCD component v documentation</title>
+    <link rel="stylesheet" href="_static/xdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/xcomment.js"></script>
+    <link rel="top" title="Graphics LCD component v documentation" href="index.html" />
+    <link rel="up" title="Example Applications" href="example.html" />
+    <link rel="prev" title="Rotating Image Application" href="rotating_image.html" /> 
+
+<script>
+function setheight() {
+h1 = document.getElementById('d1').style.height;
+h2 = document.getElementById('d2').style.height;
+
+if (parseInt(h1) > parseInt(h2)) {
+document.getElementById('d2').style.height=h1 + "px";
+}
+else {
+document.getElementById('d1').style.height=h2 + "px";
+}
+
+}
+</script>
+</head>
+
+<body onload="setheight();">
+
+  
+
+    <div class="document" id='d1'>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+<div style="float: right">
+<a href="rotating_image.html"
+                        title="previous chapter"> &lt&lt </a>
+</div>
+
+            
+  <div class="section" id="character-display-application">
+<h1>Character display Application<a class="headerlink" href="#character-display-application" title="Permalink to this headline">¶</a></h1>
+<p>The character display application shows how to display character and text on the LCD module.
+The application is intended to use the LCD component as a standalone component, which means there is no image buffer to store the LCD frame data.
+The application writes directly to the LCD component.</p>
+<div class="section" id="features-supported-in-the-application">
+<h2>Features supported in the application<a class="headerlink" href="#features-supported-in-the-application" title="Permalink to this headline">¶</a></h2>
+<p>The application supports the following:</p>
+<ol class="arabic simple">
+<li>Setting the graphics frame ready for display</li>
+<li>Setting the background colour</li>
+<li>Setting the foreground colour</li>
+<li>Reading the background colour</li>
+<li>Reading the foreground colour</li>
+<li>Setting the space between characters in a text</li>
+<li>Setting the text style - can be none, Italics, bold, bold and Italics</li>
+<li>Displaying a character of size 6 * 6 pixel in monochrome colour</li>
+<li>Displaying a character of size 6 * 6 pixel in colour</li>
+<li>Displaying text of size 6 * 6 pixel in monochrome colour</li>
+<li>Displaying text of size 6 * 6 pixel in colour (mentioned foreground colour is used)</li>
+<li>Displaying text of size 16 * 16 pixel in colour (mentioned foreground colour is used)</li>
+<li>Putting an image to the screen</li>
+</ol>
+</div>
+<div class="section" id="project-structure">
+<h2>Project structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h2>
+<p>The application includes character specific functionalities and general graphics functionalities.
+The general graphics functionalities are available in the files</p>
+<blockquote>
+<div><ul class="simple">
+<li>graphics.xc</li>
+<li>graphics.h</li>
+</ul>
+</div></blockquote>
+<p>The character specific functionalities are available in the files</p>
+<table border="1" class="docutils">
+<caption>Project structure</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">File</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">character_display.h</span></tt></td>
+<td>Header file containing the APIs for the character and text writes</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">character_display.xc</span></tt></td>
+<td>File containing the implementation of the character and text write for 6 * 6 pixel and 16 * 16 pixel</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">alphabet.c</span></tt></td>
+<td>File containing the pixel data for 6 * 6 characters. Currently the file includes only A-Z (upper case) and space</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">alphabet_16x16.c</span></tt></td>
+<td>File containing the pixel data for 16 * 16 characters. Currently the file includes only A-Z (upper case) and space. It also includes the font with no formatting and in Italics</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">alphabet_lookup_table.c</span></tt></td>
+<td>File containing the lookup table for the characters and APIs to find the pixel data for a character</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">character_specific_includes.h</span></tt></td>
+<td>Header file including the defines specific for the character list</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="apis">
+<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>Following are the list of APIs that can used for character and text display. Currently only 6 * 6 and 16 * 16 pixel fonts are supported</p>
+<dl class="function">
+<dt id="set_background_color">
+void <tt class="descname">set_background_color</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned short<em>&nbsp;color</em><big>)</big><a class="headerlink" href="#set_background_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function sets te background color for the LCD screen.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>color</strong> &#8211; The color to be set for the background color</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>At start-up the graphics initialization sets the color to black</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="set_foreground_color">
+void <tt class="descname">set_foreground_color</tt><big>(</big>unsigned short<em>&nbsp;color</em><big>)</big><a class="headerlink" href="#set_foreground_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function sets the foreground color in the LCD screen.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>color</strong> &#8211; The color to be set for the foreground color</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>At start-up the graphics initialization sets the color to white</p>
+<p>The text written on the screen takes the foreground color</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="set_graphics_frame">
+void <tt class="descname">set_graphics_frame</tt><big>(</big>chanend<em>&nbsp;client</em><big>)</big><a class="headerlink" href="#set_graphics_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function initializes the graphics screen - includes setting the background and foreground color.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="get_foreground_color">
+unsigned short <tt class="descname">get_foreground_color</tt><big>(</big>void<big>)</big><a class="headerlink" href="#get_foreground_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function reads the foreground colour set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The foreground colour set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="get_background_color">
+unsigned short <tt class="descname">get_background_color</tt><big>(</big>void<big>)</big><a class="headerlink" href="#get_background_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function reads the background colour set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The background colour set</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="put_image_BW">
+void <tt class="descname">put_image_BW</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned<em>&nbsp;start_row</em>, unsigned<em>&nbsp;start_col</em>, unsigned<em>&nbsp;height</em>, unsigned<em>&nbsp;width</em><big>)</big><a class="headerlink" href="#put_image_BW" title="Permalink to this definition">¶</a></dt>
+<dd><p>The display an image on the screen.</p>
+<p>The image will be displayed in monochrome colour</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>start_row</strong> &#8211; The row to start the image</li>
+<li><strong>start_col</strong> &#8211; The column to start the image. Should be in multiples of 2 as the LCD write is done in words and not in pixels</li>
+<li><strong>height</strong> &#8211; Height of the image in rows</li>
+<li><strong>width</strong> &#8211; Width of the image in pixels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The 0s in the image structure is displayed in BLACK and the 1s in the image structure is displayed in WHITE</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="write_text_6x6_bw">
+void <tt class="descname">write_text_6x6_bw</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned<em>&nbsp;start_row</em>, unsigned<em>&nbsp;start_col</em>, char<em>&nbsp;text_to_type[]</em><big>)</big><a class="headerlink" href="#write_text_6x6_bw" title="Permalink to this definition">¶</a></dt>
+<dd><p>To write a text with fonts of pixel size 6 * 6.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>start_row</strong> &#8211; Start row for the text</li>
+<li><strong>start_col</strong> &#8211; Start column for the text</li>
+<li><strong>text_to_type[]</strong> &#8211; The array holding the text to type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each text string should end with  indicating the end of text</p>
+<p>The user should make sure the text size doesn&#8217;t exceed the LCD width size. Else the code will have unexpected behaviour</p>
+<p>The user should make sure the character size also doesn&#8217;t exceed the LCD limits</p>
+<p>The API displays the text in monochrome colour</p>
+<p>The current code supports only A- Z (upper case) and &#8220;space&#8221;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="write_text_6x6_color">
+void <tt class="descname">write_text_6x6_color</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned<em>&nbsp;start_row</em>, unsigned<em>&nbsp;start_col</em>, char<em>&nbsp;text_to_type[]</em><big>)</big><a class="headerlink" href="#write_text_6x6_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>To write a text with fonts of pixel size 6 * 6.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>start_row</strong> &#8211; Start row for the text</li>
+<li><strong>start_col</strong> &#8211; Start column for the text</li>
+<li><strong>text_to_type[]</strong> &#8211; The array holding the text to type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each text string should end with  indicating the end of text*</p>
+<p>The user should make sure the text size doesn&#8217;t exceed the LCD width size. Else the code will have unexpected behaviour</p>
+<p>The user should make sure the character size also doesn&#8217;t exceed the LCD limits</p>
+<p>The API displays the text in colour specified as the foreground colour</p>
+<p>The current code supports only A- Z (upper case) and &#8220;space&#8221;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="write_character_6x6_bw">
+void <tt class="descname">write_character_6x6_bw</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned<em>&nbsp;start_row</em>, unsigned<em>&nbsp;start_col</em>, unsigned short<em>&nbsp;char_buffer[ALPHA_HEIGHT_6x6][ALPHA_WIDTH_6x6]</em><big>)</big><a class="headerlink" href="#write_character_6x6_bw" title="Permalink to this definition">¶</a></dt>
+<dd><p>To write a single character of pixel size 6 * 6.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>start_row</strong> &#8211; Start row for the text</li>
+<li><strong>start_col</strong> &#8211; Start column for the text</li>
+<li><strong>char_buffer[]</strong> &#8211; The character to be displayed. Array holding the character pixel data is passed as parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The user should make sure the start column and start row doesn&#8217;t exceed the LCD width and height. Else the code will have unexpected behaviour</p>
+<p>The user should make sure the character size also doesn&#8217;t exceed the LCD limits</p>
+<p>The API displays the character in monochrome colour</p>
+<p>The current code supports only A- Z (upper case) and &#8220;space&#8221;*</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="write_character_6x6_color">
+void <tt class="descname">write_character_6x6_color</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned<em>&nbsp;start_row</em>, unsigned<em>&nbsp;start_col</em>, unsigned short<em>&nbsp;char_buffer[ALPHA_HEIGHT_6x6][ALPHA_WIDTH_6x6]</em><big>)</big><a class="headerlink" href="#write_character_6x6_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>To write a single character of pixel size 6 * 6.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>start_row</strong> &#8211; Start row for the text</li>
+<li><strong>start_col</strong> &#8211; Start column for the text</li>
+<li><strong>char_buffer[]</strong> &#8211; The character to be displayed. Array holding the character pixel data is passed as parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The user should make sure the start column and start row doesn&#8217;t exceed the LCD width and height. Else the code will have unexpected behaviour</p>
+<p>The user should make sure the character size also doesn&#8217;t exceed the LCD limits</p>
+<p>The API displays the character in the color mentioned as foreground color</p>
+<p>The current code supports only A- Z (upper case) and &#8220;space&#8221;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="write_text_16x16_color">
+void <tt class="descname">write_text_16x16_color</tt><big>(</big>chanend<em>&nbsp;client</em>, unsigned<em>&nbsp;start_row</em>, unsigned<em>&nbsp;start_col</em>, char<em>&nbsp;text_to_type[]</em><big>)</big><a class="headerlink" href="#write_text_16x16_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>To write a text with fonts of pixel size 16 * 16.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>client</strong> &#8211; The LCD channel number</li>
+<li><strong>start_row</strong> &#8211; Start row for the text</li>
+<li><strong>start_col</strong> &#8211; Start column for the text</li>
+<li><strong>text_to_type[]</strong> &#8211; The array holding the text to type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each text string should end with  indicating the end of text</p>
+<p>The user should make sure the text size doesn&#8217;t exceed the LCD width size. Else the code will have unexpected behaviour</p>
+<p>The user should make sure the character size also doesn&#8217;t exceed the LCD limits</p>
+<p>The API displays the text in colour specified as the foreground colour</p>
+<p>The current code supports only A- Z (upper case) and &#8220;space&#8221;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="get_character_6x6">
+void <tt class="descname">get_character_6x6</tt><big>(</big>char<em>&nbsp;alpha</em>, unsigned short<em>&nbsp;char_buffer[ALPHA_HEIGHT_6x6][ALPHA_WIDTH_6x6]</em><big>)</big><a class="headerlink" href="#get_character_6x6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the character data from the look up table for the specified character (size of 6 * 6 pixels).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> &#8211; The character whose pixel data is required</li>
+<li><strong>char_buffer[][]</strong> &#8211; The character buffer to hold the pixel data for the mentioned character</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="get_character_16x16">
+void <tt class="descname">get_character_16x16</tt><big>(</big>char<em>&nbsp;alpha</em>, unsigned short<em>&nbsp;char_buffer[ALPHA_HEIGHT_16x16][ALPHA_WIDTH_16x16]</em><big>)</big><a class="headerlink" href="#get_character_16x16" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the character data from the look up table for the specified character (size of 6 * 6 pixels).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> &#8211; The character whose pixel data is required</li>
+<li><strong>char_buffer[][]</strong> &#8211; The character buffer to hold the pixel data for the mentioned character</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="set_text_feature">
+void <tt class="descname">set_text_feature</tt><big>(</big>text_feature<em>&nbsp;txt_ft</em><big>)</big><a class="headerlink" href="#set_text_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>To set the feature for the text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>txt_ft</strong> &#8211; The text feature (defined as enum text_feature)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The current code supports only None and Italics. Bold and Bold Italics has to be implemented</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="get_text_feature">
+text_feature <tt class="descname">get_text_feature</tt><big>(</big>void<big>)</big><a class="headerlink" href="#get_text_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>The read back the feature set for text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The feature set (defined as enum text_feature)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="set_text_space">
+void <tt class="descname">set_text_space</tt><big>(</big>unsigned short<em>&nbsp;space</em><big>)</big><a class="headerlink" href="#set_text_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>To set the space between characters in a text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>space</strong> &#8211; space between the characters</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The size should be mentioned as multiples of 2 (as the LCD is updated as words)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="demo">
+<h2>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
+<p>The file demo.xc includes a sample demo using the character and text display and displaying the image.
+The function c:func::graphics_demo does the following</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Displays the image of a silicon on the screen. The Silicon image keeps moving on the screen</p>
+</li>
+<li><p class="first">The image is displayed as monochrome image</p>
+</li>
+<li><p class="first">Multiple text that keeps changing after a certain time of display</p>
+</li>
+<li><p class="first">The text is displayed in Yellow colour and in Italics</p>
+</li>
+<li><dl class="first docutils">
+<dt>The text displayed are</dt>
+<dd><ul class="first last simple">
+<li>WELCOME TO XMOS</li>
+<li>HIGH SPEED USB</li>
+<li>MOTOR CONTROL</li>
+<li>ETHERNET AVB</li>
+<li>FREE TOOLS</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="executing-the-application">
+<h2>Executing the application<a class="headerlink" href="#executing-the-application" title="Permalink to this headline">¶</a></h2>
+<p>The application is available as app_graphics_demo.
+The following steps ahould be followed to run the application</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Include the app_graphics_demo and module_lcd to the workspace</li>
+<li>Build the application</li>
+<li>Run the application using the XTAG</li>
+<li>The image of the silicon and the texts keeps repeating on the screen</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" id='d2'>
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Graphics LCD component</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html#resource-requirements">Resource requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hw.html">Hardware Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">Component Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="example.html">Example Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rotating_image.html">Rotating Image</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Character display</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#features-supported-in-the-application">Features supported in the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-structure">Project structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apis">APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo">Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-the-application">Executing the application</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none;margin-bottom: 10px;">
+  <h3>Search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+
+
+    <div class="footer">
+    </div>
+  </body>
+</html>
+
+
+

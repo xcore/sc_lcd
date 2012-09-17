@@ -1,0 +1,171 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Source code structure &mdash; Graphics LCD component v documentation</title>
+    <link rel="stylesheet" href="_static/xdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/xcomment.js"></script>
+    <link rel="top" title="Graphics LCD component v documentation" href="index.html" />
+    <link rel="up" title="Programming Guide" href="programming.html" />
+    <link rel="next" title="Software Requirements" href="software_requirements.html" />
+    <link rel="prev" title="Programming Guide" href="programming.html" /> 
+
+<script>
+function setheight() {
+h1 = document.getElementById('d1').style.height;
+h2 = document.getElementById('d2').style.height;
+
+if (parseInt(h1) > parseInt(h2)) {
+document.getElementById('d2').style.height=h1 + "px";
+}
+else {
+document.getElementById('d1').style.height=h2 + "px";
+}
+
+}
+</script>
+</head>
+
+<body onload="setheight();">
+
+  
+
+    <div class="document" id='d1'>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+<div style="float: right">
+<a href="programming.html"
+                        title="previous chapter"> &lt&lt </a>
+<a href="software_requirements.html"
+                        title="next chapter"> &gt&gt </a></p>
+</div>
+
+            
+  <div class="section" id="source-code-structure">
+<h1>Source code structure<a class="headerlink" href="#source-code-structure" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<caption>Project structure</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Project</th>
+<th class="head">File</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>module_lcd</td>
+<td><tt class="docutils literal"><span class="pre">lcd.h</span></tt></td>
+<td>Header file containing the APIs for the LCD component</td>
+</tr>
+<tr><td>&nbsp;</td>
+<td><tt class="docutils literal"><span class="pre">lcd.xc</span></tt></td>
+<td>File containing the implementation of the LCD component thread</td>
+</tr>
+<tr><td>&nbsp;</td>
+<td><tt class="docutils literal"><span class="pre">lcd_defines.xc</span></tt></td>
+<td>Header file containing the user configurable defines for the LCD</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-select-the-lcd-target">
+<h1>How to select the LCD target<a class="headerlink" href="#how-to-select-the-lcd-target" title="Permalink to this headline">¶</a></h1>
+<p>The component has been designed to support multiple LCD targets. Each target specific configurations have been already provided
+with the component as <tt class="docutils literal"><span class="pre">lcd_defines.h</span></tt>. Each target specific lcd_defines.h is available under the sub-folder with the target name.</p>
+<p>Inorder to select the target the following should be done:</p>
+<p>If the required target is TM04NDH02 panel</p>
+<blockquote>
+<div><ul>
+<li><p class="first">In the makefile set the option LCD_TARGET for the panel name LCD_TARGET = AT043TN24</p>
+</li>
+<li><p class="first">In the INCLUDES, add the sub-folder with the target name (i.e) INCLUDES = ../module_lcd/src/$(LCD_TARGET)</p>
+<p>This will include the &#8220;lcd_defines.h&#8221; required for the selected target</p>
+</li>
+<li><p class="first">The application should also include the port mapping for the LCD as per the hardware used.</p>
+<p>A variable of the type structure &#8220;lcd_ports&#8221; should be created and must include the port information</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Example:
+In the application file</p>
+<dl class="docutils">
+<dt>on stdcore[0]: lcd_ports lcd_p orts_init = {</dt>
+<dd><p class="first">XS1_PORT_1O,</p>
+<p>XS1_PORT_4F,</p>
+<p>XS1_PORT_32A,</p>
+<p class="last">XS1_CLKBLK_3 };</p>
+</dd>
+</dl>
+<p>The declared variable lcd_ports_init is used in the LCD thread call as lcd_server(c_lcd, lcd_ports_init);</p>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" id='d2'>
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Graphics LCD component</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html#resource-requirements">Resource requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hw.html">Hardware Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">Component Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="programming.html">Programming Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Source code structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-select-the-lcd-target">How to select the LCD target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software_requirements.html">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="executing_proj.html">Executing The Project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example Applications</a></li>
+</ul>
+
+<div id="searchbox" style="display: none;margin-bottom: 10px;">
+  <h3>Search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+
+
+    <div class="footer">
+    </div>
+  </body>
+</html>
+
+
+

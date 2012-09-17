@@ -1,0 +1,72 @@
+Running Sphinx v1.0.7
+Cannot find xmosconf
+loading pickled environment... not yet created
+building [html]: targets for 12 source files that are out of date
+updating environment: 12 added, 0 changed, 0 removed
+reading sources... [  8%] api
+Rendering Doxygen function void lcd_server
+Rendering Doxygen function void lcd_init
+Rendering Doxygen function void lcd_update
+reading sources... [ 16%] character
+Rendering Doxygen function void set_background_color
+Rendering Doxygen function void set_foreground_color
+Rendering Doxygen function void set_graphics_frame
+Rendering Doxygen function unsigned short get_foreground_color
+Rendering Doxygen function unsigned short get_background_color
+Rendering Doxygen function void put_image_BW
+Rendering Doxygen function void write_text_6x6_bw
+Rendering Doxygen function void write_text_6x6_color
+Rendering Doxygen function void write_character_6x6_bw
+Rendering Doxygen function void write_character_6x6_color
+Rendering Doxygen function void write_text_16x16_color
+Rendering Doxygen function void get_character_6x6
+Rendering Doxygen function void get_character_16x16
+Rendering Doxygen function void set_text_feature
+Rendering Doxygen function text_feature get_text_feature
+Rendering Doxygen function void set_text_space
+reading sources... [ 25%] example
+reading sources... [ 33%] executing_proj
+reading sources... [ 41%] hw
+reading sources... [ 50%] index
+reading sources... [ 58%] overview
+reading sources... [ 66%] programming
+reading sources... [ 75%] rotating_image
+reading sources... [ 83%] software_requirements
+reading sources... [ 91%] structure
+reading sources... [100%] system
+
+/home/lakshmi/DocsToMake/sc_lcd/docs/api.rst:66: (ERROR/3) Figure without caption
+
+
+/home/lakshmi/DocsToMake/sc_lcd/docs/api.rst:71: (ERROR/3) Figure without caption
+
+
+/home/lakshmi/DocsToMake/sc_lcd/docs/character.rst:105: (ERROR/3) Unexpected indentation.
+
+/home/lakshmi/DocsToMake/sc_lcd/docs/rotating_image.rst:45: (ERROR/3) Unexpected indentation.
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [  8%] api
+writing output... [ 16%] character
+writing output... [ 25%] example
+writing output... [ 33%] executing_proj
+writing output... [ 41%] hw
+writing output... [ 50%] index
+writing output... [ 58%] overview
+writing output... [ 66%] programming
+writing output... [ 75%] rotating_image
+writing output... [ 83%] software_requirements
+writing output... [ 91%] structure
+writing output... [100%] system
+
+writing additional files... genindex search
+copying images... [ 50%] images/lcd_function.png
+copying images... [100%] images/lcd_timing.png
+
+copying static files... done
+dumping search index... done
+dumping object inventory... done
+build succeeded, 4 warnings.

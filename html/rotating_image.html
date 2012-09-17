@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rotating Image Application &mdash; Graphics LCD component v documentation</title>
+    <link rel="stylesheet" href="_static/xdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/xcomment.js"></script>
+    <link rel="top" title="Graphics LCD component v documentation" href="index.html" />
+    <link rel="up" title="Example Applications" href="example.html" />
+    <link rel="next" title="Character display Application" href="character.html" />
+    <link rel="prev" title="Example Applications" href="example.html" /> 
+
+<script>
+function setheight() {
+h1 = document.getElementById('d1').style.height;
+h2 = document.getElementById('d2').style.height;
+
+if (parseInt(h1) > parseInt(h2)) {
+document.getElementById('d2').style.height=h1 + "px";
+}
+else {
+document.getElementById('d1').style.height=h2 + "px";
+}
+
+}
+</script>
+</head>
+
+<body onload="setheight();">
+
+  
+
+    <div class="document" id='d1'>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+<div style="float: right">
+<a href="example.html"
+                        title="previous chapter"> &lt&lt </a>
+<a href="character.html"
+                        title="next chapter"> &gt&gt </a></p>
+</div>
+
+            
+  <div class="section" id="rotating-image-application">
+<h1>Rotating Image Application<a class="headerlink" href="#rotating-image-application" title="Permalink to this headline">¶</a></h1>
+<p>The rotating image application shows how a 2D image can be moved across the LCD screen.
+The application uses the character &#8220;X&#8221; from the &#8220;XMOS&#8221; logo. The image is of size 64  * 64 pixels.</p>
+<div class="section" id="features-supported-in-the-application">
+<h2>Features supported in the application<a class="headerlink" href="#features-supported-in-the-application" title="Permalink to this headline">¶</a></h2>
+<p>The application supports the following:</p>
+<ol class="arabic simple">
+<li>Moving a 64 * 64 pixel size image across the screen</li>
+<li>The image sizes can be modified for smaller or bigger images</li>
+<li>Checks for the LCD width and height to make sure the image doesn&#8217;t go beyond the LCD limits</li>
+</ol>
+</div>
+<div class="section" id="project-structure">
+<h2>Project structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h2>
+<p>The application includes the following files</p>
+<table border="1" class="docutils">
+<caption>Project structure</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">File</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">rotate.h</span></tt></td>
+<td>Header file containing the image pixel data</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">main.xc</span></tt></td>
+<td>File containing the implementation of the 2D image rotation across the screen</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="apis">
+<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The demo is executed in the API :c:func::<cite>demo</cite> which takes of the image rotation and check for LCD limits</p>
+</div>
+<div class="section" id="executing-the-application">
+<h2>Executing the application<a class="headerlink" href="#executing-the-application" title="Permalink to this headline">¶</a></h2>
+<p>The application is available as app_image_rotation.
+The following steps ahould be followed to run the application</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Include the app_image_rotation and module_lcd to the workspace</li>
+<li>Build the application</li>
+<li>Run the application using the XTAG</li>
+<li>The image of the XMOS logo will move across the screen</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" id='d2'>
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Graphics LCD component</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html#resource-requirements">Resource requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hw.html">Hardware Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">Component Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="example.html">Example Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Rotating Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#features-supported-in-the-application">Features supported in the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-structure">Project structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apis">APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-the-application">Executing the application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="character.html">Character display</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none;margin-bottom: 10px;">
+  <h3>Search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+
+
+    <div class="footer">
+    </div>
+  </body>
+</html>
+
+
+

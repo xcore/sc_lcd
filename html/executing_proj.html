@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Executing The Project &mdash; Graphics LCD component v documentation</title>
+    <link rel="stylesheet" href="_static/xdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/xcomment.js"></script>
+    <link rel="top" title="Graphics LCD component v documentation" href="index.html" />
+    <link rel="up" title="Programming Guide" href="programming.html" />
+    <link rel="next" title="Example Applications" href="example.html" />
+    <link rel="prev" title="Software Requirements" href="software_requirements.html" /> 
+
+<script>
+function setheight() {
+h1 = document.getElementById('d1').style.height;
+h2 = document.getElementById('d2').style.height;
+
+if (parseInt(h1) > parseInt(h2)) {
+document.getElementById('d2').style.height=h1 + "px";
+}
+else {
+document.getElementById('d1').style.height=h2 + "px";
+}
+
+}
+</script>
+</head>
+
+<body onload="setheight();">
+
+  
+
+    <div class="document" id='d1'>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+<div style="float: right">
+<a href="software_requirements.html"
+                        title="previous chapter"> &lt&lt </a>
+<a href="example.html"
+                        title="next chapter"> &gt&gt </a></p>
+</div>
+
+            
+  <div class="section" id="executing-the-project">
+<h1>Executing The Project<a class="headerlink" href="#executing-the-project" title="Permalink to this headline">¶</a></h1>
+<p>The component by itself cannot be build or executed separately.
+The component should be linked in an application which needs graphics LCD display. Once the component is linked to the application, the application can be built and tested for driving a graphics LCD maodule.</p>
+<dl class="docutils">
+<dt>The following should be done in order to link the component to the application project</dt>
+<dd><ol class="first last arabic simple">
+<li>Select the target name of the LCD module in the application</li>
+<li>The module name &#8216;module_lcd&#8217; should be added to the list of MODULES in the application project build options</li>
+<li>The object names &#8216;lcd&#8217; should be added to the list of OBJECT NAMES in the application project build options</li>
+<li>The module &#8216;module_lcd&#8217; should be added in the &#8216;References&#8217; section in the application Project settings</li>
+<li>Now the module is linked to the application and can be directly used</li>
+</ol>
+</dd>
+</dl>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" id='d2'>
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Graphics LCD component</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html#resource-requirements">Resource requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hw.html">Hardware Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">Component Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="programming.html">Programming Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="structure.html">Source code structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html#how-to-select-the-lcd-target">How to select the LCD target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software_requirements.html">Software Requirements</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Executing The Project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example Applications</a></li>
+</ul>
+
+<div id="searchbox" style="display: none;margin-bottom: 10px;">
+  <h3>Search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+
+
+    <div class="footer">
+    </div>
+  </body>
+</html>
+
+
+
