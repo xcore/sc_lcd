@@ -1,7 +1,7 @@
 Overview
 ========
 
-The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to 20MHz.
+The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to //TODO.
 
 
 Memory requirements
