@@ -5,5 +5,5 @@ The component has been supplied with 2 example applications
 
 .. toctree::
 
-   Rotating Image <rotating_image>
+   LCD Demo <lcd_demo>
    Character display <character>
