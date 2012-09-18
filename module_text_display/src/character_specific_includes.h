@@ -72,4 +72,13 @@ text_feature get_text_feature(void);
  */
 void set_text_space(unsigned short space);
 
+/** \brief Finds the color in monochrome */
+#define FindColor_Monochrome(a) a == 1? LCD_565_WHITE: LCD_565_BLACK
+
+/** \brief Finds the color to be displayed in case of RGB color */
+#define FindColor(a, bgcolor, fgcolor)  a == 1? fgcolor: bgcolor
+
+/** \brief Creates a word from 2 16 bit values */
+#define CreateWord(MSB,LSB) (unsigned)((unsigned)LSB | (unsigned)((unsigned)MSB << 16))
+
 #endif

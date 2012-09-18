@@ -1,45 +1,26 @@
-include BuildOptions
+# The TARGET variable determines what target system the application is
+# compiled for. It either refers to an XN file in the source directories
+# or a valid argument for the --target option when compiling
+TARGET = XS1-L02A-QF124-C5
 
-BINDIR = bin
-TMPDIR = .build
-TARGET = $(BINDIR)/$(APPNAME).xe
-OBJS = $(addsuffix .o, $(addprefix $(TMPDIR)/, $(OBJNAMES)))
-MODULESRCDIR = ../$(MODULE)/src
-MODULESRCDIR1 = ../$(MODULE)/src/$(LCD_TARGET)
-APPSRCDIR = src
-XNFILE = $(APPSRCDIR)/$(XNFILENAME)
-INCLUDES = $(addprefix -I../, $(APPSRCDIR) $(MODULESRCDIR) $(MODULESRCDIR1))
+# The APP_NAME variable determines the name of the final .xe file. It should
+# not include the .xe postfix. If left blank the name will default to
+# the project name
+APP_NAME = app_image_rotation
 
-all: $(TARGET)
+# The USED_MODULES variable lists other module used by the application.
+USED_MODULES = module_lcd module_text_display
 
-clean:
-	rm -rf bin .build
+# The flags passed to xcc when building the application
+# You can also set the following to override flags for a particular language:
+# XCC_XC_FLAGS, XCC_C_FLAGS, XCC_ASM_FLAGS, XCC_CPP_FLAGS
+# If the variable XCC_MAP_FLAGS is set it overrides the flags passed to
+# xcc for the final link (mapping) stage.
+XCC_FLAGS_Debug = -g -O3 -Wcodes -Xmapper -Wcodes
+XCC_FLAGS_Release = -g -O3 -Wcodes -Xmapper -Wcodes
 
-$(TMPDIR)/%.o: $(APPSRCDIR)/%.c $(XNFILE)
-	cd $(TMPDIR) && xcc -c $(COMPILEFLAGS) $(INCLUDES) ../$< ../$(XNFILE) -o ../$@
+# The VERBOSE variable, if set to 1, enables verbose output from the make system.
+VERBOSE = 0
 
-$(TMPDIR)/%.o: $(APPSRCDIR)/%.xc $(XNFILE)
-	cd $(TMPDIR) && xcc -c $(COMPILEFLAGS) $(INCLUDES) ../$< ../$(XNFILE) -o ../$@
-
-$(TMPDIR)/%.o: $(MODULESRCDIR)/%.xc $(XNFILE)
-	cd $(TMPDIR) && xcc -c $(COMPILEFLAGS) $(INCLUDES) ../$< ../$(XNFILE) -o ../$@
-
-$(TMPDIR)/%.o: $(MODULESRCDIR)/%.S $(XNFILE)
-	cd $(TMPDIR) && xcc -c $(COMPILEFLAGS) $(INCLUDES) ../$< ../$(XNFILE) -o ../$@
-	
-$(TMPDIR)/%.o: $(MODULESRCDIR1)/%.xc $(XNFILE)
-	cd $(TMPDIR) && xcc -c $(COMPILEFLAGS) $(INCLUDES) ../$< ../$(XNFILE) -o ../$@
-
-$(TMPDIR)/%.o: $(MODULESRCDIR1)/%.S $(XNFILE)
-	cd $(TMPDIR) && xcc -c $(COMPILEFLAGS) $(INCLUDES) ../$< ../$(XNFILE) -o ../$@
-	
-$(TARGET): $(TMPDIR) $(BINDIR) $(OBJS)
-	xcc $(LINKFLAGS) $(OBJS) $(XNFILE) -o $(TARGET)
-	xobjdump -d $(TARGET) > $(TARGET).txt
-	cd $(BINDIR) && xobjdump --split ../$(TARGET)
-
-$(TMPDIR):
-	-@mkdir -p $(TMPDIR)
-
-$(BINDIR):
-	-@mkdir -p $(BINDIR)
+XMOS_MAKE_PATH ?= ../..
+-include $(XMOS_MAKE_PATH)/xcommon/module_xcommon/build/Makefile.common
