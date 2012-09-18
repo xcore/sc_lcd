@@ -1,0 +1,227 @@
+-------------------------------------------------------------------------------
+-- Descriptive metadata
+-------------------------------------------------------------------------------
+
+componentName = "LCD Controller"
+componentFullName = ""
+alternativeNames = { }
+componentDescription = "Offers an LCD display controller component"
+componentVersion = "1v0"
+
+-------------------------------------------------------------------------------
+-- Parameter descriptions.
+-------------------------------------------------------------------------------
+
+configPoints =
+{
+  lcd_width =
+  {
+    short   = "LCD Width",
+    long    = ""
+    help    = "This describes the width of the LCD panel in pixels."
+    units   = "pixels",
+    define  = "LCD_WIDTH",
+    type    = "int",
+    min     = 480,
+    max     = 800,
+    resourceUsageFlags = {"noeffect"},
+    default = 480
+  },
+  lcd_height =
+  {
+    short   = "LCD Height",
+    long    = ""
+    help    = "This describes the height of the LCD panel in pixels."
+    units   = "pixels",
+    define  = "LCD_HEIGHT",
+    type    = "int",
+    min     = 272,
+    max     = 600,
+    resourceUsageFlags = {"noeffect"},
+    default = 272
+  },
+  lcd_bpp =
+  {
+    short   = "LCD Bits Per Pixel",
+    long    = ""
+    help    = "Count of bits used to set a pixels colour."
+    units   = "",
+    define  = "LCD_BITS_PER_PIXEL",
+    type    = "int",
+    min     = 1,
+    max     = 16,
+    resourceUsageFlags = {"noeffect"},
+    default = 16
+  },
+  lcd_horizontal_front_porch =
+  {
+    short   = "LCD Horizontal Front Porch",
+    long    = ""
+    help    = "The horizontal front porch timing requirement given in pixel clocks."
+    units   = "pixel clocks",
+    define  = "LCD_HOR_FRONT_PORCH",
+    type    = "int",
+    min     = 0,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 5
+  },
+  lcd_horizontal_back_porch =
+  {
+    short   = "LCD Horizontal Back Porch",
+    long    = ""
+    help    = "The horizontal back porch timing requirement given in pixel clocks."
+    units   = "pixel clocks",
+    define  = "LCD_HOR_BACK_PORCH",
+    type    = "int",
+    min     = 0,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 40
+  },
+  lcd_vertical_front_porch =
+  {
+    short   = "LCD Vertical Front Porch",
+    long    = ""
+    help    = "The vertical front porch timing requirement given in horizontal time periods."
+    units   = "horizontal time periods",
+    define  = "LCD_VERT_FRONT_PORCH",
+    type    = "int",
+    min     = 0,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 5
+  },
+  lcd_vertical_back_porch =
+  {
+    short   = "LCD Vertical Back Porch",
+    long    = ""
+    help    = "The vertical back porch timing requirement given in horizontal time periods."
+    units   = "horizontal time periods",
+    define  = "LCD_VERT_BACK_PORCH",
+    type    = "int",
+    min     = 0,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 40
+  },
+  lcd_horizontal_pulse_width =
+  {
+    short   = "LCD Horizontal Pulse Width",
+    long    = ""
+    help    = "The horizontal pulse width timing requirement given in pixel clocks. This is the duration that the hsync signal should go low to denote the start of the horizontal frame. Set to 0 when hsync is not necessary."
+    units   = "pixel clocks",
+    define  = "LCD_HOR_PULSE_WIDTH",
+    type    = "int",
+    min     = 0,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 1
+  },
+  lcd_vertical_pulse_width =
+  {
+    short   = "LCD Vertical Pulse Width",
+    long    = ""
+    help    = "The vertical pulse width timing requirement given in vertical time periods. This is the duration that the vsync signal should go low to denote the start of the vertical frame. Set to 0 when vsync is not necessary."
+    units   = "horizontal time periods",
+    define  = "LCD_VERT_PULSE_WIDTH",
+    type    = "int",
+    min     = 0,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 1
+  },
+  lcd_freq_dividend =
+  {
+    short   = "LCD Frequency Dividend",
+    long    = ""
+    help    = "FIXME"
+    units   = "",
+    define  = "LCD_FREQ_DIVIDEND",
+    type    = "int",
+    min     = 1,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 100
+  },
+  lcd_freq_divisor =
+  {
+    short   = "LCD Frequency Divisor,
+    long    = ""
+    help    = "FIXME"
+    units   = "",
+    define  = "LCD_FREQ_DIVISOR",
+    type    = "int",
+    min     = 8,
+    max     = 100,
+    resourceUsageFlags = {"noeffect"},
+    default = 40
+  },
+  
+}
+
+derivedValues = {}
+
+ports = {
+  p_lcd_clk = {
+    short   = "lcd_clk",
+    long    = "The clock line",
+    help    = "",
+    width   = 1
+  },
+  p_lcd_data_enabled = {
+    short   = "lcd_data_enabled",
+    long    = "The LCD data enabled",
+    help    = "",
+    width   = 1
+  },
+  p_lcd_rgb = {
+    short   = "lcd_rgb",
+    long    = "16 bit data port",
+    help    = "",
+    width   = 16
+  },
+  p_lcd_hsync = {
+    short   = "lcd_hsync",
+    long    = "The hsync line",
+    help    = "",
+    width   = 1
+  },
+  p_lcd_vsync = {
+    short   = "lcd_vsync",
+    long    = "The vsync line",
+    help    = "",
+    width   = 1
+  },
+}
+
+channels = {
+  c_lcd_client = {
+    short = "LCD Client channel",
+    long  = "Channel for the client to exchange commands with the LCD server,
+    help  = "",
+  },
+}    
+
+function getConfigStatus()
+  local status = "Trusted Configuration"
+  local issues = {}
+  if swblock.params.clock_divider == 1 or swblock.params.enable_cmd_full_row_read == 2 then
+    status = "FIXME"  
+  end
+  return status, issues
+end
+            
+-------------------------------------------------------------------------------
+-- Source generation functions
+-------------------------------------------------------------------------------
+
+generatedCode = {
+  includes = { 
+  },
+  globals = [[
+  ]],
+  body = [[
+  ]]
+}
+
