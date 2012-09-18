@@ -44,26 +44,13 @@ void write_character_6x6_bw(chanend client, unsigned start_row, unsigned start_c
 	{
 		for (buffer_col = 0; buffer_col < ALPHA_WIDTH_6x6; buffer_col++)
 		{
-		    if (char_buffer[buffer_row][buffer_col] == 0)
-		    	buffer[buffer_row][buffer_col] = LCD_565_BLACK;
-		    else
-		    	buffer[buffer_row][buffer_col] = LCD_565_WHITE;
+			buffer[buffer_row][buffer_col] = FindColor_Monochrome(char_buffer[buffer_row][buffer_col]);
 		}
 	}
 
 	/* From row 0 to start row of the character, fill the screen with background colour */
-	for (row = 0; row < start_row; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
+	fill_rows(client, 0, start_row, 0, LCD_ROW_WORDS, background);
 
-		// The value of index switches between 1 and 0
-	    index = (index > 0)? 0: 1;
-	}
 	buffer_row = 0;
 	buffer_col = 0;
 
@@ -76,8 +63,9 @@ void write_character_6x6_bw(chanend client, unsigned start_row, unsigned start_c
 		for (col = start_col; col < (start_col + (ALPHA_WIDTH_6x6/2));
 				              col++, buffer_col+=2 )
 		{
-			lcd_buffer[index][col] = buffer[buffer_row][buffer_col] |
-					      ((unsigned)buffer[buffer_row][buffer_col + 1] << 16);
+			lcd_buffer[index][col] = CreateWord(buffer[buffer_row][buffer_col + 1],
+					                            buffer[buffer_row][buffer_col] );
+
 		}
 
 		buffer_col = 0;
@@ -86,20 +74,12 @@ void write_character_6x6_bw(chanend client, unsigned start_row, unsigned start_c
 		// The value of index switches between 1 and 0
 	    index = (index > 0)? 0: 1;
 	}
-	/* Fill the rest of the rows with the background colour */
-	for (;row < LCD_HEIGHT; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
 
-		// The value of index switches between 1 and 0
-		index = (index > 0)? 0: 1;
-	}
+
+	/* Fill the rest of the rows with the background colour */
+	fill_rows(client, row, LCD_HEIGHT, 0, LCD_ROW_WORDS, background);
 }
+
 
 /* To write a 6 * 6 pixel character in color */
 void write_character_6x6_color(chanend client, unsigned start_row, unsigned start_col,
@@ -132,26 +112,15 @@ void write_character_6x6_color(chanend client, unsigned start_row, unsigned star
 	{
 		for (buffer_col = 0; buffer_col < ALPHA_WIDTH_6x6; buffer_col++)
 		{
-		    if (char_buffer[buffer_row][buffer_col] == 0)
-		    	buffer[buffer_row][buffer_col] = background;
-		    else
-		    	buffer[buffer_row][buffer_col] = foreground;
+			buffer[buffer_row][buffer_col] = FindColor(char_buffer[buffer_row][buffer_col],
+					                                    background, foreground );
+
 		}
 	}
 
 	/* from row 0 to start row of the character, fill the rows with the background color */
-	for (row = 0; row < start_row; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
+	fill_rows(client, 0, start_row, 0, LCD_ROW_WORDS, background);
 
-		// The value of index switches between 1 and 0
-	    index = (index > 0)? 0: 1;
-	}
 	buffer_row = 0;
 	buffer_col = 0;
 
@@ -164,8 +133,9 @@ void write_character_6x6_color(chanend client, unsigned start_row, unsigned star
 		for (col = start_col; col < (start_col + (ALPHA_WIDTH_6x6/2));
 				              col++, buffer_col+=2 )
 		{
-			lcd_buffer[index][col] = buffer[buffer_row][buffer_col] |
-					      ((unsigned)buffer[buffer_row][buffer_col + 1] << 16);
+			lcd_buffer[index][col] = CreateWord(buffer[buffer_row][buffer_col + 1],
+					                            buffer[buffer_row][buffer_col]);
+
 		}
 
 		buffer_col = 0;
@@ -175,15 +145,7 @@ void write_character_6x6_color(chanend client, unsigned start_row, unsigned star
 	    index = (index > 0)? 0: 1;
 	}
 	/* for rest of the rows, fill with the background colour */
-	for (;row < LCD_HEIGHT; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
-	}
+	fill_rows(client, row, LCD_HEIGHT, 0, LCD_ROW_WORDS, background);
 }
 
 
@@ -209,7 +171,7 @@ void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col, c
 	{
 		for (col = 0; col < start_col; col++)
 		{
-           temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+           temp_buffer[row][col] = CreateWord(background, background);
 		}
 	}
 	/* The loop is iterated till it encounter a '\0' which indicates end of text  */
@@ -225,10 +187,9 @@ void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col, c
 		        * Pixel value with 1 is updated with WHITE colour
 		        * Pixel value with 0 is updated with BLACK colour
 		        */
-			   if (char_buffer[buffer_row][buffer_col] == 0)
-		          	char_buffer[buffer_row][buffer_col] = LCD_565_BLACK;
-		       else
-		    	   	char_buffer[buffer_row][buffer_col] = LCD_565_WHITE;
+			   char_buffer[buffer_row][buffer_col] =
+					   FindColor_Monochrome(char_buffer[buffer_row][buffer_col]);
+
 		   }
 	   	}
 		buffer_row = 0; buffer_col = 0;
@@ -240,14 +201,15 @@ void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col, c
 			for (col = temp_start_col; col < (temp_start_col + (ALPHA_WIDTH_6x6/2));
 						              col++, buffer_col+=2 )
 		    {
-				temp_buffer[row][col] = char_buffer[row][buffer_col] |
-						      ((unsigned)char_buffer[row][buffer_col + 1] << 16);
+				temp_buffer[row][col] = CreateWord(char_buffer[row][buffer_col + 1],
+						                           char_buffer[row][buffer_col]);
+
 		    }
 			buffer_col = 0;
 			for (; col < (temp_start_col + (ALPHA_WIDTH_6x6/2) + (text_space/2));
 							              col++, buffer_col+=2 )
 			{
-				temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+				temp_buffer[row][col] = CreateWord(background, background);
 			}
 		} /* end of loop for the rows in the temporary buffer */
 
@@ -264,24 +226,14 @@ void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col, c
 	{
 		for (col = temp_start_col; col < LCD_ROW_WORDS; col++)
 		{
-           temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+           temp_buffer[row][col] = CreateWord(background, background);
 		}
 	}
 	/* Now sending to LCD frame */
 	/* for rows from 0 to start row of the text, update with the background colour*/
-	for (row = 0; row < start_row; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
+	fill_rows(client, 0, start_row, 0, LCD_ROW_WORDS, background);
 
-		// The value of index switches between 1 and 0
-	    index = (index > 0)? 0: 1;
-	}
-    buffer_row = 0;
+	buffer_row = 0;
     /* send the temp buffer */
 	for (row = start_row; row < (start_row + ALPHA_HEIGHT_6x6); row++, buffer_row++)
 	{
@@ -294,20 +246,9 @@ void write_text_6x6_bw(chanend client, unsigned start_row, unsigned start_col, c
 		// The value of index switches between 1 and 0
 	    index = (index > 0)? 0: 1;
 	}
+
 	/* Fill the rest of the rows with the background colour */
-
-	for (; row < LCD_HEIGHT; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
-
-		// The value of index switches between 1 and 0
-	    index = (index > 0)? 0: 1;
-	}
+	fill_rows(client, row, LCD_HEIGHT, 0, LCD_ROW_WORDS, background);
 }
 
 void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col, char text_to_type[])
@@ -335,7 +276,7 @@ void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col
 	{
 		for (col = 0; col < start_col; col++)
 		{
-           temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+           temp_buffer[row][col] = CreateWord(background, background);
 		}
 	}
 
@@ -352,13 +293,12 @@ void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col
 			    * Pixel value with 1 is updated with foreground colour
 			   	* Pixel value with 0 is updated with background colour
 			   	*/
+			   char_buffer[buffer_row][buffer_col]  = FindColor(char_buffer[buffer_row][buffer_col],
+					                                            background, foreground);
 
-			   if (char_buffer[buffer_row][buffer_col] == 0)
-		          	char_buffer[buffer_row][buffer_col] = background;
-		       else
-		    	   	char_buffer[buffer_row][buffer_col] = foreground;
 		   }
 	   	}
+
 		buffer_row = 0; buffer_col = 0;
 		/* Update the temporary buffer with the character data */
 		for (row = 0; row < ALPHA_HEIGHT_6x6; row++)
@@ -367,14 +307,15 @@ void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col
 			for (col = temp_start_col; col < (temp_start_col + (ALPHA_WIDTH_6x6/2));
 						              col++, buffer_col+=2 )
 		    {
-				temp_buffer[row][col] = char_buffer[row][buffer_col] |
-						      ((unsigned)char_buffer[row][buffer_col + 1] << 16);
+				temp_buffer[row][col] = CreateWord(char_buffer[row][buffer_col + 1],
+						                  char_buffer[row][buffer_col]);
+
 		    }
 			buffer_col = 0;
 			for (; col < (temp_start_col + (ALPHA_WIDTH_6x6/2) + (text_space/2));
 							              col++, buffer_col+=2 )
 			{
-				temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+				temp_buffer[row][col] = CreateWord(background, background);
 			}
 		}
 		/* Set the text space based on the spacing value set in the function set_text_space */
@@ -388,24 +329,14 @@ void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col
 	{
 		for (col = temp_start_col; col < LCD_ROW_WORDS; col++)
 		{
-           temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+           temp_buffer[row][col] = CreateWord(background, background);
 		}
 	}
 	/* Now sending to LCD frame */
 	/* for rows from 0 to start row of the text, update with the background colour*/
-	for (row = 0; row < start_row; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
+	fill_rows(client, 0, start_row, 0, LCD_ROW_WORDS, background);
 
-		// The value of index switches between 1 and 0
-		index = (index > 0)? 0: 1;
-	}
-    buffer_row = 0;
+	buffer_row = 0;
     /* send the temp buffer */
 	for (row = start_row; row < (start_row + ALPHA_HEIGHT_6x6); row++, buffer_row++)
 	{
@@ -419,18 +350,7 @@ void write_text_6x6_color(chanend client, unsigned start_row, unsigned start_col
 		index = (index > 0)? 0: 1;
 	}
 	/* Fill the rest of the rows with the background colour */
-	for (; row < LCD_HEIGHT; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
-
-	    // The value of index switches between 1 and 0
-		index = (index > 0)? 0: 1;
-	}
+	fill_rows(client, row, LCD_HEIGHT, 0, LCD_ROW_WORDS, background);
 }
 /* To write a 16 * 16 pixel text in color */
 void write_text_16x16_color(chanend client, unsigned start_row, unsigned start_col, char text_to_type[])
@@ -458,7 +378,7 @@ void write_text_16x16_color(chanend client, unsigned start_row, unsigned start_c
 	{
 		for (col = 0; col < start_col; col++)
 		{
-           temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+           temp_buffer[row][col] = CreateWord(background, background);
 		}
 	}
 	/* The loop is iterated till it encounter a '\0' which indicates end of text  */
@@ -495,7 +415,7 @@ void write_text_16x16_color(chanend client, unsigned start_row, unsigned start_c
 			for (; col < (temp_start_col + (ALPHA_WIDTH_16x16/2) + (text_space/2));
 							              col++, buffer_col+=2 )
 			{
-				temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+				temp_buffer[row][col] = CreateWord(background, background);
 			}
 		}
 		temp_start_col += (ALPHA_WIDTH_16x16/2);
@@ -508,23 +428,13 @@ void write_text_16x16_color(chanend client, unsigned start_row, unsigned start_c
 	{
 		for (col = temp_start_col; col < LCD_ROW_WORDS; col++)
 		{
-           temp_buffer[row][col] = (unsigned)background | (unsigned)((unsigned)background << 16);
+           temp_buffer[row][col] = CreateWord(background, background);
 		}
 	}
 	/* Now sending to LCD frame */
 	/* for rows from 0 to start row of the text, update with the background colour*/
-	for (row = 0; row < start_row; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
+    fill_rows(client, 0, start_row, 0, LCD_ROW_WORDS, background);
 
-		// The value of index switches between 1 and 0
-	    index = (index > 0)? 0: 1;
-	}
     buffer_row = 0;
     /* send the temp buffer */
 	for (row = start_row; row < (start_row + ALPHA_HEIGHT_16x16); row++, buffer_row++)
@@ -540,17 +450,8 @@ void write_text_16x16_color(chanend client, unsigned start_row, unsigned start_c
 	    index = (index > 0)? 0: 1;
 	}
 	/* Fill the rest of the rows with the background colour */
-	for (; row < LCD_HEIGHT; row++)
-	{
-		for (col = 0 ; col < LCD_ROW_WORDS; col++)
-		{
-			lcd_buffer[index][col] =
-					(unsigned)background | (unsigned)((unsigned)background << 16);
-		}
-		lcd_update(client, lcd_buffer[index]);
-
-		// The value of index switches between 1 and 0
-	    index = (index > 0)? 0: 1;
-	}
+    fill_rows(client, row, LCD_HEIGHT, 0, LCD_ROW_WORDS, background);
 }
+
+
 

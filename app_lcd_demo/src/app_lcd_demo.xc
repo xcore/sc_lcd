@@ -32,8 +32,10 @@ void demo(chanend c_lcd){
 	unsigned buffer[2][LCD_ROW_WORDS];
 	unsigned buffer_index = 0, update = 0;
 	int x=20, y=0, vx=1, vy=2;
-	for(unsigned i=0;i<LCD_ROW_WORDS;i++)
-		buffer[0][i] = buffer[1][i] = BACK_COLOUR;
+	for(unsigned i=0;i<LCD_ROW_WORDS;i++) {
+		buffer[0][i] = BACK_COLOUR;
+	    buffer[1][i] = BACK_COLOUR;
+	}
 	lcd_init(c_lcd);
 	while(1){
 		add(x, y, 0, buffer[buffer_index]);

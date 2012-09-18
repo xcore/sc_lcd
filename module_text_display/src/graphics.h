@@ -52,12 +52,15 @@ unsigned short get_background_color(void);
  * \param start_col The column to start the image. Should be in multiples of 2 as the LCD write is done in words and not in pixels
  * \param height Height of the image in rows
  * \param width Width of the image in pixels
+ * \param image[] The image to be displayed
  *
  * \note The 0s in the image structure is displayed in BLACK and the 1s in the image structure is displayed in WHITE
  */
 void put_image_BW(chanend client, unsigned start_row, unsigned start_col,
-		          unsigned height, unsigned width);
+		          unsigned height, unsigned width, unsigned short image[]);
 
+void fill_rows(chanend client, unsigned start_row, unsigned end_row, unsigned start_col,
+		              unsigned end_col, unsigned color);
 
 /* RGB 565 colour defines */
 #define LCD_565_RED           0x001F

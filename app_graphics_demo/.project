@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>module_lcd</project>
+		<project>module_text_display</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
