@@ -26,7 +26,7 @@ with the component int the ``\devices`` directory. The module only supports a si
 To select the target the following should be done:
 
 If the required target is the part AT043TN24 LCD display then,
-
+	* Create a header in the application project called ``lcd_conf.h``
 	* In the ``lcd_conf.h`` add the define ``#define LCD_PART_NUMBER AT043TN24``. This will include the "lcd_defines_AT043TN24.h" required for the selected target.
 	* Any specific overrides should be added to the ``lcd_conf.h``. For example, to override the ``LCD_HEIGHT`` to 600 pixels add the line ``#define LCD_HEIGHT 600``.
 	* The application should also include the port mapping for the LCD as per the hardware used. A variable of the type structure ``lcd_ports`` should be created and must include the port information
@@ -43,7 +43,7 @@ In the application file
 		XS1_CLKBLK_1
 	};
 
-The declared variable lcd_ports is used by the LCD server call to address these ports. A core should have the ``lcd_server`` running on it and it should be connected by a channel to the application, for example:
+The declared variable ``lcd_ports`` is used by the LCD server call to address these ports. A core should have the ``lcd_server`` running on it and it should be connected by a channel to the application, for example:
 ::
   chan c_lcd;
   par {

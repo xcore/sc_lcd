@@ -10,7 +10,7 @@ The ``module_lcd`` includes device support defines, each support header, located
 ::
 #define LCD_PART_NUMBER p
 
-where p is the part the user requires support for. Currently, support is provided for
+where p is the part the user requires support for. ``lcd_conf.h`` must be located in the application project and not the module. Currently, support is provided for
 ::
 	AT043TN24
 	K430WQAV4F
