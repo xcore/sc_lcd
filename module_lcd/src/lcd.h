@@ -7,7 +7,7 @@
  */
 struct lcd_ports {
   out port lcd_clk; 			/**< The clock line */
-  out port lcd_data_enabled; 		/**< The LCD signal lines */
+  out port lcd_data_enabled; 		/**< The LCD data enabled */
   out port lcd_rgb; 			/**< 16 bit data port */
   out buffered port:32 lcd_hsync; 	/**< The hsync line */
   out buffered port:32 lcd_vsync; 	/**< The vsync line */

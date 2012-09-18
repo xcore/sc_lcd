@@ -2,7 +2,7 @@
 #include "lcd.h"
 #include "sprite.h"
 
-on stdcore[CORE]: struct lcd_ports lcd_ports = {
+struct lcd_ports lcd_ports = {
 	XS1_PORT_1G, XS1_PORT_1F, XS1_PORT_16A,XS1_PORT_1B, XS1_PORT_1C, XS1_CLKBLK_1};
 
 static inline void add(unsigned x, unsigned y, unsigned line, unsigned buffer[]){
@@ -49,9 +49,9 @@ void demo(chanend c_lcd){
 int main() {
   chan c_lcd;
   par {
-	on stdcore[CORE]:lcd_server(c_lcd, lcd_ports);
-	on stdcore[CORE]:demo(c_lcd);
-	on stdcore[CORE]:par(int i=0;i<6;i++) while(1);
+	lcd_server(c_lcd, lcd_ports);
+	demo(c_lcd);
+	par(int i=0;i<6;i++) while(1);
   }
   return 0;
 }

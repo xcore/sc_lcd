@@ -20,10 +20,10 @@ Implementation Specific Defines
 It is possible to override the default defines when a part number is selected. The defines avaliable are:
 
 **LCD_WIDTH**
-	This define is used to represent the width of the LCD panel in pixels
+	This define is used to represent the width of the LCD panel in pixels.
 
 **LCD_HEIGHT**
-	This define is used to represent the height of the LCD panel in terms of lines
+	This define is used to represent the height of the LCD panel in terms of lines.
 
 **LCD_BITS_PER_PIXEL**
 	Count of bits used to set a pixels colour, i.e. if the screen was wired for rgb565 then the LCD_BITS_PER_PIXEL would be 16, rgb888 would be 24. This is independant of the actual bit depth of the lcd. 
