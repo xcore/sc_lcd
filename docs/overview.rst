@@ -1,7 +1,7 @@
 Overview
 ========
 
-The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to //TODO.
+The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to 35MHz.
 
 
 Memory requirements
@@ -31,7 +31,7 @@ Resource requirements
 Performance
 ----------- 
 
-The achievable effective bandwidth varies according to the avaliable XCore MIPS. The maximum pixel clock supported is //TODO.
+The achievable effective bandwidth varies according to the avaliable XCore MIPS. The maximum pixel clock supported is 35MHz.
 
 
 LCD Display component properties
@@ -40,7 +40,4 @@ LCD Display component properties
 	* Standard component to support different LCD displays
 	* Different color depths 32 bpp, 16 bpp, etc. based on user configuration
 	* Resolution of up to 800 * 600 pixels. See table below for different screen configurations.
-
-
-
 

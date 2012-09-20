@@ -6,14 +6,13 @@ The component ``sc_lcd`` includes the module ``module_lcd``. It can be used by a
 Configuration Defines
 ---------------------
 
-The ``module_lcd`` includes device support defines, each support header, located in the ``devices`` directory defines a number of parameters. It is sufficient for the user to specify which device to support in the ``lcd_conf.h`` for the device to be correctly supported. To do this ``lcd_conf.h`` must include the define:
-::
+The ``module_lcd`` includes device support defines, each support header, located in the ``devices`` directory defines a number of parameters. It is sufficient for the user to specify which device to support in the ``lcd_conf.h`` for the device to be correctly supported. To do this ``lcd_conf.h`` must include the define::
+
 #define LCD_PART_NUMBER p
 
-where p is the part the user requires support for. ``lcd_conf.h`` must be located in the application project and not the module. Currently, support is provided for
-::
-	AT043TN24
-	K430WQAV4F
+where p is the part the user requires support for. ``lcd_conf.h`` must be located in the application project and not the module. Currently, support is provided for:
+  * AT043TN24
+  * K430WQAV4F
 
 Implementation Specific Defines
 +++++++++++++++++++++++++++++++

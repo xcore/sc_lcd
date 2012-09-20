@@ -7,4 +7,4 @@ It functions as a standalone component - so that the pixel data can be directly 
 
 Example applications have been provided with the component
  - app_graphics_demo - highlighting the capability of XCORE to write character and text using a standalone LCD component
- - app_image_rotation - simple movement of a 2D image across the LCD screen
+ - app_lcd_demo - simple movement of a 2D image across the LCD screen
