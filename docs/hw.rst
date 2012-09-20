@@ -12,7 +12,7 @@ Slicekit
 
 This module may be evaluated using the Slicekit Modular Development Platform, available from digikey. Required board SKUs are:
 
-   * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-SDRAM plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
+   * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-SCR480 plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
 
 Demonstration Applications
 --------------------------
@@ -20,7 +20,7 @@ Demonstration Applications
 LCD Demo Application
 ++++++++++++++++++++
 
-The LCD demo application shows how a buffer of image data can be written to the  the LCD screen.
+The LCD demo application shows how a buffer of image data can be written to the 480x272 LCD screen that is supplied with the XA-SK-SCR480 Slice Card.
 
    * Package: sc_lcd
    * Application: app_lcd_demo
@@ -29,7 +29,7 @@ The LCD demo application shows how a buffer of image data can be written to the 
 Text Display Application
 ++++++++++++++++++++++++
 
-This application demonstrates how the ``module_text_display`` can be used to put text into the LCD image buffer for display to the screen.
+This application demonstrates how the ``module_text_display`` can be used to put text into the LCD image buffer for display to the Slice Card screen.
 
    * Package: sc_lcd
    * Application: app_text_display
@@ -42,7 +42,7 @@ This combination demo employs the ``module_lcd`` along with the ``module_sdram_b
 
 Required board SKUs for this demo are:
 
-   * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-SDRAM plus XA-SK-LCD480 plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
+   * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-SDRAM plus XA-SK-SCR480 plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
 
    * Package: sw_display_controller
    * Application: app_graphics_demo
