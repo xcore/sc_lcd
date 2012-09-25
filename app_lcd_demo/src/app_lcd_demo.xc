@@ -26,11 +26,11 @@ void demo(chanend c_lcd){
 	lcd_init(c_lcd);
 	while(1){
 		add(x, y, 0, buffer[buffer_index]);
-		lcd_ack(c_lcd);
+		lcd_req(c_lcd);
 		lcd_update(c_lcd, buffer[buffer_index]);
 		for(unsigned line=1;line<LCD_HEIGHT;line++){
 			add(x, y, line, buffer[1 - buffer_index]);
-			lcd_ack(c_lcd);
+			lcd_req(c_lcd);
 			lcd_update(c_lcd, buffer[1 - buffer_index]);
 			sub(x, y, line-1, buffer[buffer_index]);
 			buffer_index = 1 - buffer_index;
