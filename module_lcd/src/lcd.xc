@@ -10,7 +10,7 @@
 //#define TIMING_DEBUG
 
 void lcd_init(chanend c_lcd){
-	c_lcd <: 0;
+  outct(c_lcd, XS1_CT_END);
 }
 
 #pragma unsafe arrays
@@ -32,8 +32,9 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
   start_clock(p.clk_lcd);
 
-  c_lcd :> int;
-  c_lcd <: 0;
+  chkct(c_lcd, XS1_CT_END);
+  outct(c_lcd, XS1_CT_END);
+
   partout(p.lcd_vsync, 1, 1);
   partout(p.lcd_hsync, 1, 1);
   p.lcd_data_enabled <: 0 @ time;
@@ -87,7 +88,8 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
     		  break;
     	}
 #else
-     c_lcd :> ptr;
+      ptr = inuint(c_lcd);
+      chkct(c_lcd, XS1_CT_END);
 #endif
 
       LDW(x, ptr, 0);
@@ -103,7 +105,7 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
         LDW(x, ptr, i);
         p.lcd_rgb <: x;
       }
-      c_lcd <: 0;
+      outct(c_lcd, XS1_CT_END);
       time += LCD_HOR_FRONT_PORCH;
     }
 
