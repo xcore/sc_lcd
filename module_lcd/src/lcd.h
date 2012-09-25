@@ -1,6 +1,6 @@
 #ifndef _lcd_h_
 #define _lcd_h_
-
+#include <xs1.h>
 #include "lcd_defines.h"
 /**
  * The structure to represent LCD port configuration
@@ -8,7 +8,7 @@
 struct lcd_ports {
   out port lcd_clk; 			/**< The clock line */
   out port lcd_data_enabled; 		/**< The LCD data enabled */
-  out port lcd_rgb; 			/**< 16 bit data port */
+  out buffered port:32 lcd_rgb; 			/**< 16 bit data port */
   out buffered port:32 lcd_hsync; 	/**< The hsync line */
   out buffered port:32 lcd_vsync; 	/**< The vsync line */
   clock clk_lcd; 			/**< Clock block used for LCD clock */
@@ -36,6 +36,10 @@ static inline void lcd_update(chanend c_lcd, unsigned buffer[]){
 	unsigned buffer_pointer;
 	asm  ("mov %0, %1" : "=r"(buffer_pointer) : "r"(buffer));
 	c_lcd <: buffer_pointer;
+}
+
+static inline void lcd_ack(chanend c_lcd){
+  c_lcd :> int;
 }
 
 #endif
