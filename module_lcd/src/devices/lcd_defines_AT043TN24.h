@@ -3,7 +3,6 @@
 
 #include "lcd_conf.h"
 
-
 #define LCD_WIDTH_AT043TN24            (480)
 #define LCD_HEIGHT_AT043TN24           (272)
 #define LCD_BITS_PER_PIXEL_AT043TN24   (16)

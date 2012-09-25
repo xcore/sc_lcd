@@ -179,10 +179,7 @@ configPoints =
     resourceUsageFlags = {"noeffect"},
     default = 40
   },
-  
 }
-
-
 
 ports = {
   p_lcd_clk = {
@@ -239,11 +236,26 @@ end
 -------------------------------------------------------------------------------
 
 generatedCode = {
-  includes = { 
-  },
+  includes = {"lcd.h"},
   globals = [[
+    struct lcd_ports lcd_${swblock.id}_ports = { 
+      ${swblock.ports.lcd_clk},  
+      ${swblock.ports.lcd_data_enabled}, 
+      ${swblock.ports.lcd_rgb},  
+      ${swblock.ports.lcd_hsync}, 
+      ${swblock.ports.lcd_vsync}, 
+      ${swblock.clocks[1]}
+    };
   ]],
   body = [[
+    lcd_server(p_uart_rx, rx_buffer, ${swblock.channels.c_lcd_client}, struct lcd_ports lcd_${swblock.id}_ports);
   ]]
 }
+
+api = {
+       'lcd_server',
+       'lcd_init',
+       'lcd_update',
+       'lcd_ack',
+      }
 

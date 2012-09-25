@@ -32,8 +32,8 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
   start_clock(p.clk_lcd);
 
-  /* wait until buffers are ready */
   c_lcd :> int;
+  c_lcd <: 0;
   partout(p.lcd_vsync, 1, 1);
   partout(p.lcd_hsync, 1, 1);
   p.lcd_data_enabled <: 0 @ time;
@@ -55,12 +55,16 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
     if (LCD_VERT_PULSE_WIDTH>0)
       partout_timed(p.lcd_vsync, 1, 1, time);
 
-    for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++){
-      if (LCD_HOR_PULSE_WIDTH>0)
-        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
-
-      time += LCD_HSYNC_TIME;
+    if(LCD_HOR_PULSE_WIDTH){
+      for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++){
+        if (LCD_HOR_PULSE_WIDTH>0)
+          partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+        time += LCD_HSYNC_TIME;
+      }
+    } else {
+      time += LCD_HSYNC_TIME*(LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH);
     }
+
     for (int y = 0; y < LCD_HEIGHT; y++)
     {
       if (LCD_HOR_PULSE_WIDTH>0)
@@ -89,21 +93,17 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
       LDW(x, ptr, 0);
 
       p.lcd_data_enabled @ time <: 1;
-
       p.lcd_rgb @ time <: x;
-
-      p.lcd_rgb <: (x>>16);
 
       time += LCD_WIDTH;
 
       p.lcd_data_enabled @ time <: 0;
 
-      for (unsigned i = 1; i <  (LCD_WIDTH / 2); i++)
-      {
+      for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
         LDW(x, ptr, i);
         p.lcd_rgb <: x;
-        p.lcd_rgb <: (x>>16);
       }
+      c_lcd <: 0;
       time += LCD_HOR_FRONT_PORCH;
     }
 
