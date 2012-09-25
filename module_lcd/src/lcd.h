@@ -35,11 +35,15 @@ void lcd_init(chanend c_lcd);
 static inline void lcd_update(chanend c_lcd, unsigned buffer[]){
 	unsigned buffer_pointer;
 	asm  ("mov %0, %1" : "=r"(buffer_pointer) : "r"(buffer));
-	c_lcd <: buffer_pointer;
+	//c_lcd <: buffer_pointer;
+	outuint(c_lcd, buffer_pointer);
+	outct(c_lcd, XS1_CT_END);
 }
 
-static inline void lcd_ack(chanend c_lcd){
-  c_lcd :> int;
+#pragma select handler
+static inline void lcd_req(chanend c_lcd){
+  //c_lcd :> int;
+  chkct(c_lcd, XS1_CT_END);
 }
 
 #endif

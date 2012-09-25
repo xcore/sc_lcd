@@ -256,6 +256,6 @@ api = {
        'lcd_server',
        'lcd_init',
        'lcd_update',
-       'lcd_ack',
+       'lcd_req',
       }
 
