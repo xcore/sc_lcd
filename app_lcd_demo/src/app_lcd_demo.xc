@@ -2,11 +2,9 @@
 #include "lcd.h"
 #include "sprite.h"
 
-//struct lcd_ports lcd_ports = {
-//  XS1_PORT_1G, XS1_PORT_1F, XS1_PORT_16A, XS1_PORT_1B, XS1_PORT_1C, XS1_CLKBLK_1};
-
 struct lcd_ports lcd_ports = {
-  XS1_PORT_1I, XS1_PORT_1L, XS1_PORT_16B, XS1_PORT_1J, XS1_PORT_1K, XS1_CLKBLK_1};
+  XS1_PORT_1G, XS1_PORT_1F, XS1_PORT_16A, XS1_PORT_1B, XS1_PORT_1C, XS1_CLKBLK_1};
+
 
 static inline void add(unsigned x, unsigned y, unsigned line, unsigned buffer[]){
 	if(line >= x && line < x + SPRITE_HEIGHT_PX)
