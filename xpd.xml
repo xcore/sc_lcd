@@ -13,6 +13,10 @@
         <githash>248ab2ae6437f0da373a8e9cebd6a30990c013be</githash>
         <uri>git@github.com:xcore/sc_lcd.git</uri>
     </dependency>
+    <docdir>docs</docdir>
+    <exclude_dir>module_text_display</exclude_dir>
+    <exclude_dir>app_graphics_demo</exclude_dir>
+    <exclude_dir>app_lcd_demo</exclude_dir>
     <description>Driver component and supporting modules for RGB565 LCDs</description>
     <location>git@github.com:xcore/sc_lcd.git</location>
     <name>sc_lcd</name>
