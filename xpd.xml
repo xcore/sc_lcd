@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<xpd>
+    <components>
+        <component name = "Parallel RGB LCD Driver" type = "component" buildresults_path = "module_lcd/.module_lcd.buildinfo" scope = "General Use" path = "module_lcd" metainfo_path = "module_lcd/module_lcd.metainfo" local = "false" id = "module_lcd" description = "Server component for driving LCDs with an RGB 565 interface up to 800x600 pixels">
+            <board>XA-SK-SCR480</board>
+            <keyword>LCD</keyword>
+            <keyword>TFT</keyword>
+            <keyword>RGB565</keyword>
+            <keyword>Display</keyword>
+        </component>
+    </components>
+    <dependency repo = "sc_lcd_old">
+        <githash>248ab2ae6437f0da373a8e9cebd6a30990c013be</githash>
+        <uri>git@github.com:xcore/sc_lcd.git</uri>
+    </dependency>
+    <description>Driver component and supporting modules for RGB565 LCDs</description>
+    <location>git@github.com:xcore/sc_lcd.git</location>
+    <name>sc_lcd</name>
+    <maintainer>andrewstanfordjason</maintainer>
+    <partnumber>XM-001960-DH</partnumber>
+    <subpartnumber>XM-001961-SM</subpartnumber>
+    <vendor>XMOS</vendor>
+    <xcore_repo>sc_lcd.git</xcore_repo>
+    <xpd_version>1.0</xpd_version>
+</xpd>
