@@ -19,8 +19,8 @@ configPoints =
   lcd_part =
   {
     short   = "LCD part",
-    long    = ""
-    help    = "This selects supported LCD part."
+    long    = "",
+    help    = "This selects supported LCD part. Pick generic if the desired part number is not listed",
     units   = "",
     define  = "LCD_PART_NUMBER",
     type    = "string",
@@ -31,155 +31,159 @@ configPoints =
   lcd_width =
   {
     short   = "LCD Width",
-    long    = ""
-    help    = "This describes the width of the LCD panel in pixels."
+    long    = "",
+    help    = "This describes the width of the LCD panel in pixels",
     units   = "pixels",
     type    = "int",
     min     = 16,
     max     = 800,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
+    default=480
   },
   lcd_height =
   {
     short   = "LCD Height",
-    long    = ""
-    help    = "This describes the height of the LCD panel in pixels."
+    long    = "",
+    help    = "This describes the height of the LCD panel in pixels",
     units   = "pixels",
     define  = "LCD_HEIGHT",
     type    = "int",
     min     = 16,
     max     = 600,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
+    default = 272
   },
   lcd_bpp =
   {
     short   = "LCD Bits Per Pixel",
-    long    = ""
-    help    = "Count of bits used to set a pixels colour."
+    long    = "",
+    help    = "Count of bits used to set a pixels colour.",
     units   = "",
     define  = "LCD_BITS_PER_PIXEL",
     type    = "int",
     min     = 1,
     max     = 16,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 16
   },
   lcd_horizontal_front_porch =
   {
     short   = "LCD Horizontal Front Porch",
-    long    = ""
-    help    = "The horizontal front porch timing requirement given in pixel clocks."
+    long    = "",
+    help    = "The horizontal front porch timing requirement given in pixel clocks",
     units   = "pixel clocks",
     define  = "LCD_HOR_FRONT_PORCH",
     type    = "int",
     min     = 0,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 5
   },
   lcd_horizontal_back_porch =
   {
     short   = "LCD Horizontal Back Porch",
-    long    = ""
-    help    = "The horizontal back porch timing requirement given in pixel clocks."
+    long    = "",
+    help    = "The horizontal back porch timing requirement given in pixel clocks",
     units   = "pixel clocks",
     define  = "LCD_HOR_BACK_PORCH",
     type    = "int",
     min     = 0,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 40
   },
   lcd_vertical_front_porch =
   {
     short   = "LCD Vertical Front Porch",
-    long    = ""
-    help    = "The vertical front porch timing requirement given in horizontal time periods."
+    long    = "",
+    help    = "The vertical front porch timing requirement given in horizontal time periods",
     units   = "horizontal time periods",
     define  = "LCD_VERT_FRONT_PORCH",
     type    = "int",
     min     = 0,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 5
   },
   lcd_vertical_back_porch =
   {
     short   = "LCD Vertical Back Porch",
-    long    = ""
-    help    = "The vertical back porch timing requirement given in horizontal time periods."
+    long    = "",
+    help    = "The vertical back porch timing requirement given in horizontal time periods",
     units   = "horizontal time periods",
     define  = "LCD_VERT_BACK_PORCH",
     type    = "int",
     min     = 0,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 40
   },
   lcd_horizontal_pulse_width =
   {
     short   = "LCD Horizontal Pulse Width",
-    long    = ""
-    help    = "The horizontal pulse width timing requirement given in pixel clocks. This is the duration that the hsync signal should go low to denote the start of the horizontal frame. Set to 0 when hsync is not necessary."
+    long    = "",
+    help    = "The horizontal pulse width timing requirement given in pixel clocks. This is the duration that the hsync signal should go low to denote the start of the horizontal frame. Set to 0 when hsync is not necessary",
     units   = "pixel clocks",
     define  = "LCD_HOR_PULSE_WIDTH",
     type    = "int",
     min     = 0,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 1
   },
   lcd_vertical_pulse_width =
   {
     short   = "LCD Vertical Pulse Width",
-    long    = ""
-    help    = "The vertical pulse width timing requirement given in vertical time periods. This is the duration that the vsync signal should go low to denote the start of the vertical frame. Set to 0 when vsync is not necessary."
+    long    = "",
+    help    = "The vertical pulse width timing requirement given in vertical time periods. This is the duration that the vsync signal should go low to denote the start of the vertical frame. Set to 0 when vsync is not necessary.",
     units   = "horizontal time periods",
     define  = "LCD_VERT_PULSE_WIDTH",
     type    = "int",
     min     = 0,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 1
   },
   lcd_freq_dividend =
   {
     short   = "LCD Frequency Dividend",
-    long    = ""
-    help    = "FIXME"
+    long    = "",
+    help    = "FIXME",
     units   = "",
     define  = "LCD_FREQ_DIVIDEND",
     type    = "int",
     min     = 1,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 100
   },
   lcd_freq_divisor =
   {
-    short   = "LCD Frequency Divisor,
-    long    = ""
-    help    = "FIXME"
+    short   = "LCD Frequency Divisor",
+    long    = "",
+    help    = "FIXME",
     units   = "",
     define  = "LCD_FREQ_DIVISOR",
     type    = "int",
     min     = 8,
     max     = 100,
-    enabled = swblock.params.lcd_part == "Generic"
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 40
   },
 }
+
+derivedValues = {}
 
 ports = {
   p_lcd_clk = {
@@ -217,7 +221,7 @@ ports = {
 channels = {
   c_lcd_client = {
     short = "LCD Client channel",
-    long  = "Channel for the client to exchange commands with the LCD server,
+    long  = "Channel for the client to exchange commands with the LCD server",
     help  = "",
   },
 }    
@@ -226,7 +230,7 @@ function getConfigStatus()
   local status = "Trusted Configuration"
   local issues = {}
   if swblock.params.lcd_part == "Generic" then
-    status = "Untested"  
+    status = "Valid Configuration"  
   end
   return status, issues
 end
@@ -238,24 +242,26 @@ end
 generatedCode = {
   includes = {"lcd.h"},
   globals = [[
-    struct lcd_ports lcd_${swblock.id}_ports = { 
-      ${swblock.ports.lcd_clk},  
-      ${swblock.ports.lcd_data_enabled}, 
-      ${swblock.ports.lcd_rgb},  
-      ${swblock.ports.lcd_hsync}, 
-      ${swblock.ports.lcd_vsync}, 
-      ${swblock.clocks[1]}
+    lcd_ports lcd${swblock.id}_resources = { 
+      ${swblock.ports.p_lcd_clk},  
+      ${swblock.ports.p_lcd_data_enabled}, 
+      ${swblock.ports.p_lcd_rgb},  
+      ${swblock.ports.p_lcd_hsync}, 
+      ${swblock.ports.p_lcd_vsync}, 
+      ${swblock.clocks[0]}
     };
   ]],
   body = [[
-    lcd_server(${swblock.channels.c_lcd_client}, struct lcd_ports lcd_${swblock.id}_ports);
+    lcd_server(${swblock.chanends.c_lcd_client},  lcd${swblock.id}_resources);
   ]]
+}
+
+files = {
+  ["module_lcd/lcd_conf_example.h"] = "src/lcd_conf.h",
 }
 
 api = {
        'lcd_server',
-       'lcd_init',
-       'lcd_update',
-       'lcd_req',
+       'lcd_init'
       }
 
