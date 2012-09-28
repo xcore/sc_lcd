@@ -1,5 +1,5 @@
-Graphics LCD component
-======================
+LCD Component
+=============
 
 .. toctree::
 

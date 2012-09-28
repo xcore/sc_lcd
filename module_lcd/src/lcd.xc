@@ -9,7 +9,7 @@
 // Turn this on for debug only. It will cause the driver to error if timing in not met.
 //#define TIMING_DEBUG
 
-void lcd_init(chanend c_lcd){
+void lcd_init(chanend c_lcd) {
   outct(c_lcd, XS1_CT_END);
 }
 
@@ -21,7 +21,7 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
   unsigned now;
   unsigned started = 0;
 #endif
-  configure_clock_rate_at_least( p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
+  configure_clock_rate_at_least(p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
   set_port_clock(p.lcd_clk, p.clk_lcd);
   set_port_mode_clock(p.lcd_clk);
 
@@ -41,25 +41,26 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
   time += 1000;
 
-  while(1){
+  while (1) {
     unsigned ptr;
     unsigned x;
 
-    if (LCD_VERT_PULSE_WIDTH>0)
+    if (LCD_VERT_PULSE_WIDTH > 0)
       partout_timed(p.lcd_vsync, 1, 0, time);
 
-    for(unsigned i=0;i<LCD_VERT_PULSE_WIDTH;i++){
-      if (LCD_HOR_PULSE_WIDTH>0)
-        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+    for (unsigned i = 0; i < LCD_VERT_PULSE_WIDTH; i++) {
+      if (LCD_HOR_PULSE_WIDTH > 0)
+        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH + 1,
+            1 << LCD_HOR_PULSE_WIDTH, time);
       time += LCD_HSYNC_TIME;
     }
     if (LCD_VERT_PULSE_WIDTH>0)
-      partout_timed(p.lcd_vsync, 1, 1, time);
+    partout_timed(p.lcd_vsync, 1, 1, time);
 
-    if(LCD_HOR_PULSE_WIDTH){
-      for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++){
+    if(LCD_HOR_PULSE_WIDTH) {
+      for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++) {
         if (LCD_HOR_PULSE_WIDTH>0)
-          partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
         time += LCD_HSYNC_TIME;
       }
     } else {
@@ -69,24 +70,24 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
     for (int y = 0; y < LCD_HEIGHT; y++)
     {
       if (LCD_HOR_PULSE_WIDTH>0)
-        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+      partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
 
       time += LCD_HOR_BACK_PORCH;
 
 #ifdef TIMING_DEBUG
 #define TIME_STEP (LCD_FREQ_DIVISOR*LCD_HSYNC_TIME*100)/(LCD_FREQ_DIVIDEND)
-#pragma ordered
+  #pragma ordered
       select {
-    		case c_lcd :> ptr:
-				t:> now;
-			  started = 1;
-    		now += TIME_STEP;
-    			break;
-    		case started => t when timerafter(now)  :> int:
-    		  printstrln("LCD timing fail");
-    		  _Exit(1);
-    		  break;
-    	}
+        case c_lcd :> ptr:
+        t:> now;
+        started = 1;
+        now += TIME_STEP;
+        break;
+        case started => t when timerafter(now) :> int:
+        printstrln("LCD timing fail");
+        _Exit(1);
+        break;
+      }
 #else
       ptr = inuint(c_lcd);
       chkct(c_lcd, XS1_CT_END);
@@ -109,9 +110,9 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
       time += LCD_HOR_FRONT_PORCH;
     }
 
-    for(unsigned i=0;i<LCD_VERT_FRONT_PORCH;i++){
+    for(unsigned i=0;i<LCD_VERT_FRONT_PORCH;i++) {
       if (LCD_HOR_PULSE_WIDTH>0)
-        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+      partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
       time += LCD_HSYNC_TIME;
     }
   }
