@@ -38,7 +38,7 @@ This application demonstrates how the ``module_text_display`` can be used to put
 Display Controller Application
 ++++++++++++++++++++++++++++++
 
-This combination demo employs the ``module_lcd`` along with the ``module_sdram_burst`` and the ``module_framebuffer`` framebuffer framework component to implement a 480x272 display controller.
+This combination demo employs the ``module_lcd`` along with the ``module_sdram`` and the ``module_framebuffer`` framebuffer framework component to implement a 480x272 display controller.
 
 Required board SKUs for this demo are:
 

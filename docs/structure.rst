@@ -11,7 +11,7 @@ Source code structure
     - Header file containing the APIs for the LCD component
   * - 
     - ``lcd.xc``
-    - File containing the implementation of the LCD component thread
+    - File containing the implementation of the LCD component
   * - 
     - ``lcd_defines.xc``
     - Header file containing the user configurable defines for the LCD

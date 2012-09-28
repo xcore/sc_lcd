@@ -35,7 +35,7 @@ configPoints =
     help    = "This describes the width of the LCD panel in pixels."
     units   = "pixels",
     type    = "int",
-    min     = 480,
+    min     = 16,
     max     = 800,
     enabled = swblock.params.lcd_part == "Generic"
     resourceUsageFlags = {"noeffect"},
@@ -48,7 +48,7 @@ configPoints =
     units   = "pixels",
     define  = "LCD_HEIGHT",
     type    = "int",
-    min     = 272,
+    min     = 16,
     max     = 600,
     enabled = swblock.params.lcd_part == "Generic"
     resourceUsageFlags = {"noeffect"},
@@ -225,8 +225,8 @@ channels = {
 function getConfigStatus()
   local status = "Trusted Configuration"
   local issues = {}
-  if swblock.params.clock_divider == 1 or swblock.params.enable_cmd_full_row_read == 2 then
-    status = "FIXME"  
+  if swblock.params.lcd_part == "Generic" then
+    status = "Untested"  
   end
   return status, issues
 end
@@ -248,7 +248,7 @@ generatedCode = {
     };
   ]],
   body = [[
-    lcd_server(p_uart_rx, rx_buffer, ${swblock.channels.c_lcd_client}, struct lcd_ports lcd_${swblock.id}_ports);
+    lcd_server(${swblock.channels.c_lcd_client}, struct lcd_ports lcd_${swblock.id}_ports);
   ]]
 }
 

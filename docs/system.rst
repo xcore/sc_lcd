@@ -6,7 +6,7 @@ Basics of Graphics LCD
 
 The LCD screen types are being widely used in embedded applications due to their cost and simple interface. 
 
-SDRAM Component Feature
+LCD Component Feature
 -----------------------
 
 The LCD component is designed to support various LCD available on the market that interface via a CMOS interface.
