@@ -30,16 +30,23 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
   configure_out_port(p.lcd_rgb, p.clk_lcd, 0);
   configure_out_port(p.lcd_data_enabled, p.clk_lcd, 0);
+#if LCD_HOR_PULSE_WIDTH
   configure_out_port(p.lcd_hsync, p.clk_lcd, 0);
-  configure_out_port(p.lcd_vsync, p.clk_lcd, 0);
+#endif
 
+#if LCD_VERT_PULSE_WIDTH
+  configure_out_port(p.lcd_vsync, p.clk_lcd, 0);
+#endif
   start_clock(p.clk_lcd);
 
   chkct(c_lcd, XS1_CT_END);
   outct(c_lcd, XS1_CT_END);
-
+#if LCD_VERT_PULSE_WIDTH
   partout(p.lcd_vsync, 1, 1);
+#endif
+#if LCD_HOR_PULSE_WIDTH
   partout(p.lcd_hsync, 1, 1);
+#endif
   p.lcd_data_enabled <: 0 @ time;
 
   time += 1000;
@@ -48,33 +55,34 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
     unsigned ptr;
     unsigned x;
 
-    if (LCD_VERT_PULSE_WIDTH > 0)
+#if (LCD_VERT_PULSE_WIDTH > 0)
       partout_timed(p.lcd_vsync, 1, 0, time);
-
+#endif
     for (unsigned i = 0; i < LCD_VERT_PULSE_WIDTH; i++) {
-      if (LCD_HOR_PULSE_WIDTH > 0)
+#if (LCD_HOR_PULSE_WIDTH > 0)
         partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH + 1,
             1 << LCD_HOR_PULSE_WIDTH, time);
+#endif
       time += LCD_HSYNC_TIME;
     }
-    if (LCD_VERT_PULSE_WIDTH>0)
+#if (LCD_VERT_PULSE_WIDTH>0)
     partout_timed(p.lcd_vsync, 1, 1, time);
-
-    if(LCD_HOR_PULSE_WIDTH) {
+#endif
+#if(LCD_HOR_PULSE_WIDTH)
       for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++) {
         if (LCD_HOR_PULSE_WIDTH>0)
         partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
         time += LCD_HSYNC_TIME;
       }
-    } else {
+#else
       time += LCD_HSYNC_TIME*(LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH);
-    }
+#endif
 
     for (int y = 0; y < LCD_HEIGHT; y++)
     {
-      if (LCD_HOR_PULSE_WIDTH>0)
+#if (LCD_HOR_PULSE_WIDTH>0)
       partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
-
+#endif
       time += LCD_HOR_BACK_PORCH;
 
 #ifdef TIMING_DEBUG
@@ -114,8 +122,9 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
     }
 
     for(unsigned i=0;i<LCD_VERT_FRONT_PORCH;i++) {
-      if (LCD_HOR_PULSE_WIDTH>0)
+#if (LCD_HOR_PULSE_WIDTH>0)
       partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
+#endif
       time += LCD_HSYNC_TIME;
     }
   }

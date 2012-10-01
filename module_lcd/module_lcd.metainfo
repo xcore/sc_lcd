@@ -25,7 +25,7 @@ configPoints =
     define  = "LCD_PART_NUMBER",
     type    = "string",
     options = {"AT043TN24V7","K430WQAV4F","Generic"},
-    resourceUsageFlags = {"noeffect"},
+    resourceUsageFlags = {},
     default = "K430WQAV4F"
   },
   lcd_width =
@@ -34,6 +34,7 @@ configPoints =
     long    = "",
     help    = "This describes the width of the LCD panel in pixels",
     units   = "pixels",
+    define  = "LCD_WIDTH",
     type    = "int",
     min     = 16,
     max     = 800,
@@ -179,7 +180,7 @@ configPoints =
     max     = 100,
     enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
-    default = 40
+    default = 12
   },
 }
 
@@ -204,17 +205,21 @@ ports = {
     help    = "",
     width   = 16
   },
+
   p_lcd_hsync = {
     short   = "lcd_hsync",
     long    = "The hsync line",
     help    = "",
-    width   = 1
+    width   = 1,
+    enabled = (swblock.params.lcd_part ~= "K430WQAV4F" and swblock.params.lcd_horizontal_pulse_width ~= 0  ) or swblock.params.lcd_part == "K430WQAV4F"
   },
+
   p_lcd_vsync = {
     short   = "lcd_vsync",
     long    = "The vsync line",
     help    = "",
-    width   = 1
+    width   = 1,
+    enabled = (swblock.params.lcd_part ~= "K430WQAV4F" and  swblock.params.lcd_vertical_pulse_width ~= 0  )or swblock.params.lcd_part == "K430WQAV4F"
   },
 }
 
@@ -239,6 +244,18 @@ end
 -- Source generation functions
 -------------------------------------------------------------------------------
 
+if swblock.params.lcd_horizontal_pulse_width == 0 then
+hsync = ""
+else
+hsync = swblock.ports.p_lcd_hsync .. ","
+end
+
+if swblock.params.lcd_vertical_pulse_width == 0 then
+vsync = ""
+else
+vsync = swblock.ports.p_lcd_vsync .. ","
+end
+
 generatedCode = {
   includes = {"lcd.h"},
   globals = [[
@@ -246,8 +263,8 @@ generatedCode = {
       ${swblock.ports.p_lcd_clk},  
       ${swblock.ports.p_lcd_data_enabled}, 
       ${swblock.ports.p_lcd_rgb},  
-      ${swblock.ports.p_lcd_hsync}, 
-      ${swblock.ports.p_lcd_vsync}, 
+      ${hsync}
+      ${vsync}
       ${swblock.clocks[0]}
     };
   ]],
