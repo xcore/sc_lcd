@@ -1,217 +1,67 @@
-/* The file includes the demo API.
- * The API can be edited by the user based on need
- * Currently the following features are supported
- *  - Setting background color
- *  - Setting foreground color
- *  - Reading background and foreground color
- *  - Displaying an image
- *  - Writing character (6 * 6 pixel) in monochrome and color
- *  - Writing text (6 * 6 pixel) in monochrome and color
- *  - Writing text (16 * 16 pixel) in color (with support for normal and Italic fonts)
- *  - Setting font space in a text
- *  - The character set currently supports only Alphabets in Upper case and special character 'space'
- */
-#include "platform.h"
-#include "graphics.h"
-#include "character_display.h"
-#include "character_specific_includes.h"
+#include <platform.h>
 #include "lcd.h"
+#include "sprite.h"
 
+lcd_ports ports = {
+  XS1_PORT_1G, XS1_PORT_1F, XS1_PORT_16A, XS1_PORT_1B, XS1_PORT_1C, XS1_CLKBLK_1};
 
-/* The XMOS chip shown in the image. It is a 40 * 40 pixel image */
-/* A black chip with white pins and diagram on it */
-unsigned short image[IMAGE_HEIGHT * IMAGE_WIDTH] =
-{
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
- 0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,
-};
-
-
-void graphics_demo(chanend client)
-{
-  unsigned display_counter = 0;
-  char welcometext[] = {'W', 'E', 'L', 'C', 'O', 'M', 'E', ' ', 'T', 'O', ' ', 'X', 'M', 'O', 'S', '\0' };
-  char usbtext[] = {'H', 'I', 'G', 'H', ' ', 'S', 'P', 'E', 'E', 'D', ' ', 'U', 'S', 'B', '\0'};
-  char motortext[] = {'M', 'O', 'T', 'O', 'R', ' ', 'C', 'O', 'N', 'T', 'R', 'O', 'L', '\0'};
-  char ethernettext[] = {'E', 'T', 'H', 'E', 'R', 'N', 'E', 'T', ' ', 'A', 'V', 'B', '\0'};
-  char toolstext[] = {'F','R','E','E',' ','T','O','O','L','S','\0'};
-
-  /* Initialize the first data for the LCD */
-  lcd_init(client);
-
-  /* Paint screen with black */
-  set_graphics_frame(client);
-
-  while(1)
-  {
-	  set_foreground_color(LCD_565_YELLOW);
-	  set_text_space(4);
-	  set_text_feature(TEXT_ITALIC);
-	  while (display_counter < 75)
-	  {
-		  if (display_counter < 25)
-		  {
-		     put_image_BW(client, 50 , 10, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else if (display_counter < 50)
-		  {
-		     put_image_BW(client, 100 , 30, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else
-		  {
-		     put_image_BW(client, 130 , 60, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  write_text_16x16_color(client, 110, 60, welcometext);
-		  display_counter++;
-	  }
-	  display_counter = 0;
-	  while (display_counter < 75)
-	  {
-		  if (display_counter < 25)
-		  {
-		     put_image_BW(client, 150 , 80, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else if (display_counter < 50)
-		  {
-		     put_image_BW(client, 200 , 120, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else
-		  {
-		     put_image_BW(client, 180 , 180, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  write_text_16x16_color(client, 110, 60, usbtext);
-		  display_counter++;
-	  }
-	  display_counter = 0;
-	  while (display_counter < 75)
-	  {
-		  if (display_counter < 25)
-		  {
-		     put_image_BW(client, 160 , 200, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else if (display_counter < 50)
-		  {
-		     put_image_BW(client, 150 , 160, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else
-		  {
-		     put_image_BW(client, 135 , 130, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-
-		  write_text_16x16_color(client, 110, 60, ethernettext);
-		  display_counter++;
-	  }
-	  display_counter = 0;
-	  while (display_counter < 75)
-	  {
-		  if (display_counter < 25)
-		  {
-		     put_image_BW(client, 65 , 170, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else if (display_counter < 50)
-		  {
-		     put_image_BW(client, 45 , 150, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else
-		  {
-		     put_image_BW(client, 30 , 130, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  write_text_16x16_color(client, 110, 60, motortext);
-
-		  display_counter++;
-	  }
-	  display_counter = 0;
-	  while (display_counter < 75)
-	  {
-		  if (display_counter < 25)
-		  {
-		     put_image_BW(client, 20 , 150, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else if (display_counter < 50)
-		  {
-		     put_image_BW(client, 30, 100, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  else
-		  {
-		     put_image_BW(client, 40, 50, IMAGE_HEIGHT, IMAGE_WIDTH, image);
-		  }
-		  write_text_16x16_color(client, 110, 60, toolstext);
-
-		  display_counter++;
-	  }
-	  display_counter = 0;
-
-
-  }
+static inline void add(unsigned x, unsigned y, unsigned line, unsigned buffer[]){
+	if(line >= x && line < x + SPRITE_HEIGHT_PX)
+		for(unsigned i=y;i<y + SPRITE_WIDTH_WORDS;i++)
+			buffer[i] = logo[(line-x)*SPRITE_WIDTH_WORDS+(i-y)];
 }
 
-/* Variable holding the LCD port information
- * The ports used are based on the customer hardware used
- * The LCD panel's data line is connected as 32 bit line though only 16 bit RGB is used
- * Hence the data is sent as words of pixel information (each word containing 2 pixels)
- */
-on stdcore[0]: struct lcd_ports lcd_ports_init = {
-		XS1_PORT_1O,
-		XS1_PORT_4F,
-		XS1_PORT_32A,
-		XS1_PORT_1K,
-		XS1_PORT_1J,
-		XS1_CLKBLK_3 };
+static inline void sub(unsigned x, unsigned y, unsigned line, unsigned buffer[]){
+	if(line >= x && line < x + SPRITE_HEIGHT_PX)
+		for(unsigned i=y;i<y + SPRITE_WIDTH_WORDS;i++)
+			buffer[i] = BACK_COLOUR;
+}
 
-/* The main function invoking the threads in the parallel statement */
-int main(void)
-{
+void demo(chanend c_lcd){
+	unsigned buffer[2][LCD_ROW_WORDS];
+	unsigned buffer_index = 0, update = 0;
+	int x=20, y=0, vx=1, vy=2;
+	for(unsigned i=0;i<LCD_ROW_WORDS;i++)
+		buffer[0][i] = buffer[1][i] = BACK_COLOUR;
+	lcd_init(c_lcd);
+	while(1){
+		add(x, y, 0, buffer[buffer_index]);
+		lcd_req(c_lcd);
+		lcd_update(c_lcd, buffer[buffer_index]);
+		for(unsigned line=1;line<LCD_HEIGHT;line++){
+			add(x, y, line, buffer[1 - buffer_index]);
+			lcd_req(c_lcd);
+			lcd_update(c_lcd, buffer[1 - buffer_index]);
+			sub(x, y, line-1, buffer[buffer_index]);
+			buffer_index = 1 - buffer_index;
+		}
+		sub(x, y, LCD_HEIGHT-1, buffer[buffer_index]);
+		if(update==0){
+			x+=vx;
+			y+=vy;
+			if(y>=LCD_ROW_WORDS - SPRITE_WIDTH_WORDS || y<=0)
+				vy = -vy;
+			if(x>=LCD_HEIGHT - SPRITE_HEIGHT_PX || x <= 0)
+				vx = -vx;
+		}
+		update = 1 - update;
+	}
+}
+
+out port p = XS1_PORT_8D;
+static void disable_flash(){
+  p <:0x80;
+  p <:0xc0;
+  set_port_use_off(p);
+}
+
+int main() {
   chan c_lcd;
-
+  disable_flash();
   par {
-	  lcd_server(c_lcd, lcd_ports_init);
-      graphics_demo(c_lcd);
-
+	lcd_server(c_lcd, ports);
+	demo(c_lcd);
+	par(int i=0;i<6;i++) while(1);
   }
   return 0;
 }
-
-
-
-
-
-
-
