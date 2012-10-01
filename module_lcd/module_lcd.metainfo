@@ -24,7 +24,7 @@ configPoints =
     units   = "",
     define  = "LCD_PART_NUMBER",
     type    = "string",
-    options = {"AT043TN24","K430WQAV4F","Generic"},
+    options = {"AT043TN24V7","K430WQAV4F","Generic"},
     resourceUsageFlags = {"noeffect"},
     default = "K430WQAV4F"
   },
