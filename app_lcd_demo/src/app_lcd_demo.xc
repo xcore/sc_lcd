@@ -2,9 +2,8 @@
 #include "lcd.h"
 #include "sprite.h"
 
-struct lcd_ports lcd_ports = {
+lcd_ports ports = {
   XS1_PORT_1G, XS1_PORT_1F, XS1_PORT_16A, XS1_PORT_1B, XS1_PORT_1C, XS1_CLKBLK_1};
-
 
 static inline void add(unsigned x, unsigned y, unsigned line, unsigned buffer[]){
 	if(line >= x && line < x + SPRITE_HEIGHT_PX)
@@ -51,15 +50,8 @@ void demo(chanend c_lcd){
 
 out port p = XS1_PORT_8D;
 static void disable_flash(){
-#if 1
   p <:0x80;
   p <:0xc0;
-  p <:0x80;
-#else
-  p <:0x00;
-  p <:0x40;
-  p <:0x00;
-#endif
   set_port_use_off(p);
 }
 
@@ -67,7 +59,7 @@ int main() {
   chan c_lcd;
   disable_flash();
   par {
-	lcd_server(c_lcd, lcd_ports);
+	lcd_server(c_lcd, ports);
 	demo(c_lcd);
 	par(int i=0;i<6;i++) while(1);
   }

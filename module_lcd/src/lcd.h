@@ -19,7 +19,7 @@ typedef struct lcd_ports {
  * \param client The channel end connecting to the client.
  * \param ports The structure carrying the LCD port details.
  */
-void lcd_server(chanend client, struct lcd_ports &ports);
+void lcd_server(chanend client, lcd_ports &ports);
 
 /** \brief LCD init function. This sets the lcd into a state where it is ready to accept data.
  *
