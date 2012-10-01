@@ -3,7 +3,7 @@
 
 #include "lcd_conf.h"
 
-#include "lcd_defines_AT043TN24.h"
+#include "lcd_defines_AT043TN24V7.h"
 #include "lcd_defines_K430WQAV4F.h"
 
 #ifndef ADD_SUFFIX

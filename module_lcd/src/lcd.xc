@@ -22,6 +22,9 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
   unsigned started = 0;
 #endif
   configure_clock_rate_at_least(p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
+
+  //set_port_inv(p_lcd_clk);  //FIXME this should be inverted but works better when it is not.
+
   set_port_clock(p.lcd_clk, p.clk_lcd);
   set_port_mode_clock(p.lcd_clk);
 
