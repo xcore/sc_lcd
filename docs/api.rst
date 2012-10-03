@@ -59,5 +59,7 @@ The LCD display module functionality is defined in
 	* ``\devices``
 
 .. doxygenfunction:: lcd_init
+.. doxygenfunction:: lcd_req
 .. doxygenfunction:: lcd_update
+.. doxygenfunction:: lcd_update_p
 .. doxygenfunction:: lcd_server

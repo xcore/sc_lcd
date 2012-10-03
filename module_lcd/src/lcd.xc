@@ -6,9 +6,6 @@
 
 #define LDW(dst, mem, ind) asm("ldw %0, %1[%2]" : "=r"(dst) : "r"(mem), "r"(ind))
 
-// Turn this on for debug only. It will cause the driver to error if timing in not met.
-//#define TIMING_DEBUG
-
 void lcd_init(chanend c_lcd) {
   outct(c_lcd, XS1_CT_END);
 }
@@ -16,27 +13,22 @@ void lcd_init(chanend c_lcd) {
 #pragma unsafe arrays
 void lcd_server(chanend c_lcd, struct lcd_ports &p) {
   unsigned time;
-#ifdef TIMING_DEBUG
-  timer t;
-  unsigned now;
-  unsigned started = 0;
-#endif
-  configure_clock_rate_at_least(p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
 
-  //set_port_inv(p_lcd_clk);  //FIXME this should be inverted but works better when it is not.
+  configure_clock_rate_at_least(p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
 
   set_port_clock(p.lcd_clk, p.clk_lcd);
   set_port_mode_clock(p.lcd_clk);
 
-  configure_out_port(p.lcd_rgb, p.clk_lcd, 0);
-  configure_out_port(p.lcd_data_enabled, p.clk_lcd, 0);
+  set_port_clock(p.lcd_rgb, p.clk_lcd);
+  set_port_clock(p.lcd_data_enabled, p.clk_lcd);
 #if LCD_HOR_PULSE_WIDTH
-  configure_out_port(p.lcd_hsync, p.clk_lcd, 0);
+  set_port_clock(p.lcd_hsync, p.clk_lcd);
 #endif
 
 #if LCD_VERT_PULSE_WIDTH
-  configure_out_port(p.lcd_vsync, p.clk_lcd, 0);
+  set_port_clock(p.lcd_vsync, p.clk_lcd);
 #endif
+
   start_clock(p.clk_lcd);
 
   chkct(c_lcd, XS1_CT_END);
@@ -85,24 +77,8 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 #endif
       time += LCD_HOR_BACK_PORCH;
 
-#ifdef TIMING_DEBUG
-#define TIME_STEP (LCD_FREQ_DIVISOR*LCD_HSYNC_TIME*100)/(LCD_FREQ_DIVIDEND)
-  #pragma ordered
-      select {
-        case c_lcd :> ptr:
-        t:> now;
-        started = 1;
-        now += TIME_STEP;
-        break;
-        case started => t when timerafter(now) :> int:
-        printstrln("LCD timing fail");
-        _Exit(1);
-        break;
-      }
-#else
       ptr = inuint(c_lcd);
       chkct(c_lcd, XS1_CT_END);
-#endif
 
       LDW(x, ptr, 0);
 
@@ -111,7 +87,7 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
       time += LCD_WIDTH;
 
-      p.lcd_data_enabled @ time <: 0;
+      p.lcd_data_enabled @ time+1 <: 0;
 
       for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
         LDW(x, ptr, i);

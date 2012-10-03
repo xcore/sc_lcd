@@ -1,7 +1,7 @@
 #ifndef LCD_CONF_H_
 #define LCD_CONF_H_
 
-#define LCD_PART_NUMBER [pn]
+#define LCD_PART_NUMBER [part number]
 
 //#define LCD_WIDTH
 //#define LCD_HEIGHT
