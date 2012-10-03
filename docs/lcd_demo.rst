@@ -13,6 +13,10 @@ This application demonstrates how the module is used write image data to the LCD
 Application Notes
 -----------------
 
+
+
+
+
 Getting Started
 +++++++++++++++
 

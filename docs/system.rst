@@ -1,13 +1,5 @@
-Component Description
-=====================
-
-Basics of Graphics LCD
-----------------------
-
-The LCD screen types are being widely used in embedded applications due to their cost and simple interface. 
-
-LCD Component Feature
------------------------
+Component Features
+==================
 
 The LCD component is designed to support various LCD available on the market that interface via a CMOS interface.
 

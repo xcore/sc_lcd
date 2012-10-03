@@ -43,7 +43,6 @@ This combination demo employs the ``module_lcd`` along with the ``module_sdram``
 Required board SKUs for this demo are:
 
    * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-SDRAM plus XA-SK-SCR480 plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
-
    * Package: sw_display_controller
-   * Application: app_graphics_demo
+   * Application: app_display_controller_demo
 

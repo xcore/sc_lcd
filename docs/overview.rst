@@ -1,7 +1,7 @@
 Overview
 ========
 
-The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to 35MHz.
+The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to 25MHz.
 
 Features
 --------
@@ -39,5 +39,5 @@ Resource requirements
 Performance
 ----------- 
 
-The achievable effective bandwidth varies according to the avaliable XCore MIPS. The maximum pixel clock supported is 35MHz.
+The achievable effective bandwidth varies according to the avaliable XCore MIPS. The maximum pixel clock supported is 25MHz.
 
