@@ -6,35 +6,34 @@ The LCD component is used to drive a single graphics LCD module up to 800 * 600 
 Features
 --------
 
-   * Standard component to support different LCD displays with RGB 565
-   * Different color depths 32 bpp, 16 bpp, etc. based on user configuration
+   * Standard component to support different LCD displays with RGB 565.
+   * Different color depths 32 bpp, 16 bpp, etc. based on user configuration.
    * Resolution of up to 800 * 600 pixels. See table below for different screen configurations.
-
-
+   * Outputs to a CMOS interface.
 
 Memory requirements
 -------------------
 +------------------+---------------+
 | Resource         | Usage         |
 +==================+===============+
-| Stack            | X bytes       |
+| Stack            | 92 bytes      |
 +------------------+---------------+
-| Program          | X bytes       |
+| Program          | 2168 bytes    |
 +------------------+---------------+
 
 Resource requirements
 ---------------------
-+--------------+-------+
-| Resource     | Usage |
-+==============+=======+
-| Channels     |   1   |
-+--------------+-------+
-| Timers       |   0   |
-+--------------+-------+
-| Clocks       |   1   |
-+--------------+-------+
-| Threads      |   1   |
-+--------------+-------+
++---------------+-------+
+| Resource      | Usage |
++===============+=======+
+| Channels      |   1   |
++---------------+-------+
+| Timers        |   0   |
++---------------+-------+
+| Clocks        |   1   |
++---------------+-------+
+| Logical Cores |   1   |
++---------------+-------+
 
 Performance
 ----------- 
