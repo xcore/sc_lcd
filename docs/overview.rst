@@ -10,6 +10,13 @@ Features
    * Different color depths 32 bpp, 16 bpp, etc. based on user configuration.
    * Resolution of up to 800 * 600 pixels. See table below for different screen configurations.
    * Outputs to a CMOS interface.
+   * Configurability of 
+     * LCD pixel dimensions,
+     * clock rate,
+     * horizontal and vertical timing requiremnts,
+     * port mapping of the LCD.
+   * Requires a single core for the server.
+     * The function ``lcd_server`` requires just one core, the client functions, located in ``lcd.h`` are very low overhead and are called from the application.
 
 Memory requirements
 -------------------

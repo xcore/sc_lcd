@@ -1,7 +1,7 @@
 LCD Demo
 ========
 
-:scope: General Use
+:scope: Example
 :description: Demonstrates how the module is used to write to an LCD screen.
 :keywords: LCD,Screen
 :boards: XA-SK-SCR480

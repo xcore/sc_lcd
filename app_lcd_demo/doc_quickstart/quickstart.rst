@@ -47,19 +47,13 @@ Now that the application has been compiled, the next step is to run it on the Sl
 Next Steps
 ++++++++++
 
+  #. Trying changing the ``int x=20, y=0, vx=1, vy=2;`` variables, they represent: initial x coord, initial y coord, x velocity and y velociry respectivly.
+  #. In the ``sub()`` function what would you expect to see if the line: ``buffer[i] = BACK_COLOUR;`` was changed to ``buffer[i] = 0x12345678;``?
+
 Look at the Code
 ................
 
    #. Examine the application code. In xTIMEcomposer navigate to the ``src`` directory under app_sdram_demo and double click on the ``app_sdram_demo.xc`` file within it. The file will open in the central editor window.
-   #. Find the main function and note that it runs the ``application()`` function on a single logical core. 
-   #. Find the ``sdram_buffer_write`` function within ``application()``. There are 4 SDRAM I/O commands: ``sdram_buffer_write``, ``sdram_buffer_read``, ``sdram_full_page_write``, ``sdram_full_page_read``. They must all be followed by a ``sdram_wait_until_idle`` before another I/O command may be issued. When the ``sdram_wait_until_idle`` returns then the data is now at it destination. This functionality allows the application to be getting on with something else whilst the SDRAM server is busy with the I/O. 
-   #. There is no need to explictly refresh the SDRAM as this is managed by the ``sdram_server``.
+   #. Find the main function and note that it runs the ``demo()`` function on a single logical core. 
 
-Try the Benchmark and Regressession Demo
-........................................
-
-   #. After completing this demo there are two more application to try: 
-
-:ref:``sdram_benchmark_Quickstart`
-:ref:``sdram_regress_Quickstart`
    

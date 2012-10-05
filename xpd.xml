@@ -8,16 +8,20 @@
             <keyword>RGB565</keyword>
             <keyword>Display</keyword>
         </component>
+        <component description = "Demonstrates how the module is used to write to an LCD screen." type = "demoCode" scope = "Example" path = "app_lcd_demo" local = "false" id = "app_lcd_demo" name = "LCD Demo">
+            <board>XA-SK-SCR480</board>
+            <componentDependency>module_lcd</componentDependency>
+            <keyword>LCD</keyword>
+            <keyword>Screen</keyword>
+        </component>
     </components>
-    <dependency repo = "sc_lcd_old">
-        <githash>248ab2ae6437f0da373a8e9cebd6a30990c013be</githash>
+    <dependency repo = "sc_lcd">
+        <githash>68bd31a27ec4e76a78d8c45681273299028bdcf3</githash>
         <uri>git@github.com:xcore/sc_lcd.git</uri>
     </dependency>
-    <docdir>docs</docdir>
-    <exclude_dir>module_text_display</exclude_dir>
-    <exclude_dir>app_graphics_demo</exclude_dir>
-    <exclude_dir>app_lcd_demo</exclude_dir>
     <description>Driver component and supporting modules for RGB565 LCDs</description>
+    <docdir>docs</docdir>
+    <docdir>app_lcd_demo/docs</docdir>
     <location>git@github.com:xcore/sc_lcd.git</location>
     <name>sc_lcd</name>
     <maintainer>andrewstanfordjason</maintainer>

@@ -8,5 +8,5 @@ LCD Component
    Component Description <system>
    API <api>
    Programming Guide <programming>
-   Example Applications <example>
+   Example Applications <examples>
    

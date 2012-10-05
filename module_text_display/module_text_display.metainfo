@@ -1,0 +1,58 @@
+-------------------------------------------------------------------------------
+-- Descriptive metadata
+-------------------------------------------------------------------------------
+
+componentName = "Text display module"
+componentFullName = ""
+alternativeNames = { }
+componentDescription = "Offers text rendering for use with the LCD module"
+componentVersion = "1v0"
+
+-------------------------------------------------------------------------------
+-- Parameter descriptions.
+-------------------------------------------------------------------------------
+
+configPoints =
+{
+  
+
+ 
+}
+
+derivedValues = {}
+
+ports = {
+ 
+}
+
+channels = {
+ 
+}    
+
+function getConfigStatus()
+  local status = "Trusted Configuration"
+  local issues = {}
+  return status, issues
+end
+            
+-------------------------------------------------------------------------------
+-- Source generation functions
+-------------------------------------------------------------------------------
+
+
+generatedCode = {
+  includes = {"text_display.h"},
+  globals = [[
+
+  ]],
+  body = [[
+  ]]
+}
+
+files = {
+  ["module_text_display/text_display_conf_example.h"] = "src/text_display_conf.h",
+}
+
+api = {
+      }
+

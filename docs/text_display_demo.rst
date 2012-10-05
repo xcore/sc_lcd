@@ -1,4 +1,0 @@
-Text Display Demo
-=================
-
-//TODO
