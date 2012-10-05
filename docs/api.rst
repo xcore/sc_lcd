@@ -1,10 +1,13 @@
 Project structure
 =================
 
-The component ``sc_lcd`` includes the module ``module_lcd``. It can be used by an application to drive an LCD module.
+The component ``sc_lcd`` includes the module ``module_lcd`` and the ``module_text_display``.
+
+module_lcd
+----------
 
 Configuration Defines
----------------------
++++++++++++++++++++++
 
 The ``module_lcd`` includes device support defines, each support header, located in the ``devices`` directory defines a number of parameters. It is sufficient for the user to specify which device to support in the ``lcd_conf.h`` for the device to be correctly supported. To do this ``lcd_conf.h`` must include the define:
 ::
@@ -50,7 +53,7 @@ It is possible to override the default defines when a part number is selected. T
 	The defines FREQ_DIVIDEND and FREQ_DIVISOR are used to calculate the frequency of the clock used for LCD. The frequency configured = (FREQ_DIVIDEND / FREQ_DIVISOR) in MHz
 
 API
----
++++
 
 The LCD display module functionality is defined in
         * ``lcd.xc``
@@ -63,3 +66,17 @@ The LCD display module functionality is defined in
 .. doxygenfunction:: lcd_update
 .. doxygenfunction:: lcd_update_p
 .. doxygenfunction:: lcd_server
+
+module_text_display
+-------------------
+
+Configuration Defines
++++++++++++++++++++++
+
+//TODO
+
+API
++++
+
+//TODO
+
