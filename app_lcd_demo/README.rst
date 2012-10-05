@@ -1,9 +1,9 @@
-<Add title here>
-================
+LCD Demo
+========
 
-:scope: <Put one of Roadmap, Example, Early Development or General Use>
-:description: <Add one line here>
-:keywords: <Add comma separated list of keywords>
-:boards: <Add comma separated list of supported boards>
+:scope: General Use
+:description: Demonstrates how the module is used to write to an LCD screen.
+:keywords: LCD,Screen
+:boards: XA-SK-SCR480
 
-<Add description of software block>
+This simple demonstration of xTIMEcomposer Studio functionality uses the XA-SK-SCR480 Slice Card together with the xSOFTip module_lcd to demonstrate how the module is used to write to an LCD screen.
