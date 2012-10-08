@@ -47,7 +47,7 @@ Now that the application has been compiled, the next step is to run it on the Sl
 Next Steps
 ++++++++++
 
-  #. Trying changing the ``int x=20, y=0, vx=1, vy=2;`` variables, they represent: initial x coord, initial y coord, x velocity and y velociry respectivly.
+  #. Trying changing the ``int x=20, y=0, vx=1, vy=2;`` variables, they represent: initial x coord, initial y coord, x velocity and y velocity respectivly.
   #. In the ``sub()`` function what would you expect to see if the line: ``buffer[i] = BACK_COLOUR;`` was changed to ``buffer[i] = 0x12345678;``?
 
 Look at the Code
@@ -56,4 +56,11 @@ Look at the Code
    #. Examine the application code. In xTIMEcomposer navigate to the ``src`` directory under app_sdram_demo and double click on the ``app_sdram_demo.xc`` file within it. The file will open in the central editor window.
    #. Find the main function and note that it runs the ``demo()`` function on a single logical core. 
 
+Try the Full Display Controller Demo
+....................................
+
+These applications are necessarily limited since there is no external memory available for a proper framebuffer, and the internal memory of an XCore Tile is too small to buffer a full screen colour image. The Display Controller demo combines the functionality of this LCD module with the SDRAM Controller component and SDRAM Slice Card to implement a fully functioning LCD Display Controller by adding the memory controller and a component that takes care of framebuffer management. 
+
+Once you have both the XA-SK-SDRAM< and XA-SK-SCR480 slices you can try the Display Controller demo by
    
+:ref:`Display_Controller_Demo_Quickstart`
