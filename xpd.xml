@@ -15,10 +15,6 @@
             <keyword>Display</keyword>
         </component>
     </components>
-    <dependency repo = "sc_lcd">
-        <githash>64754dc1e7e17efad61ad75a8aebc6d00687543c</githash>
-        <uri>git@github.com:xcore/sc_lcd.git</uri>
-    </dependency>
     <description>Driver component and supporting modules for RGB565 LCDs</description>
     <docdir>docs</docdir>
     <docdir>app_lcd_demo/doc_quickstart</docdir>
