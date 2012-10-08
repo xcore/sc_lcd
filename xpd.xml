@@ -16,7 +16,7 @@
         </component>
     </components>
     <description>Driver component and supporting modules for RGB565 LCDs</description>
-    <docdir>docs</docdir>
+    <docdir>doc</docdir>
     <docdir>app_lcd_demo/doc_quickstart</docdir>
     <location>git@github.com:xcore/sc_lcd.git</location>
     <name>sc_lcd</name>
