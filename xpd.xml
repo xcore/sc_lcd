@@ -22,6 +22,7 @@
     <name>sc_lcd</name>
     <maintainer>andrewstanfordjason</maintainer>
     <partnumber>XM-001960-DH</partnumber>
+    <release parenthash = "16c8862e6a27e20b82c5ee6f4065169583d3f044" version = "1.0.0alpha0"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <xcore_repo>sc_lcd.git</xcore_repo>
