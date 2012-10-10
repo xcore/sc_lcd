@@ -6,5 +6,5 @@ LCD Demo
 :keywords: LCD,Screen
 :boards: XA-SK-SCR480
 
-This simple demonstration of xTIMEcomposer Studio functionality uses the XA-SK-SCR480 Slice Card together with the xSOFTip module_lcd to demonstrate how the module is used to write to an LCD screen.
+This simple demonstration of xTIMEcomposer Studio functionality that uses the XA-SK-SCR480 Slice Card together with the xSOFTip module_lcd to demonstrate how the module is used to write to an LCD screen.
 
