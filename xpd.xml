@@ -16,13 +16,16 @@
         </component>
     </components>
     <description>Driver component and supporting modules for RGB565 LCDs</description>
-    <docdir>docs</docdir>
+    <docdir>doc</docdir>
     <docdir>app_lcd_demo/doc_quickstart</docdir>
     <location>git@github.com:xcore/sc_lcd.git</location>
     <name>sc_lcd</name>
     <maintainer>andrewstanfordjason</maintainer>
     <partnumber>XM-001960-DH</partnumber>
     <release parenthash = "16c8862e6a27e20b82c5ee6f4065169583d3f044" version = "1.0.0alpha0" githash = "82925fe188f69f81c7e489eef1c1d016636c89de"></release>
+    <release parenthash = "2d05e87bea8f07a7b5c59d4f9495106a808658dc" version = "1.0.0alpha1" githash = "b2ec5be2a9844f3dfc3acbc8fc18da83842a1560"></release>
+    <release parenthash = "bc40313c877e76ae1ea489a9ee4e47cd52dcd756" version = "1.0.0alpha2" githash = "4f3f3edee98d7c8e213c7b51dee97e9a76877876"></release>
+    <release parenthash = "4f3f3edee98d7c8e213c7b51dee97e9a76877876" version = "1.0.0alpha3"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <xcore_repo>sc_lcd.git</xcore_repo>
