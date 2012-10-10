@@ -1,7 +1,7 @@
 LCD Driver Component
 ....................
 
-:Latest release: 1.0.0alpha2
+:Latest release: 1.0.0alpha3
 :Maintainer: andrewstanfordjason
 :Description: Driver component and supporting modules for RGB565 LCDs
 
