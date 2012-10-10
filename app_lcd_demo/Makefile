@@ -9,7 +9,7 @@ TARGET = XS1-L02A-QF124-C5
 APP_NAME = app_lcd_demo
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = module_lcd
+USED_MODULES = module_lcd module_slicekit_support
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:

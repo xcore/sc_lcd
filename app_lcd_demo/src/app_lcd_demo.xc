@@ -48,16 +48,8 @@ void demo(chanend c_lcd){
 	}
 }
 
-out port p = XS1_PORT_8D;
-static void disable_flash(){
-  p <:0x80;
-  p <:0xc0;
-  set_port_use_off(p);
-}
-
 int main() {
   chan c_lcd;
-  disable_flash();
   par {
 	lcd_server(c_lcd, ports);
 	demo(c_lcd);
