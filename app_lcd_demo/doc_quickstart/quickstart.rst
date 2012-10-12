@@ -42,6 +42,7 @@ Run the Application
 
 Now that the application has been compiled, the next step is to run it on the Slicekit Core Board using the tools to load the application over JTAG (via the XTAG2 and Xtag Adaptor card) into the xCORE multicore microcontroller.
 
+   #. Select the file ``app_lcd_demo.xc`` in the ``app_lcd_demo`` project from the Project Explorer.
    #. Click on the ``Run`` icon (the white arrow in the green circle). 
    #. Select "XCore Application", click "Run".
    #. The output on the LCD should look like a bouncing "X".
@@ -58,6 +59,4 @@ Try the Full Display Controller Demo
 
 This application is necessarily limited since there is no external memory available for a proper framebuffer, and the internal memory of an XCore Tile is too small to buffer a full screen colour image. The Display Controller demo combines the functionality of this LCD module with the SDRAM Controller component and SDRAM Slice Card. Together they implement a fully functioning LCD Display Controller by adding the memory controller and a component that takes care of framebuffer management. 
 
-Once you have both the XA-SK-SDRAM and XA-SK-SCR480 slices you can try the Display Controller demo by
-   
-:ref:`Display_Controller_Demo_Quickstart`
+Once you have both the XA-SK-SDRAM and XA-SK-SCR480 slices you can try the Display Controller demo by :ref:`Display_Controller_Demo_Quickstart`
