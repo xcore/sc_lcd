@@ -39,10 +39,22 @@ void demo(chanend c_lcd){
 		if(update==0){
 			x+=vx;
 			y+=vy;
-			if(y>=LCD_ROW_WORDS - SPRITE_WIDTH_WORDS || y<=0)
+                        if(y<=0) {
 				vy = -vy;
-			if(x>=LCD_HEIGHT - SPRITE_HEIGHT_PX || x <= 0)
+				y = 0;
+                        }
+                        if(y >= LCD_ROW_WORDS - SPRITE_WIDTH_WORDS) {
+				vy = -vy;
+				y = LCD_ROW_WORDS - SPRITE_WIDTH_WORDS - 1;
+                        }
+                        if(x <= 0) {
 				vx = -vx;
+				x = 0;
+                        }
+                        if(x >= LCD_HEIGHT - SPRITE_HEIGHT_PX) {
+				vx = -vx;
+				x = LCD_HEIGHT - SPRITE_HEIGHT_PX - 1;
+                        }
 		}
 		update = 1 - update;
 	}
