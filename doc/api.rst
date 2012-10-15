@@ -1,3 +1,4 @@
+
 Project structure
 =================
 
@@ -49,6 +50,8 @@ It is possible to override the default defines when a part number is selected. T
 	The vertical pulse width timing requirement given in vertical time periods. This is the duration that the vsync signal should go low to denote the start of the vertical frame. Set to 0 when vsync is not necessary.
 
 **LCD_FREQ_DIVIDEND**
+	The defines FREQ_DIVIDEND and FREQ_DIVISOR are used to calculate the frequency of the clock used for LCD. The frequency configured = (FREQ_DIVIDEND / FREQ_DIVISOR) in MHz
+
 **LCD_FREQ_DIVISOR**
 	The defines FREQ_DIVIDEND and FREQ_DIVISOR are used to calculate the frequency of the clock used for LCD. The frequency configured = (FREQ_DIVIDEND / FREQ_DIVISOR) in MHz
 
@@ -56,10 +59,12 @@ API
 +++
 
 The LCD display module functionality is defined in
-        * ``lcd.xc``
-        * ``lcd.h``
-        * ``lcd_defines.h``
-	* ``\devices``
+  * ``lcd.xc``
+  * ``lcd.h``
+  * ``lcd_defines.h``
+  * ``/devices``
+
+Where the following functions can be found:
 
 .. doxygenfunction:: lcd_init
 .. doxygenfunction:: lcd_req
@@ -67,16 +72,4 @@ The LCD display module functionality is defined in
 .. doxygenfunction:: lcd_update_p
 .. doxygenfunction:: lcd_server
 
-module_text_display
--------------------
-
-Configuration Defines
-+++++++++++++++++++++
-
-//TODO
-
-API
-+++
-
-//TODO
 

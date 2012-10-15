@@ -1,4 +1,5 @@
 
+
 LCD Programming Guide
 =====================
 
@@ -43,6 +44,7 @@ If the required target is the part AT043TN24V7 LCD display then,
 Example:
 In the application file
 ::
+
 	struct lcd_ports lcd_ports = {
 		XS1_PORT_1G, 
 		XS1_PORT_1F, 
@@ -54,6 +56,7 @@ In the application file
 
 The declared variable ``lcd_ports`` is used by the LCD server call to address these ports. A core should have the ``lcd_server`` running on it and it should be connected by a channel to the application, for example:
 ::
+
   chan c_lcd;
   par {
 	lcd_server(c_lcd, lcd_ports);
