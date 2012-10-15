@@ -31,7 +31,7 @@ Import and Build the Application
 
    #. Open xTIMEcomposer and check that it is operating in online mode. Open the edit perspective (Window->Open Perspective->XMOS Edit).
    #. Locate the ``'Slicekit LCD Demo'`` item in the xSOFTip pane on the bottom left of the window and drag it into the Project Explorer window in the xTIMEcomposer. This will also cause the modules on which this application depends (in this case, module_lcd) to be imported as well. 
-   #. Click on the app_lcd_demo item in the Explorer pane then click on the build icon (hammer) in xTIMEcomposer. Check the console window to verify that the application has built successfully.
+   #. Click on the app_lcd_demo item in the Project Explorer pane then click on the build icon (hammer) in xTIMEcomposer. Check the console window to verify that the application has built successfully.
 
 For help in using xTIMEcomposer, try the xTIMEcomposer tutorial.
 
@@ -44,19 +44,19 @@ Now that the application has been compiled, the next step is to run it on the Sl
 
    #. Select the file ``app_lcd_demo.xc`` in the ``app_lcd_demo`` project from the Project Explorer.
    #. Click on the ``Run`` icon (the white arrow in the green circle). 
-   #. Select "XCore Application", click "Run".
+   #. At the ``Select Device`` dialog select ``XMOS XTAG-2 connect to L1[0..1]`` and click ``OK``.
    #. The output on the LCD should look like a bouncing "X".
     
 Next Steps
 ++++++++++
 
-  #. Examine the application code. In xTIMEcomposer navigate to the ``src`` directory under app_sdram_demo and double click on the ``app_sdram_demo.xc`` file within it. The file will open in the central editor window.
-  #. Trying changing the ``int x=20, y=0, vx=1, vy=2;`` variableson line 23, they represent: initial x coord, initial y coord, x velocity and y velocity respectivly.
+  #. Examine the application code. In xTIMEcomposer navigate to the ``src`` directory under app_lcd_demo and double click on the ``app_lcd_demo.xc`` file within it. The file will open in the central editor window.
+  #. Trying changing the ``int x=20, y=0, vx=1, vy=2;`` variables on line 23, they represent: initial x coord, initial y coord, x velocity and y velocity respectivly.
   #. In the ``sub()`` function what would you expect to see if the line: ``buffer[i] = BACK_COLOUR;`` was changed to ``buffer[i] = 0x12345678;``?
 
 Try the Full Display Controller Demo
 ....................................
 
-This application is necessarily limited since there is no external memory available for a proper framebuffer, and the internal memory of an XCore Tile is too small to buffer a full screen colour image. The Display Controller demo combines the functionality of this LCD module with the SDRAM Controller component and SDRAM Slice Card. Together they implement a fully functioning LCD Display Controller by adding the memory controller and a component that takes care of framebuffer management. 
+This application is necessarily limited since there is no external memory available for a full framebuffer, and the internal memory of an XCore Tile is too small to buffer a full screen colour image. The Display Controller demo combines the functionality of this LCD module with the SDRAM Controller component and SDRAM Slice Card. Together they implement a fully functioning LCD Display Controller by adding the memory controller and a component that takes care of framebuffer management. 
 
 Once you have both the XA-SK-SDRAM and XA-SK-SCR480 slices you can try the Display Controller demo by :ref:`Display_Controller_Demo_Quickstart`

@@ -87,7 +87,7 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
       time += LCD_WIDTH;
 
-      p.lcd_data_enabled @ time+1 <: 0;
+      p.lcd_data_enabled @ time <: 0;
 
       for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
         LDW(x, ptr, i);

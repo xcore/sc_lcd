@@ -36,25 +36,25 @@ void demo(chanend c_lcd){
 			buffer_index = 1 - buffer_index;
 		}
 		sub(x, y, LCD_HEIGHT-1, buffer[buffer_index]);
-		if(update==0){
-			x+=vx;
-			y+=vy;
-                        if(y<=0) {
+		if (update == 0) {
+			x += vx;
+			y += vy;
+			if (y <= 0) {
 				vy = -vy;
 				y = 0;
-                        }
-                        if(y >= LCD_ROW_WORDS - SPRITE_WIDTH_WORDS) {
+			}
+			if (y >= LCD_ROW_WORDS - SPRITE_WIDTH_WORDS) {
 				vy = -vy;
 				y = LCD_ROW_WORDS - SPRITE_WIDTH_WORDS - 1;
-                        }
-                        if(x <= 0) {
+			}
+			if (x <= 0) {
 				vx = -vx;
 				x = 0;
-                        }
-                        if(x >= LCD_HEIGHT - SPRITE_HEIGHT_PX) {
+			}
+			if (x >= LCD_HEIGHT - SPRITE_HEIGHT_PX) {
 				vx = -vx;
 				x = LCD_HEIGHT - SPRITE_HEIGHT_PX - 1;
-                        }
+			}
 		}
 		update = 1 - update;
 	}
