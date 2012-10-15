@@ -1,13 +1,6 @@
 <?xml version="1.0" ?>
 <xpd>
     <components>
-        <component name = "Parallel RGB LCD Driver" type = "component" buildresults_path = "module_lcd/.module_lcd.buildinfo" scope = "General Use" path = "module_lcd" metainfo_path = "module_lcd/module_lcd.metainfo" local = "false" id = "module_lcd" description = "Server component for driving LCDs with an RGB 565 interface up to 800x600 pixels">
-            <board>XA-SK-SCR480</board>
-            <keyword>LCD</keyword>
-            <keyword>TFT</keyword>
-            <keyword>RGB565</keyword>
-            <keyword>Display</keyword>
-        </component>
         <component description = "Demonstrates how the module is used to write to an LCD screen." type = "demoCode" scope = "Example" path = "app_lcd_demo" local = "false" id = "app_lcd_demo" name = "LCD Demo">
             <board>XA-SK-SCR480</board>
             <componentDependency>module_slicekit_support</componentDependency>
@@ -15,9 +8,16 @@
             <keyword>LCD</keyword>
             <keyword>Screen</keyword>
         </component>
+        <component name = "Parallel RGB LCD Driver" type = "component" buildresults_path = "module_lcd/.module_lcd.buildinfo" scope = "General Use" path = "module_lcd" metainfo_path = "module_lcd/module_lcd.metainfo" local = "false" id = "module_lcd" description = "Server component for driving LCDs with an RGB 565 interface up to 800x600 pixels">
+            <board>XA-SK-SCR480</board>
+            <keyword>LCD</keyword>
+            <keyword>TFT</keyword>
+            <keyword>RGB565</keyword>
+            <keyword>Display</keyword>
+        </component>
     </components>
     <dependency repo = "sc_util">
-        <githash>935d6d71c987ade68bc66b76a96d59133767c696</githash>
+        <githash>afbba103d8b5ed3378eaa3832b8f694dec2844bc</githash>
         <uri>git@github.com:xcore/sc_util</uri>
     </dependency>
     <description>Driver component and supporting modules for RGB565 LCDs</description>
@@ -31,6 +31,7 @@
     <release parenthash = "2d05e87bea8f07a7b5c59d4f9495106a808658dc" version = "1.0.0alpha1" githash = "b2ec5be2a9844f3dfc3acbc8fc18da83842a1560"></release>
     <release parenthash = "bc40313c877e76ae1ea489a9ee4e47cd52dcd756" version = "1.0.0alpha2" githash = "4f3f3edee98d7c8e213c7b51dee97e9a76877876"></release>
     <release parenthash = "4f3f3edee98d7c8e213c7b51dee97e9a76877876" version = "1.0.0alpha3" githash = "3ab1ed11add040893f146d6636b178ca090cf231"></release>
+    <release parenthash = "5caa2281fcee1af462a1338ec8e4a18ea55158ab" version = "1.0.0rc0"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <xcore_repo>sc_lcd.git</xcore_repo>
