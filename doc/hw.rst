@@ -38,11 +38,14 @@ This application demonstrates how the ``module_text_display`` can be used to put
 Display Controller Application
 ++++++++++++++++++++++++++++++
 
-This combination demo employs the ``module_lcd`` along with the ``module_sdram`` and the ``module_framebuffer`` framebuffer framework component to implement a 480x272 display controller.
+This combination demo employs the ``module_lcd`` along with the ``module_sdram`` and the ``module_display_controller`` framebuffer framework component to implement a 480x272 display controller.
 
 Required board SKUs for this demo are:
 
-   * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-SDRAM plus XA-SK-SCR480 plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
+   * XP-SKC-L2 (Slicekit L2 Core Board) plus XA-SK-XTAG2 (Slicekit XTAG adaptor) 
+   * XA-SK-SCR480 for the LCD
+   * XA-SK-SDRAM for the SDRAM
+
    * Package: sw_display_controller
-   * Application: app_display_controller_demo
+   * Application: app_display_controller
 
