@@ -1,7 +1,10 @@
 .. _lcd_demo_Quickstart:
 
+LCD Demo Quickstart Guide
+=========================
+
 sc_lcd demo : Quick Start Guide
----------------------------------------
+-------------------------------
 
 This simple demonstration of xTIMEcomposer Studio functionality uses the XA-SK-SCR480 Slice Card together with the xSOFTip ``module_lcd`` to demonstrate how the module is used to write to an LCD screen.
 
@@ -33,7 +36,7 @@ Import and Build the Application
    #. Locate the ``'Slicekit LCD Demo'`` item in the xSOFTip pane on the bottom left of the window and drag it into the Project Explorer window in the xTIMEcomposer. This will also cause the modules on which this application depends (in this case, module_lcd) to be imported as well. 
    #. Click on the app_lcd_demo item in the Project Explorer pane then click on the build icon (hammer) in xTIMEcomposer. Check the console window to verify that the application has built successfully.
 
-For help in using xTIMEcomposer, try the xTIMEcomposer tutorial.
+For help in using xTIMEcomposer, try the xTIMEcomposer tutorial, which you can find by selecting Help->Tutorials from the xTIMEcomposer menu.
 
 Note that the Developer Column in the xTIMEcomposer on the right hand side of your screen provides information on the xSOFTip components you are using. Select the module_lcd component in the Project Explorer, and you will see its description together with API documentation. Having done this, click the `back` icon until you return to this quickstart guide within the Developer Column.
 
