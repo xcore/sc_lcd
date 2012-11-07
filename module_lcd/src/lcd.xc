@@ -21,6 +21,9 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 
   set_port_clock(p.lcd_rgb, p.clk_lcd);
   set_port_clock(p.lcd_data_enabled, p.clk_lcd);
+
+  set_port_inv(p.lcd_clk);
+
 #if LCD_HOR_PULSE_WIDTH
   set_port_clock(p.lcd_hsync, p.clk_lcd);
 #endif
