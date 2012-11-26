@@ -17,6 +17,7 @@ The ``module_lcd`` includes device support defines, each support header, located
 where p is the part the user requires support for. ``lcd_conf.h`` must be located in the application project and not the module. Currently, support is provided for:
   * AT043TN24V7
   * K430WQAV4F
+  * K70DWN0V1F
 
 Implementation Specific Defines
 +++++++++++++++++++++++++++++++
@@ -55,6 +56,9 @@ It is possible to override the default defines when a part number is selected. T
 **LCD_FREQ_DIVISOR**
 	The defines FREQ_DIVIDEND and FREQ_DIVISOR are used to calculate the frequency of the clock used for LCD. The frequency configured = (FREQ_DIVIDEND / FREQ_DIVISOR) in MHz
 
+**LCD_FAST_WRITE**
+	The define enables a faster LCD write function, however, it produces more code. Use when a 25MHz pixel clock is required. 
+
 API
 +++
 
@@ -62,6 +66,7 @@ The LCD display module functionality is defined in
   * ``lcd.xc``
   * ``lcd.h``
   * ``lcd_defines.h``
+  * ``lcd_assembly.S``
   * ``/devices``
 
 Where the following functions can be found:

@@ -23,8 +23,19 @@ Source code structure
     - ``lcd_defines.xc``
     - Header file containing the user configurable defines for the LCD
   * - 
+    - ``lcd_assembly.S``
+    - Assembly file containing the fast_write functionality for the LCD.
+  * - 
     - ``/devices``
     - Folder containing header files of configurations for LCDs
+
+Additional Files
+----------------
+.. list-table:: Additional Files
+  :header-rows: 1
+  * - 
+    - ``generate.pl``
+    - Perl file for generating a fast write function body for LCD screens of arbitrary width. 
 
 
 How to select the LCD target
