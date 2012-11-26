@@ -1,6 +1,10 @@
 sc_lcd Change Log
 =============================
 
+1.0.5
+-----
+   * Removed unneeded files
+
 1.0.4
 -----
    * Added lcd_fast_write() function for 25MHz to 50MHz pixel clocks
