@@ -17,8 +17,7 @@ USED_MODULES = module_i2c_master module_touch_controller_lib
 # If the variable XCC_MAP_FLAGS is set it overrides the flags passed to
 # xcc for the final link (mapping) stage.
 XCC_FLAGS_Debug = -O0 -g
-#XCC_FLAGS_Release = -O2 -g -fxscope
-
+XCC_FLAGS_Release = -O2 -g
 
 # The VERBOSE variable, if set to 1, enables verbose output from the make system.
 VERBOSE = 0

@@ -43,7 +43,7 @@ typedef struct {
 #define CNTL_WORD3_LS_BYTE 0xc0;
 
 
-void touch_controller_init(touchController_ports &ports);
+void touch_lib_init(touchController_ports &ports);
 {unsigned,unsigned}  get_touch_coordinates(r_i2c &i2c_ports);
 
 

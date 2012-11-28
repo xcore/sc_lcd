@@ -6,7 +6,7 @@
 
 #define INIT_CHECK 0	// To check interrupt line after initialising touch controller
 
-#define TIME_OUT 10		// Time out message appear after 10 seconds
+#define TIME_OUT 10		// Time out message appear every 10 seconds
 #define TIME_OUT_MSG_ENABLE 1
 
 

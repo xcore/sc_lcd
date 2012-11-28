@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "touch_controller_conf.h"
+#include "touch_server_conf.h"
 #include "touch_controller_server.h"
 #include "touch_controller_impl.h"
 
@@ -9,14 +9,14 @@
 
 void touch_controller_server(chanend c_server, touchController_ports &ports)
 {
-	unsigned cmd;
+	unsigned cmd, exitLoop=0;
 	t_status touched=FALSE, nextTouched=FALSE;
 	unsigned ts_x=0, ts_y=0;
 	unsigned touchTime, currentTime, elapsedTime, cmdTime;
 	unsigned time, nSec;
 	timer t;
 
-	touch_controller_init(ports);	// sets control registers in the controller
+	touch_server_init(ports);	// sets control registers in the controller
 	t :> time;
 	t when timerafter(time+1000000):>void;	// wait for the interrupt value to settle down
 
@@ -46,10 +46,6 @@ void touch_controller_server(chanend c_server, touchController_ports &ports)
 						select {
 						case ports.PENIRQ when pinseq(0) :> void:	// wait for pen interrupt
 							process_interrupt(ports,nSec,touched,ts_x,ts_y,touchTime);
-
-							// Send X,Y to application program through channel
-							c_server <: ts_x;
-							c_server <: ts_y;
 							nextTouched = TRUE;
 							break;
 
@@ -59,18 +55,24 @@ void touch_controller_server(chanend c_server, touchController_ports &ports)
 
 							// Time out
 #if (TIME_OUT_MSG_ENABLE)
-							if ((nSec-cmdTime)==TIME_OUT){
-								printf ("\n No touch for more than %d seconds. \n", TIME_OUT);
+							if (((nSec-cmdTime)%TIME_OUT)==0){
+								printf ("\n No activity for %d seconds. \n", nSec-cmdTime);
 							}
 #endif 
+							// Send X,Y to application program through channel
+							if (nextTouched){
+								c_server <: ts_x;
+								c_server <: ts_y;
+								nextTouched = FALSE;
+								exitLoop = 1;
+							}
 							break;
-
 						}
 
-						if (nextTouched) break;
+						if (exitLoop) break;
 					}
 
-//					nextTouched = FALSE;
+					exitLoop = 0;
 					break;
 
 				case LAST_TOUCH_CMD:
@@ -118,7 +120,7 @@ select process_interrupt(touchController_ports &ports, unsigned presentTimeSec, 
 }
 
 
-void touch_get_next_coord(chanend c_ts, unsigned &x, unsigned &y){
+void touch_server_get_next_coord(chanend c_ts, unsigned &x, unsigned &y){
 	c_ts <: NEXT_TOUCH_CMD;
 	c_ts :> x;
 	c_ts :> y;
@@ -127,7 +129,7 @@ void touch_get_next_coord(chanend c_ts, unsigned &x, unsigned &y){
 }
 
 
-t_status touch_get_last_coord(chanend c_ts, unsigned &x, unsigned &y){
+t_status touch_server_get_last_coord(chanend c_ts, unsigned &x, unsigned &y){
 	unsigned temp_x,temp_y;
 	t_status touched;
 
@@ -145,7 +147,7 @@ t_status touch_get_last_coord(chanend c_ts, unsigned &x, unsigned &y){
 }
 
 
-t_status touch_get_last_coord_timed(chanend c_ts, unsigned &t, unsigned &x, unsigned &y){
+t_status touch_server_get_last_coord_timed(chanend c_ts, unsigned &t, unsigned &x, unsigned &y){
 	unsigned temp_x,temp_y,temp_t;
 	t_status touched;
 

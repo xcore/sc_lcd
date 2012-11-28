@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "touch_controller_conf.h"
+#include "touch_lib_conf.h"
 #include "touch_controller_lib.h"
 #include "touch_controller_impl.h"
 
 
-select touch_req_next_coord(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y)
+select touch_lib_req_next_coord(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y)
 {
 
 	case ports.PENIRQ when pinseq(0) :> void:		// pen interrupt goes low when there is a touch
@@ -21,7 +21,7 @@ select touch_req_next_coord(touchController_ports &ports, unsigned &ts_x, unsign
 
 
 
-void touch_req_next_coord_timed(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t)
+void touch_lib_req_next_coord_timed(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t)
 {
 	unsigned timerCount, touched = FALSE;
 
@@ -31,18 +31,18 @@ void touch_req_next_coord_timed(touchController_ports &ports, unsigned &ts_x, un
 
 	while (1){
 
-		touch_next_coord_timed(ports, ts_x, ts_y, nSec, t, timerCount, touched);
+		touch_lib_next_coord_timed(ports, ts_x, ts_y, nSec, t, timerCount, touched);
 		if (touched) break;
 #if (TIME_OUT_MSG_ENABLE)
-		if (nSec==TIME_OUT){
-			printf ("\n No touch for more than %d seconds.\n", TIME_OUT);
+		if ((nSec%TIME_OUT)==0){
+			printf ("\n No activity for %d seconds.\n", nSec);
 		}
 #endif
 	}
 }
 
 
-select touch_next_coord_timed(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t, unsigned &timerCount, unsigned &touched)
+select touch_lib_next_coord_timed(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t, unsigned &timerCount, unsigned &touched)
 {
 
 	case ports.PENIRQ when pinseq(0) :> void:		// pen interrupt goes low when there is a touch

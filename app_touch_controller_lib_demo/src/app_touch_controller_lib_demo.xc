@@ -18,17 +18,17 @@ void app(touchController_ports &ports) {
 	timer t;
 	int choice;
 
-	touch_controller_init(ports);	// Initialises control registers of touch screen controller
+	touch_lib_init(ports);	// Initialises control registers of touch screen controller
 
 	// Testing functions interfacing touchscreen
 	printf ("\n Please touch the screen .......\n");
-	touch_req_next_coord(ports, x, y);
+	touch_lib_req_next_coord(ports, x, y);
 	printf ("\n Touch Coordinates (x,y) = (%u,%u)\n", x, y);
 
 	t :> timerTime;
 	t when timerafter(timerTime+200000000):> void;	//
 	printf ("\n Please touch the screen again to display touch coordinates with time delay.......\n");
-	touch_req_next_coord_timed(ports, x, y, time, t);
+	touch_lib_req_next_coord_timed(ports, x, y, time, t);
 	printf ("\n Touch Coordinates (x,y) = (%u,%u) after %u seconds \n", x, y, time);
 
 }

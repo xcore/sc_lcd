@@ -2,12 +2,12 @@
 #include <print.h>
 
 #include "touch_controller_impl.h"
-#include "touch_controller_conf.h"
+#include "touch_server_conf.h"
 
 
 #pragma unsafe arrays
 
-void touch_controller_init(touchController_ports &ports) {
+void touch_server_init(touchController_ports &ports) {
 
 	unsigned char data[2];
 	unsigned intr, time;
