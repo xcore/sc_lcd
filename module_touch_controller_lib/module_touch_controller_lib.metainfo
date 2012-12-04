@@ -1,0 +1,143 @@
+-------------------------------------------------------------------------------
+-- Descriptive metadata
+-------------------------------------------------------------------------------
+
+componentName = "Touch Screen Controller"
+componentFullName = ""
+alternativeNames = { }
+componentDescription = "Offers a touch screen controller component"
+componentVersion = "1v0"
+
+-------------------------------------------------------------------------------
+-- Parameter descriptions.
+-------------------------------------------------------------------------------
+
+configPoints =
+{
+  
+
+  ts_part =
+  {
+    short   = "LCD Part with Touch Screen",
+    long    = "",
+    help    = "This selects supported LCD part with touch screen. Pick generic if the desired part number is not listed",
+    units   = "",
+    define  = "LCD_TS_PART_NUMBER",
+    type    = "string",
+    options = {"K430WQA-V4-F","K430WQA-V5-F","AT043TN24V1","Generic"},
+    resourceUsageFlags = {},
+    default = "K430WQA-V5-F"
+  },
+  lcd_width =
+  {
+    short   = "LCD Width",
+    long    = "",
+    help    = "This describes the width of the LCD panel in pixels",
+    units   = "pixels",
+    define  = "LCD_WIDTH",
+    type    = "int",
+    min     = 16,
+    max     = 800,
+    enabled = swblock.params.ts_part == "Generic",
+    resourceUsageFlags = {"noeffect"},
+    default=480
+  },
+  lcd_height =
+  {
+    short   = "LCD Height",
+    long    = "",
+    help    = "This describes the height of the LCD panel in pixels",
+    units   = "pixels",
+    define  = "LCD_HEIGHT",
+    type    = "int",
+    min     = 16,
+    max     = 600,
+    enabled = swblock.params.ts_part == "Generic",
+    resourceUsageFlags = {"noeffect"},
+    default = 272
+  },
+  ts_width =
+  {
+    short   = "Touch Screen Width",
+    long    = "",
+    help    = "This describes the width of the touch screen in points",
+    units   = "points",
+    define  = "TS_WIDTH",
+    type    = "int",
+    enabled = swblock.params.ts_part == "Generic",
+    resourceUsageFlags = {"noeffect"},
+    default=4096
+  },
+  ts_height =
+  {
+    short   = "Touch Screen Height",
+    long    = "",
+    help    = "This describes the height of the touch screen in points",
+    units   = "points",
+    define  = "TS_HEIGHT",
+    type    = "int",
+    enabled = swblock.params.ts_part == "Generic",
+    resourceUsageFlags = {"noeffect"},
+    default = 4096
+  },
+}
+
+derivedValues = {}
+
+ports = {
+  p_scl = {
+    short   = "scl",
+    long    = "The clock line",
+    help    = "",
+    width   = 1
+  },
+  p_sda = {
+    short   = "sda",
+    long    = "The serial data line",
+    help    = "",
+    width   = 1
+  },
+  p_penirq = {
+    short   = "PENIRQ",
+    long    = "The pen-down interrupt line",
+    help    = "",
+    width   = 1
+  },
+}
+
+function getConfigStatus()
+  local status = "Trusted Configuration"
+  local issues = {}
+  if swblock.params.ts_part == "Generic" then
+    status = "Valid Configuration"  
+  end
+  return status, issues
+end
+            
+-------------------------------------------------------------------------------
+-- Source generation functions
+-------------------------------------------------------------------------------
+
+
+generatedCode = {
+  includes = {"touch_controller_lib.h"},
+  globals = [[
+    touchController_ports touchController${swblock.id}_resources = { 
+      ${swblock.ports.p_scl},  
+      ${swblock.ports.p_sda}, 
+      ${swblock.ports.p_penirq},  
+    };
+  ]],
+  body = [[
+    touchController${swblock.id}_resources);
+  ]]
+}
+
+files = {
+  ["module_touch_controller_lib/touch_lib_conf_example.h"] = "src/touch_lib_conf.h",
+}
+
+api = {
+       'touch_lib_init'
+      }
+
