@@ -18,7 +18,5 @@
 #define TS_HEIGHT 4096
 
 
-#define DELAY 100000000		// corresponds to 1 sec for 100MHz timer
-
 
 #endif /* CONF_H_ */

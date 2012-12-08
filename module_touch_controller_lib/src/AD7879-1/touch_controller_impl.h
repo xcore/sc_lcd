@@ -5,8 +5,8 @@
 #include "i2c.h"
 
 typedef struct {
-	r_i2c i2c_ports;
-	in port PENIRQ;
+	r_i2c i2c_ports;	/**< The I2C ports */
+	in port PENIRQ;		/**< The pen-down interrupt line */
 }touchController_ports;
 
 
@@ -42,8 +42,16 @@ typedef struct {
 #define CNTL_WORD3_MS_BYTE 0xf0;
 #define CNTL_WORD3_LS_BYTE 0xc0;
 
-
+/** \brief The touch controller initialisation.
+ *
+ * \param ports The structure containing the touch controller port details.
+ */
 void touch_lib_init(touchController_ports &ports);
+
+/** \brief Get touch coordinates from the result registers of touch controller.
+ *
+ * \param i2c_ports The structure containing the I2C port details.
+ */
 {unsigned,unsigned}  get_touch_coordinates(r_i2c &i2c_ports);
 
 

@@ -2,7 +2,7 @@
 Project structure
 =================
 
-The component ``sc_lcd`` includes the module ``module_lcd`` and the ``module_text_display``.
+The component ``sc_lcd`` includes the modules ``module_lcd``, ``module_text_display``, ``module_touch_controller_lib`` and the ``module_touch_controller_server``.
 
 module_lcd
 ----------
@@ -21,7 +21,7 @@ where p is the part the user requires support for. ``lcd_conf.h`` must be locate
 
 Implementation Specific Defines
 +++++++++++++++++++++++++++++++
-It is possible to override the default defines when a part number is selected. The defines avaliable are:
+It is possible to override the default defines when a part number is selected. The defines available are:
 
 **LCD_WIDTH**
 	This define is used to represent the width of the LCD panel in pixels.
@@ -69,12 +69,124 @@ The LCD display module functionality is defined in
   * ``lcd_assembly.S``
   * ``/devices``
 
-Where the following functions can be found:
+where the following functions can be found:
 
 .. doxygenfunction:: lcd_init
 .. doxygenfunction:: lcd_req
 .. doxygenfunction:: lcd_update
 .. doxygenfunction:: lcd_update_p
 .. doxygenfunction:: lcd_server
+
+
+module_touch_controller_lib
+---------------------------
+
+Configuration Defines
++++++++++++++++++++++
+
+The device-specific configuration defines are listed in ``touch_lib_conf.h``. They are:
+
+
+**LCD_WIDTH**
+	This define is used to represent the width of the LCD panel in pixels.
+
+**LCD_HEIGHT**
+	This define is used to represent the height of the LCD panel in terms of lines.
+
+**TS_WIDTH**
+     This define is used to represent the width of the touch screen in points.
+
+**TS_HEIGHT**
+     This define is used to represent the height of the touch screen in points.
+
+
+Conditional Compilation Defines
++++++++++++++++++++++++++++++++
+
+The defines for setting the parameters for conditional compilation are also listed in ``touch_lib_conf.h``. They are:
+
+**INIT_CHECK**
+     This define is used to check the pen-down interrupt line after initialising the touch controller.
+
+**TIME_OUT**
+     This define is used to set the time in seconds for the time-out message to display.
+
+**TIME_OUT_MSG_ENABLE**
+     This define is used to enable the display of time-out message.
+
+
+API
++++
+
+The touch screen module functionality is defined in
+  * ``touch_controller_lib.xc``
+  * ``touch_controller_lib.h``
+  * ``/AD7879-1``
+
+where the following functions can be found:
+
+.. doxygenfunction:: touch_lib_init
+.. doxygenfunction:: get_touch_coordinates
+.. doxygenfunction:: touch_lib_req_next_coord
+.. doxygenfunction:: touch_lib_req_next_coord_timed
+.. doxygenfunction:: touch_lib_next_coord_timed
+.. doxygenfunction:: scale_coords
+
+
+module_touch_controller_server
+------------------------------
+
+Configuration Defines
++++++++++++++++++++++
+
+The device-specific configuration defines are listed in ``touch_server_conf.h``. They are:
+
+
+**LCD_WIDTH**
+	This define is used to represent the width of the LCD panel in pixels.
+
+**LCD_HEIGHT**
+	This define is used to represent the height of the LCD panel in terms of lines.
+
+**TS_WIDTH**
+     This define is used to represent the width of the touch screen in points.
+
+**TS_HEIGHT**
+     This define is used to represent the height of the touch screen in points.
+
+
+Conditional Compilation Defines
++++++++++++++++++++++++++++++++
+
+The defines for setting the parameters for conditional compilation are also listed in ``touch_server_conf.h``. They are:
+
+**INIT_CHECK**
+     This define is used to check the pen-down interrupt line after initialising the touch controller.
+
+**TIME_OUT**
+     This define is used to set the time in seconds for the time-out message to display.
+
+**TIME_OUT_MSG_ENABLE**
+     This define is used to enable the display of time-out message.
+
+
+API
++++
+
+The touch screen module functionality is defined in
+  * ``touch_controller_server.xc``
+  * ``touch_controller_server.h``
+  * ``/AD7879-1``
+
+where the following functions can be found:
+
+.. doxygenfunction:: touch_server_init
+.. doxygenfunction:: get_touch_coordinates
+.. doxygenfunction:: touch_controller_server
+.. doxygenfunction:: process_interrupt
+.. doxygenfunction:: touch_server_get_last_coord
+.. doxygenfunction:: touch_server_get_next_coord
+.. doxygenfunction:: touch_server_get_last_coord_timed
+.. doxygenfunction:: scale_coords
 
 

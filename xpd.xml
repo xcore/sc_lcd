@@ -23,6 +23,8 @@
     <description>Driver component and supporting modules for RGB565 LCDs</description>
     <docdir>doc</docdir>
     <docdir>app_lcd_demo/doc_quickstart</docdir>
+    <docdir>app_touch_controller_server_demo/doc_quickstart</docdir>
+    <docdir>app_touch_controller_lib_demo/doc_quickstart</docdir>
     <location>git@github.com:xcore/sc_lcd.git</location>
     <name>sc_lcd</name>
     <maintainer>andrewstanfordjason</maintainer>

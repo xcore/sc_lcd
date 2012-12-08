@@ -48,7 +48,7 @@ Look at the Code
 
 #. Examine the application code. In xTIMEcomposer, navigate to the ``src`` directory under ``app_touch_controller_lib_demo`` and double click on the ``app_touch_controller_lib_demo.xc`` file within it. The file will open in the central editor window. 
 #. Find the ``main()`` function and note that it runs the ``app()`` function on a single logical core. You may engage other seven logical cores using ``par`` replicator. To do this, do not comment the line ``par(int i=0;i<7;i++) on stdcore[TILE]: while(1);``. 
-#. The ``app()`` function in the file calls three functions, namely, ``touch_lib_init()``, ``touch_lib_req_next_coord()`` and ``touch_lib_req_next_coord_timed()``. ``touch_lib_init()`` initialises the touch screen controller AD7879-1. It should be called before calling either of the other two functions. 
+#. The ``app()`` function in the file calls three functions, namely, ``touch_lib_init()``, ``touch_lib_req_next_coord()`` and ``touch_lib_req_next_coord_timed()``. ``touch_lib_init()`` initialises the touch screen controller AD7879-1. It should be called once before calling other two functions. 
 #. The functions ``touch_lib_req_next_coord()`` and ``touch_lib_req_next_coord_timed()`` wait for touch event and then read the touch coordinates stored in the result registers of AD7879-1. ``touch_lib_req_next_coord_timed()`` computes the time delay in touch event from the function call. 
 #. The various parameters used are defined in ``touch_lib_conf.h``. You can change their values if necessary. 
 

@@ -88,3 +88,94 @@ Software Requirements
 The module is built on XDE Tool version 12.0
 The module can be used in version 12.0 or any higher version of xTIMEcomposer.
 
+
+Touch Controller Programming Guide
+==================================
+
+This section provides information on how to program applications using the touch controller module.
+
+Source code structure
+---------------------
+.. list-table:: Project structure
+  :header-rows: 1
+  
+  * - Project
+    - File
+    - Description
+  * - module_touch_controller_lib
+    - ``touch_controller_lib.h`` 
+    - Header file containing the APIs for interfacing touch controller component
+  * - 
+    - ``touch_controller_lib.xc``
+    - File containing the implementation of APIs
+  * - 
+    - ``/AD7879-1``
+    - Folder containing files for the implementation of touch controller component
+  * - 
+    - ``touch_controller_impl.h``
+    - Header file containing the APIs for implementing touch controller component
+  * - 
+    - ``touch_controller_impl.xc``
+    - File containing the implementation of touch controller component  
+  * - module_touch_controller_server
+    - ``touch_controller_server.h`` 
+    - Header file containing the APIs for interfacing touch controller component
+  * - 
+    - ``touch_controller_server.xc``
+    - File containing the implementation of APIs 
+  * - 
+    - ``/AD7879-1``
+    - Folder containing files for the implementation of touch controller component
+  * - 
+    - ``touch_controller_impl.h``
+    - Header file containing the APIs for implementing touch controller component
+  * - 
+    - ``touch_controller_impl.xc``
+    - File containing the implementation of touch controller component
+
+How to develop an application 
+-----------------------------
+
+The modules have been designed to support two types of interfacing with the touch screen controller; one for direct interfacing and the other for interfacing through a server. Only one of these two modules should be used by the application program. 
+
+To use a module,
+	* Create a header file in the application project called ``touch_lib_conf.h`` or ``touch_server_conf.h``.
+	* In the header file, add the defines for conditional compilation and device-specific parameters. 
+	* The application should also include the port mapping for the touch screen controller. A variable of the type structure ``touchController_ports`` should be created and must include the port information.
+
+Example:
+In the application file
+::
+
+	struct touchController_ports ports = {
+		XS1_PORT_1E, 
+		XS1_PORT_1H, 
+		1000, 
+		XS1_PORT_1D
+	};
+
+When ``module_touch_controller_server`` is used, a core should have the ``touch_controller_server`` running on it and it should be connected by a channel to the application, for example:
+::
+
+  chan c;
+  par {
+	touch_controller_server(c, ports);
+	app(c);
+  }
+
+Executing The Project
+---------------------
+The touch controller module by itself cannot be built or executed separately. It must be linked into an application. The application also depends on I2C module. Once the modules are linked to the application, the application can be built and run.
+
+The following should be done in order to link the modules to the application project.
+  #. The module name ``module_touch_controller_lib`` or ``module_touch_controller_server`` should be added to the list of MODULES in the application project build options. 
+  #. The module name ``module_i2c_master`` should also be added.
+  #. Now the modules are linked to the application and can be directly used
+
+Software Requirements
+---------------------
+
+The modules are built on XDE Tool version 12.0
+The modules can be used in version 12.0 or any higher version of xTIMEcomposer.
+
+
