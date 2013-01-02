@@ -14,5 +14,6 @@
 #define LCD_VERT_PULSE_WIDTH_K70DWN0V1F (0)
 #define LCD_FREQ_DIVIDEND_K70DWN0V1F    (25)
 #define LCD_FREQ_DIVISOR_K70DWN0V1F     (1)
+#define LCD_FAST_WRITE                  (1)
 
 #endif
