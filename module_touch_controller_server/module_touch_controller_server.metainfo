@@ -34,7 +34,7 @@ configPoints =
     long    = "",
     help    = "This describes the width of the LCD panel in pixels",
     units   = "pixels",
-    define  = "LCD_WIDTH",
+    define  = "TOUCH_SERVER_LCD_WIDTH",
     type    = "int",
     min     = 16,
     max     = 800,
@@ -48,7 +48,7 @@ configPoints =
     long    = "",
     help    = "This describes the height of the LCD panel in pixels",
     units   = "pixels",
-    define  = "LCD_HEIGHT",
+    define  = "TOUCH_SERVER_LCD_HEIGHT",
     type    = "int",
     min     = 16,
     max     = 600,
@@ -62,7 +62,7 @@ configPoints =
     long    = "",
     help    = "This describes the width of the touch screen in points",
     units   = "points",
-    define  = "TS_WIDTH",
+    define  = "TOUCH_SERVER_TS_WIDTH",
     type    = "int",
     enabled = swblock.params.ts_part == "Generic",
     resourceUsageFlags = {"noeffect"},
@@ -74,7 +74,7 @@ configPoints =
     long    = "",
     help    = "This describes the height of the touch screen in points",
     units   = "points",
-    define  = "TS_HEIGHT",
+    define  = "TOUCH_SERVER_TS_HEIGHT",
     type    = "int",
     enabled = swblock.params.ts_part == "Generic",
     resourceUsageFlags = {"noeffect"},
@@ -130,14 +130,14 @@ end
 generatedCode = {
   includes = {"touch_controller_server.h"},
   globals = [[
-    touchController_ports touchController${swblock.id}_resources = { 
+    touch_controller_ports touch_controller${swblock.id}_resources = { 
       ${swblock.ports.p_scl},  
       ${swblock.ports.p_sda}, 
       ${swblock.ports.p_penirq},  
     };
   ]],
   body = [[
-    touch_controller_server(${swblock.chanends.c_ts_client},touchController${swblock.id}_resources);
+    touch_controller_server(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
   ]]
 }
 

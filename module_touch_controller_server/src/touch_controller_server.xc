@@ -7,7 +7,7 @@
 
 
 
-void touch_controller_server(chanend c_server, touchController_ports &ports)
+void touch_controller_server(chanend c_server, touch_controller_ports &ports)
 {
 	unsigned cmd, exitLoop=0;
 	t_status touched=FALSE, nextTouched=FALSE;
@@ -27,7 +27,7 @@ void touch_controller_server(chanend c_server, touchController_ports &ports)
 		select
 		{
 			case t when timerafter(time) :> void:	// timer event every one second
-				time += DELAY;
+				time += TOUCH_SERVER_DELAY;
 				nSec++;
 				break;
 
@@ -50,15 +50,14 @@ void touch_controller_server(chanend c_server, touchController_ports &ports)
 							break;
 
 						case t when timerafter(time) :> void:	// timer event every one second
-							time += DELAY;
+							time += TOUCH_SERVER_DELAY;
 							nSec++;
 
 							// Time out
-#if (TIME_OUT_MSG_ENABLE)
-							if (((nSec-cmdTime)%TIME_OUT)==0){
+							if (((nSec-cmdTime)%TOUCH_SERVER_TIME_OUT)==0){
 								printf ("\n No activity for %d seconds. \n", nSec-cmdTime);
 							}
-#endif 
+
 							// Send X,Y to application program through channel
 							if (nextTouched){
 								c_server <: ts_x;
@@ -108,13 +107,14 @@ void touch_controller_server(chanend c_server, touchController_ports &ports)
 }
 
 
-select process_interrupt(touchController_ports &ports, unsigned presentTimeSec, t_status &touched, unsigned &x, unsigned &y, unsigned &touchTime){
+select process_interrupt(touch_controller_ports &ports, unsigned presentTimeSec, t_status &touched, unsigned &x, unsigned &y, unsigned &touchTime){
 
 	case ports.PENIRQ when pinsneq(0) :> void:		// wait for the interrupt to go high. This indicates completion of ADC conversion.
 	touchTime = presentTimeSec;
 	touched = TRUE;
 
 	{x,y} = get_touch_coordinates(ports.i2c_ports);
+
 	break;
 
 }
@@ -168,6 +168,7 @@ t_status touch_server_get_last_coord_timed(chanend c_ts, unsigned &t, unsigned &
 
 void scale_coords(unsigned &x, unsigned &y){
 
-	x = (x*LCD_WIDTH)/TS_WIDTH;		// corresponds to column
-	y = (y*LCD_HEIGHT)/TS_HEIGHT;	// corresponds to row
+	x = (x*TOUCH_SERVER_LCD_WIDTH)/TOUCH_SERVER_TS_WIDTH;		// corresponds to column
+	y = (y*TOUCH_SERVER_LCD_HEIGHT)/TOUCH_SERVER_TS_HEIGHT;	// corresponds to row
+
 }

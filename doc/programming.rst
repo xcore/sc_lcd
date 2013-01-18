@@ -141,13 +141,13 @@ The modules have been designed to support two types of interfacing with the touc
 To use a module,
 	* Create a header file in the application project called ``touch_lib_conf.h`` or ``touch_server_conf.h``.
 	* In the header file, add the defines for conditional compilation and device-specific parameters. 
-	* The application should also include the port mapping for the touch screen controller. A variable of the type structure ``touchController_ports`` should be created and must include the port information.
+	* The application should also include the port mapping for the touch screen controller. A variable of the type structure ``touch_controller_ports`` should be created and must include the port information.
 
 Example:
 In the application file
 ::
 
-	struct touchController_ports ports = {
+	struct touch_controller_ports ports = {
 		XS1_PORT_1E, 
 		XS1_PORT_1H, 
 		1000, 

@@ -81,38 +81,30 @@ where the following functions can be found:
 module_touch_controller_lib
 ---------------------------
 
+The device-specific configuration defines and user defines are listed in ``touch_lib_conf.h``.
+
+
 Configuration Defines
 +++++++++++++++++++++
 
-The device-specific configuration defines are listed in ``touch_lib_conf.h``. They are:
-
-
-**LCD_WIDTH**
+**TOUCH_LIB_LCD_WIDTH**
 	This define is used to represent the width of the LCD panel in pixels.
 
-**LCD_HEIGHT**
+**TOUCH_LIB_LCD_HEIGHT**
 	This define is used to represent the height of the LCD panel in terms of lines.
 
-**TS_WIDTH**
+**TOUCH_LIB_TS_WIDTH**
      This define is used to represent the width of the touch screen in points.
 
-**TS_HEIGHT**
+**TOUCH_LIB_TS_HEIGHT**
      This define is used to represent the height of the touch screen in points.
 
 
-Conditional Compilation Defines
-+++++++++++++++++++++++++++++++
+User Define
++++++++++++
 
-The defines for setting the parameters for conditional compilation are also listed in ``touch_lib_conf.h``. They are:
-
-**INIT_CHECK**
-     This define is used to check the pen-down interrupt line after initialising the touch controller.
-
-**TIME_OUT**
+**TOUCH_LIB_TIME_OUT**
      This define is used to set the time in seconds for the time-out message to display.
-
-**TIME_OUT_MSG_ENABLE**
-     This define is used to enable the display of time-out message.
 
 
 API
@@ -136,38 +128,30 @@ where the following functions can be found:
 module_touch_controller_server
 ------------------------------
 
+The device-specific configuration defines and user defines are listed in ``touch_server_conf.h``.
+
+
 Configuration Defines
 +++++++++++++++++++++
 
-The device-specific configuration defines are listed in ``touch_server_conf.h``. They are:
-
-
-**LCD_WIDTH**
+**TOUCH_SERVER_LCD_WIDTH**
 	This define is used to represent the width of the LCD panel in pixels.
 
-**LCD_HEIGHT**
+**TOUCH_SERVER_LCD_HEIGHT**
 	This define is used to represent the height of the LCD panel in terms of lines.
 
-**TS_WIDTH**
+**TOUCH_SERVER_TS_WIDTH**
      This define is used to represent the width of the touch screen in points.
 
-**TS_HEIGHT**
+**TOUCH_SERVER_TS_HEIGHT**
      This define is used to represent the height of the touch screen in points.
 
 
-Conditional Compilation Defines
-+++++++++++++++++++++++++++++++
+User Define
++++++++++++
 
-The defines for setting the parameters for conditional compilation are also listed in ``touch_server_conf.h``. They are:
-
-**INIT_CHECK**
-     This define is used to check the pen-down interrupt line after initialising the touch controller.
-
-**TIME_OUT**
+**TOUCH_SERVER_TIME_OUT**
      This define is used to set the time in seconds for the time-out message to display.
-
-**TIME_OUT_MSG_ENABLE**
-     This define is used to enable the display of time-out message.
 
 
 API

@@ -38,7 +38,7 @@ Now that the application has been compiled, the next step is to run it on the Sl
 
 #. Click on the run icon (the white arrow in the green circle). A dialog will appear asking which device to connect to. Select ``XMOS XTAG2``. 
 #. Wait for the message ``Please touch the screen .....`` in the Debug Console window. When the screen is touched, the touch coordinates are displayed. 
-#. Wait for another message. When the screen is touched again, the touch coordinates along with the delay in touch event are displayed. If there is no touch event for a period of time (``TIME_OUT`` currently set to 10 seconds in ``touch_lib_conf.h``), a message ``No activity for 10 seconds`` is printed and the program continues to wait for a touch event. The ``No activity`` message is printed every 10 seconds. 
+#. Wait for another message. When the screen is touched again, the touch coordinates along with the delay in touch event are displayed. If there is no touch event for a period of time (``TOUCH_LIB_TIME_OUT`` currently set to 10 seconds in ``touch_lib_conf.h``), a message ``No activity for 10 seconds`` is printed and the program continues to wait for a touch event. The ``No activity`` message is printed every 10 seconds. 
 
 Next Steps 
 ++++++++++ 

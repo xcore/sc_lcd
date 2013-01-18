@@ -6,7 +6,7 @@
 #include "touch_controller_impl.h"
 
 
-select touch_lib_req_next_coord(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y)
+select touch_lib_req_next_coord(touch_controller_ports &ports, unsigned &ts_x, unsigned &ts_y)
 {
 
 	case ports.PENIRQ when pinseq(0) :> void:		// pen interrupt goes low when there is a touch
@@ -21,28 +21,26 @@ select touch_lib_req_next_coord(touchController_ports &ports, unsigned &ts_x, un
 
 
 
-void touch_lib_req_next_coord_timed(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t)
+void touch_lib_req_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t)
 {
 	unsigned timerCount, touched = FALSE;
 
 	nSec = 0;
 	t :> timerCount;
-	timerCount += DELAY;
+	timerCount += TOUCH_LIB_DELAY;
 
 	while (1){
 
 		touch_lib_next_coord_timed(ports, ts_x, ts_y, nSec, t, timerCount, touched);
 		if (touched) break;
-#if (TIME_OUT_MSG_ENABLE)
-		if ((nSec%TIME_OUT)==0){
+		if ((nSec%TOUCH_LIB_TIME_OUT)==0){
 			printf ("\n No activity for %d seconds.\n", nSec);
 		}
-#endif
 	}
 }
 
 
-select touch_lib_next_coord_timed(touchController_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t, unsigned &timerCount, unsigned &touched)
+select touch_lib_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t, unsigned &timerCount, unsigned &touched)
 {
 
 	case ports.PENIRQ when pinseq(0) :> void:		// pen interrupt goes low when there is a touch
@@ -56,7 +54,7 @@ select touch_lib_next_coord_timed(touchController_ports &ports, unsigned &ts_x, 
 	break;
 
 	case t when timerafter(timerCount) :> void:	// timer event every one second
-		timerCount += DELAY;
+		timerCount += TOUCH_LIB_DELAY;
 		nSec++;
 	break;
 
@@ -65,7 +63,7 @@ select touch_lib_next_coord_timed(touchController_ports &ports, unsigned &ts_x, 
 
 void scale_coords(unsigned &x, unsigned &y){
 
-	x = (x*LCD_WIDTH)/TS_WIDTH;		// corresponds to column
-	y = (y*LCD_HEIGHT)/TS_HEIGHT;	// corresponds to row
+	x = (x*TOUCH_LIB_LCD_WIDTH)/TOUCH_LIB_TS_WIDTH;		// corresponds to column
+	y = (y*TOUCH_LIB_LCD_HEIGHT)/TOUCH_LIB_TS_HEIGHT;	// corresponds to row
 }
 
