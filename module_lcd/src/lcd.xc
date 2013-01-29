@@ -83,23 +83,23 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
       ptr = inuint(c_lcd);
       chkct(c_lcd, XS1_CT_END);
 
-#if 0
-      lcd_fast_write(ptr, time, p.lcd_rgb, p.lcd_data_enabled);
-      time += LCD_WIDTH;
+#if LCD_FAST_WRITE==1
+	  lcd_fast_write(ptr, time, p.lcd_rgb, p.lcd_data_enabled);
+	  time += LCD_WIDTH;
 #else
-      LDW(x, ptr, 0);
+	  LDW(x, ptr, 0);
 
-      p.lcd_data_enabled @ time <: 1;
-      p.lcd_rgb @ time <: x;
+	  p.lcd_data_enabled @ time <: 1;
+	  p.lcd_rgb @ time <: x;
 
-      time += LCD_WIDTH;
+	  time += LCD_WIDTH;
 
-      p.lcd_data_enabled @ time <: 0;
+	  p.lcd_data_enabled @ time <: 0;
 
-      for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
-        LDW(x, ptr, i);
-        p.lcd_rgb <: x;
-      }
+	  for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
+		LDW(x, ptr, i);
+		p.lcd_rgb <: x;
+	  }
 #endif
       outct(c_lcd, XS1_CT_END);
       time += LCD_HOR_FRONT_PORCH;

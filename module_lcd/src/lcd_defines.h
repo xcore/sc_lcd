@@ -95,6 +95,12 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #define LCD_VERT_PULSE_WIDTH ADD_SUFFIX(LCD_VERT_PULSE_WIDTH, LCD_PART_NUMBER)
 #endif
 
+/**
+ * Fast write is used when the pixel clock is between 25 and 50MHz.
+ */
+#ifndef LCD_FAST_WRITE
+#define LCD_FAST_WRITE ADD_SUFFIX(LCD_FAST_WRITE, LCD_PART_NUMBER)
+#endif
 /** 
  * The total time for HSYNC in terms of clock.
  */

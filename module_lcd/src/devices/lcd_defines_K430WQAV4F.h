@@ -14,5 +14,5 @@
 #define LCD_VERT_PULSE_WIDTH_K430WQAV4F (1)
 #define LCD_FREQ_DIVIDEND_K430WQAV4F    (100)
 #define LCD_FREQ_DIVISOR_K430WQAV4F     (10)
-#define LCD_FAST_WRITE                  (0)
+#define LCD_FAST_WRITE_K430WQAV4F       (0)
 #endif
