@@ -1,7 +1,7 @@
 sc_lcd Change Log
 =============================
 
-1.0.3
+1.1.0
 -----
 
    * Added touch controller modules and demos
