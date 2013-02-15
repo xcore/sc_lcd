@@ -82,6 +82,8 @@ configPoints =
 
 derivedValues = {}
 
+channels = {}
+
 ports = {
   p_scl = {
     short   = "scl",
@@ -118,18 +120,14 @@ end
 
 generatedCode = {
   includes = {"touch_controller_lib.h"},
+
   globals = [[
-    i2c_ports touch_controller i2c_${swblock.id}_resources = {
-      ${swblock.ports.p_scl},
-      ${swblock.ports.p_sda},
-    };
     touch_controller_ports touch_controller${swblock.id}_resources = {
-      i2c_${swblock.id}_resources,
+      {${swblock.ports.p_sda}, ${swblock.ports.p_scl}, 1000},
       ${swblock.ports.p_penirq},
     };
   ]],
   body = [[
-touch_controller_lib(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
   ]]
 }
 
@@ -139,6 +137,6 @@ files = {
 }
 
 api = {
-       'touch_lib_init'
+       'touch_lib_init', 'touch_lib_req_next_coord', 'touch_lib_req_next_coord_timed', 'touch_lib_next_coord_timed', 'scale_coords'
       }
 

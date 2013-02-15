@@ -6,7 +6,7 @@
 #define TILE 0 // triangle slot is used to plug LCD slice. Hence Tile 0
 on stdcore[TILE]: touch_controller_ports ports =
 {
-		XS1_PORT_1E, XS1_PORT_1H, 1000,
+  {XS1_PORT_1E, XS1_PORT_1H, 1000},
 		XS1_PORT_1D
 };
 

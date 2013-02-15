@@ -11,6 +11,15 @@ componentVersion = "1v0"
 -------------------------------------------------------------------------------
 -- Parameter descriptions.
 -------------------------------------------------------------------------------
+#define TOUCH_SERVER_TIME_OUT 10		// Time out message appear after 10 seconds
+
+
+// Parameters related to touch screen. Touch screen resolution is 4096x4096. LCD resolution is 480x272.
+
+#define TOUCH_SERVER_LCD_WIDTH 480
+#define TOUCH_SERVER_LCD_HEIGHT 272
+#define TOUCH_SERVER_TS_WIDTH 4096
+#define TOUCH_SERVER_TS_HEIGHT 4096
 
 configPoints =
 {
@@ -128,13 +137,9 @@ end
 generatedCode = {
 includes = {"touch_controller_server.h"},
 globals = [[
-i2c_ports touch_controller i2c_${swblock.id}_resources = {
-${swblock.ports.p_scl},
-${swblock.ports.p_sda},
-};
 touch_controller_ports touch_controller${swblock.id}_resources = {
-i2c_${swblock.id}_resources,
-${swblock.ports.p_penirq},
+  {${swblock.ports.p_sda}, ${swblock.ports.p_scl}, 1000},
+  ${swblock.ports.p_penirq},
 };
 ]],
 body = [[
