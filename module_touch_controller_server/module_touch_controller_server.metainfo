@@ -126,18 +126,23 @@ end
 
 
 generatedCode = {
-  includes = {"touch_controller_server.h"},
-  globals = [[
-    touch_controller_ports touch_controller${swblock.id}_resources = { 
-      ${swblock.ports.p_scl},  
-      ${swblock.ports.p_sda}, 
-      ${swblock.ports.p_penirq},  
-    };
-  ]],
-  body = [[
-    touch_controller_server(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
-  ]]
+includes = {"touch_controller_server.h"},
+globals = [[
+i2c_ports touch_controller i2c_${swblock.id}_resources = {
+${swblock.ports.p_scl},
+${swblock.ports.p_sda},
+};
+touch_controller_ports touch_controller${swblock.id}_resources = {
+i2c_${swblock.id}_resources,
+${swblock.ports.p_penirq},
+};
+]],
+body = [[
+touch_controller_server(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
+]]
 }
+
+
 
 files = {
   ["module_touch_controller_server/touch_server_conf_example.h"] = "src/touch_server_conf.h",

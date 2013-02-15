@@ -116,20 +116,23 @@ end
 -- Source generation functions
 -------------------------------------------------------------------------------
 
-
 generatedCode = {
   includes = {"touch_controller_lib.h"},
   globals = [[
-    touch_controller_ports touch_controller${swblock.id}_resources = { 
-      ${swblock.ports.p_scl},  
-      ${swblock.ports.p_sda}, 
-      ${swblock.ports.p_penirq},  
+    i2c_ports touch_controller i2c_${swblock.id}_resources = {
+      ${swblock.ports.p_scl},
+      ${swblock.ports.p_sda},
+    };
+    touch_controller_ports touch_controller${swblock.id}_resources = {
+      i2c_${swblock.id}_resources,
+      ${swblock.ports.p_penirq},
     };
   ]],
   body = [[
-    touch_controller${swblock.id}_resources);
+touch_controller_lib(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
   ]]
 }
+
 
 files = {
   ["module_touch_controller_lib/touch_lib_conf_example.h"] = "src/touch_lib_conf.h",
