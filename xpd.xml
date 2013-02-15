@@ -68,6 +68,7 @@
     <release parenthash = "5caa2281fcee1af462a1338ec8e4a18ea55158ab" version = "1.0.0rc0" githash = "3b725c775ee7b6eb7d091e2917209d54d0b1b86e"></release>
     <release parenthash = "3857a79083167f42072f15ab9e961d5f7121cb15" version = "1.0.1rc0" githash = "9361b0e07e110a248ee876dd5eaff1aaf8ee9e5d"></release>
     <release parenthash = "e9e1fa62fd82f497ffba0fcbdda8bbde3924d131" version = "1.0.2rc0" githash = "261c6e40867185df1b3f5c7f2b8013290aa6a9ee"></release>
+    <release parenthash = "587eb35c576339fa427b2838b3660974677ae8a9" version = "1.1.0beta0"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <xcore_repo>sc_lcd.git</xcore_repo>

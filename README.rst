@@ -1,8 +1,8 @@
 LCD Driver Component
 ....................
 
-:Latest release: 1.0.3
-:Maintainer: sudhanatraj
+:Latest release: 1.1.0beta0
+:Maintainer: andrewstanfordjason
 :Description: Driver component and supporting modules for RGB565 LCDs
 
 
@@ -37,10 +37,5 @@ Required software (dependencies)
 ================================
 
   * sc_util (git@github.com:xcore/sc_util)
-
-
-:Latest release: 1.0.2rc0
-:Maintainer: sudhanatraj
-:Description: Driver component and supporting modules for 4-wire resistive touch screens
-
+  * sc_i2c (git@github.com:xcore/sc_i2c.git)
 
