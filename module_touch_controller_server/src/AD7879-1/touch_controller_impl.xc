@@ -1,6 +1,3 @@
-
-#include <print.h>
-
 #include "touch_controller_impl.h"
 #include "touch_server_conf.h"
 

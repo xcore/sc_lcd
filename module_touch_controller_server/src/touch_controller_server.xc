@@ -5,7 +5,14 @@
 #include "touch_controller_server.h"
 #include "touch_controller_impl.h"
 
+#define TOUCH_SERVER_DELAY 100000000		// corresponds to 1 sec for 100MHz timer
 
+
+enum commands {
+	NEXT_TOUCH_CMD = 1,
+	LAST_TOUCH_CMD = 2,
+	LAST_TOUCH_TIMED_CMD = 3
+};
 
 void touch_controller_server(chanend c_server, touch_controller_ports &ports)
 {
@@ -32,7 +39,7 @@ void touch_controller_server(chanend c_server, touch_controller_ports &ports)
 				break;
 
 			case ports.PENIRQ when pinseq(0) :> void:		// pen interrupt goes low when there is a touch
-				process_interrupt(ports,nSec,touched,ts_x,ts_y,touchTime);
+				touch_server_process_interrupt(ports,nSec,touched,ts_x,ts_y,touchTime);
 				break;
 
 			case c_server :> cmd:	// process commands from the application program
@@ -45,7 +52,7 @@ void touch_controller_server(chanend c_server, touch_controller_ports &ports)
 					while(1){
 						select {
 						case ports.PENIRQ when pinseq(0) :> void:	// wait for pen interrupt
-							process_interrupt(ports,nSec,touched,ts_x,ts_y,touchTime);
+							touch_server_process_interrupt(ports,nSec,touched,ts_x,ts_y,touchTime);
 							nextTouched = TRUE;
 							break;
 
@@ -107,7 +114,7 @@ void touch_controller_server(chanend c_server, touch_controller_ports &ports)
 }
 
 
-select process_interrupt(touch_controller_ports &ports, unsigned presentTimeSec, t_status &touched, unsigned &x, unsigned &y, unsigned &touchTime){
+select touch_server_process_interrupt(touch_controller_ports &ports, unsigned presentTimeSec, t_status &touched, unsigned &x, unsigned &y, unsigned &touchTime){
 
 	case ports.PENIRQ when pinsneq(0) :> void:		// wait for the interrupt to go high. This indicates completion of ADC conversion.
 	touchTime = presentTimeSec;
@@ -125,7 +132,7 @@ void touch_server_get_next_coord(chanend c_ts, unsigned &x, unsigned &y){
 	c_ts :> x;
 	c_ts :> y;
 
-	scale_coords(x,y);
+	touch_server_scale_coords(x,y);
 }
 
 
@@ -140,7 +147,7 @@ t_status touch_server_get_last_coord(chanend c_ts, unsigned &x, unsigned &y){
 
 	if (touched==TRUE){
 		x = temp_x; y = temp_y;		// change (x,y) of application program only if there is touch
-		scale_coords(x,y);
+		touch_server_scale_coords(x,y);
 	}
 
 	return (touched);
@@ -159,14 +166,14 @@ t_status touch_server_get_last_coord_timed(chanend c_ts, unsigned &t, unsigned &
 
 	if (touched==TRUE){
 		x = temp_x; y = temp_y;	t = temp_t;	// change (x,y)and time values of application program only if there is touch
-		scale_coords(x,y);
+		touch_server_scale_coords(x,y);
 	}
 
 	return (touched);
 }
 
 
-void scale_coords(unsigned &x, unsigned &y){
+void touch_server_scale_coords(unsigned &x, unsigned &y){
 
 	x = (x*TOUCH_SERVER_LCD_WIDTH)/TOUCH_SERVER_TS_WIDTH;		// corresponds to column
 	y = (y*TOUCH_SERVER_LCD_HEIGHT)/TOUCH_SERVER_TS_HEIGHT;	// corresponds to row

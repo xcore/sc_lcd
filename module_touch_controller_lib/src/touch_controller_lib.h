@@ -40,7 +40,7 @@ select touch_lib_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x,
  * \param x The X coordinate value
  * \param y The Y coordinate value
  */
-void scale_coords(unsigned &x, unsigned &y);
+void touch_lib_scale_coords(unsigned &x, unsigned &y);
 
 enum {
 	TRUE = 1, FALSE = 0

@@ -35,6 +35,15 @@ This application demonstrates how the ``module_text_display`` can be used to put
    * Application: app_text_display
 
 
+Touch Screen Demo Application
++++++++++++++++++++++++++++++
+
+The touch screen demo application shows how a touch event is processed and the touch coordinates are fetched from the touch screen controller chip fitted on the XA-SK-SCR480 Slice Card.
+
+   * Package: sc_lcd
+   * Applications: app_touch_controller_lib_demo, app_touch_controller_server_demo
+
+
 Display Controller Application
 ++++++++++++++++++++++++++++++
 
@@ -48,14 +57,5 @@ Required board SKUs for this demo are:
 
    * Package: sw_display_controller
    * Application: app_display_controller
-
-
-Touch Screen Demo Application
-+++++++++++++++++++++++++++++
-
-The touch screen demo application shows how a touch event is processed and the touch coordinates are fetched from the touch screen controller chip fitted on the XA-SK-SCR480 Slice Card.
-
-   * Package: sc_lcd
-   * Applications: app_touch_controller_lib_demo, app_touch_controller_server_demo
 
 

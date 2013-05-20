@@ -33,7 +33,7 @@ void touch_lib_init(touch_controller_ports &ports) {
 }
 
 
-{unsigned, unsigned} get_touch_coordinates(r_i2c &i2c_ports){
+{unsigned, unsigned} touch_lib_get_touch_coordinates(r_i2c &i2c_ports){
 	unsigned char Ybytes[2], Xbytes[2];
 	unsigned x,y;
 

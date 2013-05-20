@@ -52,7 +52,7 @@ void touch_lib_init(touch_controller_ports &ports);
  *
  * \param i2c_ports The structure containing the I2C port details.
  */
-{unsigned,unsigned}  get_touch_coordinates(r_i2c &i2c_ports);
+{unsigned,unsigned}  touch_lib_get_touch_coordinates(r_i2c &i2c_ports);
 
 
 #endif /* TOUCH_CONTROLLER_IMPL_H_ */

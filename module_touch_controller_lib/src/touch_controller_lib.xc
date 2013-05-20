@@ -12,8 +12,8 @@ select touch_lib_req_next_coord(touch_controller_ports &ports, unsigned &ts_x, u
 	case ports.PENIRQ when pinseq(0) :> void:		// pen interrupt goes low when there is a touch
 
 		ports.PENIRQ when pinsneq(0) :> void;		// wait for the interrupt to go high. This indicates completion of ADC conversion.
-		{ts_x,ts_y} = get_touch_coordinates(ports.i2c_ports);
-		scale_coords(ts_x, ts_y);
+		{ts_x,ts_y} = touch_lib_get_touch_coordinates(ports.i2c_ports);
+		touch_lib_scale_coords(ts_x, ts_y);
 
 	break;
 
@@ -48,8 +48,8 @@ select touch_lib_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x,
 		ports.PENIRQ when pinsneq(0) :> void;		// wait for the interrupt to go high. This indicates completion of ADC conversion.
 		touched = TRUE;
 
-		{ts_x,ts_y} = get_touch_coordinates(ports.i2c_ports);
-		scale_coords(ts_x, ts_y);
+		{ts_x,ts_y} = touch_lib_get_touch_coordinates(ports.i2c_ports);
+		touch_lib_scale_coords(ts_x, ts_y);
 
 	break;
 
@@ -61,7 +61,7 @@ select touch_lib_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x,
 }
 
 
-void scale_coords(unsigned &x, unsigned &y){
+void touch_lib_scale_coords(unsigned &x, unsigned &y){
 
 	x = (x*TOUCH_LIB_LCD_WIDTH)/TOUCH_LIB_TS_WIDTH;		// corresponds to column
 	y = (y*TOUCH_LIB_LCD_HEIGHT)/TOUCH_LIB_TS_HEIGHT;	// corresponds to row

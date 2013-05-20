@@ -3,15 +3,6 @@
 
 #include "touch_controller_impl.h"
 
-#define TOUCH_SERVER_DELAY 100000000		// corresponds to 1 sec for 100MHz timer
-
-
-enum commands {
-	NEXT_TOUCH_CMD = 1,
-	LAST_TOUCH_CMD = 2,
-	LAST_TOUCH_TIMED_CMD = 3
-};
-
 typedef enum{FALSE,TRUE} t_status;
 
 
@@ -31,7 +22,7 @@ void touch_controller_server(chanend c_server, touch_controller_ports &ports);
  * \param y The Y coordinate value.
  * \param touchTime The time of touch in seconds relative to the call of touch controller server function.
  */
-select process_interrupt(touch_controller_ports &ports, unsigned presentTimeSec, t_status &touched, unsigned &x, unsigned &y, unsigned &touchTime);
+select touch_server_process_interrupt(touch_controller_ports &ports, unsigned presentTimeSec, t_status &touched, unsigned &x, unsigned &y, unsigned &touchTime);
 
 /** \brief The function to get the last touch coordinates from the touch controller server function. 
  * \param c_ts The channel connecting this client API and the server.
@@ -60,7 +51,7 @@ t_status touch_server_get_last_coord_timed(chanend c_ts, unsigned &t, unsigned &
  * \param x The X coordinate value
  * \param y The Y coordinate value
  */
-void scale_coords(unsigned &x, unsigned &y);
+void touch_server_scale_coords(unsigned &x, unsigned &y);
 
 
 #endif /* TOUCHSCREEN_H_ */

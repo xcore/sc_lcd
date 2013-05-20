@@ -23,30 +23,34 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 
 /**
- *  This define is used to represent the width of the LCD panel in pixels
+ *  This define is used to represent the width of the LCD panel in pixels.
  */
 #ifndef LCD_WIDTH
 #define LCD_WIDTH ADD_SUFFIX(LCD_WIDTH, LCD_PART_NUMBER)
 #endif
+
 /**
- *  This define is used to represent the height of the LCD panel in terms of lines
+ *  This define is used to represent the height of the LCD panel in pixels.
  */
 #ifndef LCD_HEIGHT
 #define LCD_HEIGHT ADD_SUFFIX(LCD_HEIGHT, LCD_PART_NUMBER)
 #endif
 
 /*
- * Count of bits used to set a pixels colour.
+ * Count of bits used to set a pixel's colour.
  */
 #ifndef LCD_BITS_PER_PIXEL
 #define LCD_BITS_PER_PIXEL ADD_SUFFIX(LCD_BITS_PER_PIXEL, LCD_PART_NUMBER)
 #endif
 
 /**
- *  This define is used to represent the width of the LCD panel in words
+ *  This define is used to represent the width of the LCD panel in words.
  *  The LCD row width is used in terms of words because the SDRAM used along with
  *  the lcd module is accessed as words
  */
+#ifdef LCD_ROW_WORDS
+#error Do not define LCD_ROW_WORDS. It is derived from LCD_WIDTH and LCD_BITS_PER_PIXEL
+#endif
 #define LCD_ROW_WORDS (LCD_WIDTH*LCD_BITS_PER_PIXEL/32)
 
 /**
@@ -96,13 +100,22 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 
 /**
- * Fast write is used when the pixel clock is between 25 and 50MHz.
+ * Fast write is used when the pixel clock is between 25MHz and 50MHz.
  */
 #ifndef LCD_FAST_WRITE
 #define LCD_FAST_WRITE ADD_SUFFIX(LCD_FAST_WRITE, LCD_PART_NUMBER)
+#if LCD_FAST_WRITE == 1
+#if LCD_VERT_PULSE_WIDTH > 0
+#error Cannot use LCD_FAST_WRITE with LCD_VERT_PULSE_WIDTH > 0
 #endif
+#if LCD_HOR_PULSE_WIDTH > 0
+#error Cannot use LCD_FAST_WRITE with LCD_HOR_PULSE_WIDTH > 0
+#endif
+#endif
+#endif
+
 /** 
- * The total time for HSYNC in terms of clock.
+ * The total time for HSYNC in terms of pixel clocks.
  */
 #define LCD_HSYNC_TIME (LCD_HOR_BACK_PORCH + LCD_WIDTH + LCD_HOR_FRONT_PORCH)
 

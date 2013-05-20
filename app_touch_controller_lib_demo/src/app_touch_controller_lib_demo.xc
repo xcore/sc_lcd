@@ -2,7 +2,6 @@
 #include <platform.h>
 
 #include "touch_controller_lib.h"
-#include "touch_controller_impl.h"
 
 #define TILE 0 // triangle slot is used to plug LCD slice. Hence Tile 0
 on stdcore[TILE]: touch_controller_ports ports =
@@ -11,12 +10,10 @@ on stdcore[TILE]: touch_controller_ports ports =
 		XS1_PORT_1D
 };
 
-
 void app(touch_controller_ports &ports) {
 	unsigned x=0, y=0;
 	unsigned time,timerTime;
 	timer t;
-	int choice;
 
 	touch_lib_init(ports);	// Initialises control registers of touch screen controller
 
@@ -30,17 +27,10 @@ void app(touch_controller_ports &ports) {
 	printf ("\n Please touch the screen again to display touch coordinates with time delay.......\n");
 	touch_lib_req_next_coord_timed(ports, x, y, time, t);
 	printf ("\n Touch Coordinates (x,y) = (%u,%u) after %u seconds \n", x, y, time);
-
 }
 
 
 int main() {
-
-	par {
-		on stdcore[TILE]: app(ports);
-//		par(int i=0;i<7;i++) on stdcore[TILE]:  while(1);	// equivalent to the use of all other 7 logical cores. Comment this line to have application running on single core.
-   	}
-
+	app(ports);
 	return 0;
 }
-
