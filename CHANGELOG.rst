@@ -1,17 +1,12 @@
 sc_lcd Change Log
 =============================
 
-1.0.5
+1.1.0
 -----
-   * Removed unneeded files
 
-1.0.4
------
+   * Added touch controller modules and demos
    * Added lcd_fast_write() function for 25MHz to 50MHz pixel clocks
    * Added perl program to generate lcd_fast_write()
-
-1.0.3
------
    * Added K70DWN0V1F target
 
 1.0.2

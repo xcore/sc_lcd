@@ -14,20 +14,18 @@ componentVersion = "1v0"
 
 configPoints =
 {
-  
-
-  ts_part =
+  lcd_part =
   {
-    short   = "LCD Part with Touch Screen",
+    short   = "LCD part",
     long    = "",
     help    = "This selects supported LCD part with touch screen. Pick generic if the desired part number is not listed",
     units   = "",
-    define  = "LCD_TS_PART_NUMBER",
+    define  = "LCD_PART_NUMBER",
     type    = "string",
-    options = {"K430WQA-V4-F","K430WQA-V5-F","AT043TN24V1","Generic"},
+    options = {"AT043TN24V7","K430WQAV5F","Generic"},
     resourceUsageFlags = {},
-    default = "K430WQA-V5-F"
-  },
+    default = "K430WQAV5F"
+  },  
   lcd_width =
   {
     short   = "LCD Width",
@@ -38,7 +36,7 @@ configPoints =
     type    = "int",
     min     = 16,
     max     = 800,
-    enabled = swblock.params.ts_part == "Generic",
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default=480
   },
@@ -52,7 +50,7 @@ configPoints =
     type    = "int",
     min     = 16,
     max     = 600,
-    enabled = swblock.params.ts_part == "Generic",
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 272
   },
@@ -64,7 +62,7 @@ configPoints =
     units   = "points",
     define  = "TOUCH_SERVER_TS_WIDTH",
     type    = "int",
-    enabled = swblock.params.ts_part == "Generic",
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default=4096
   },
@@ -76,7 +74,7 @@ configPoints =
     units   = "points",
     define  = "TOUCH_SERVER_TS_HEIGHT",
     type    = "int",
-    enabled = swblock.params.ts_part == "Generic",
+    enabled = swblock.params.lcd_part == "Generic",
     resourceUsageFlags = {"noeffect"},
     default = 4096
   },
@@ -116,7 +114,7 @@ channels = {
 function getConfigStatus()
   local status = "Trusted Configuration"
   local issues = {}
-  if swblock.params.ts_part == "Generic" then
+  if swblock.params.lcd_part == "Generic" then
     status = "Valid Configuration"  
   end
   return status, issues
@@ -128,18 +126,19 @@ end
 
 
 generatedCode = {
-  includes = {"touch_controller_server.h"},
-  globals = [[
-    touch_controller_ports touch_controller${swblock.id}_resources = { 
-      ${swblock.ports.p_scl},  
-      ${swblock.ports.p_sda}, 
-      ${swblock.ports.p_penirq},  
-    };
-  ]],
-  body = [[
-    touch_controller_server(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
-  ]]
+includes = {"touch_controller_server.h"},
+globals = [[
+touch_controller_ports touch_controller${swblock.id}_resources = {
+  {${swblock.ports.p_sda}, ${swblock.ports.p_scl}, 1000},
+  ${swblock.ports.p_penirq},
+};
+]],
+body = [[
+touch_controller_server(${swblock.chanends.c_ts_client},touch_controller${swblock.id}_resources);
+]]
 }
+
+
 
 files = {
   ["module_touch_controller_server/touch_server_conf_example.h"] = "src/touch_server_conf.h",

@@ -1,5 +1,5 @@
-Touch Screen Driver 
-====================
+Touch Screen Driver Component
+=============================
 
 :scope: General Use
 :description: Server-based component for driving touch screen with low voltage controller
@@ -9,7 +9,8 @@ Touch Screen Driver
 Features
 --------
 
-   * Standard component to support touch screen controller with I2C serial interface
+   * Supports touch screen controller with I2C serial interface
    * Supports 4-wire resistive touch screens of different sizes
-   * Pen-down interrupt signal supported
+   * Pen-down interrupt signal 
    * Outputs touch coordinates with time information
+   * Runs in its own logical core for simple instantiation
