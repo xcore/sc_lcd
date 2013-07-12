@@ -90,15 +90,20 @@ void lcd_server(chanend c_lcd, struct lcd_ports &p) {
 	  LDW(x, ptr, 0);
 
 	  p.lcd_data_enabled @ time <: 1;
-	  p.lcd_rgb @ time <: x;
+    p.lcd_rgb @ time <: x;
 
+#if LCD_USE_32_BIT_DATA_PORT==1
+    p.lcd_rgb  <: x>>16;
+#endif
 	  time += LCD_WIDTH;
-
 	  p.lcd_data_enabled @ time <: 0;
 
 	  for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
 		LDW(x, ptr, i);
 		p.lcd_rgb <: x;
+#if LCD_USE_32_BIT_DATA_PORT==1
+    p.lcd_rgb  <: x>>16;
+#endif
 	  }
 #endif
       outct(c_lcd, XS1_CT_END);

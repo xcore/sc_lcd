@@ -15,4 +15,5 @@
 #define LCD_FREQ_DIVIDEND_K430WQAV4F    (100)
 #define LCD_FREQ_DIVISOR_K430WQAV4F     (10)
 #define LCD_FAST_WRITE_K430WQAV4F       (0)
+#define LCD_USE_32_BIT_DATA_PORT         (0)
 #endif

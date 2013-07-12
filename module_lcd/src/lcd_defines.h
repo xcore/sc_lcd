@@ -100,6 +100,16 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 
 /**
+ * If the data port for the LCD is on a 32 bit port then enable this define.
+ * It will result in a working LCD but half the maximum pixel clock due to the
+ * loss of port buffering.
+ */
+#ifndef LCD_USE_32_BIT_DATA_PORT
+#define LCD_USE_32_BIT_DATA_PORT ADD_SUFFIX(LCD_USE_32_BIT_DATA_PORT, LCD_PART_NUMBER)
+#endif
+
+
+/**
  * Fast write is used when the pixel clock is between 25MHz and 50MHz.
  */
 #ifndef LCD_FAST_WRITE

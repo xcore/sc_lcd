@@ -1,50 +1,55 @@
-#ifndef TOUCHSCREEN_H_
-#define TOUCHSCREEN_H_
+#ifndef TOUCH_CONTROLLER_LIB_H_
+#define TOUCH_CONTROLLER_LIB_H_
 
+/*
+ * This should import the implementation specific ports for the touch
+ * controller that is in use.
+ */
 #include "touch_controller_impl.h"
 
-#define TOUCH_LIB_DELAY 100000000		// corresponds to 1 sec for 100MHz timer
+/*
+ * Implementation Specific
+ */
 
-/** \brief The function to fetch the next touch coordinates from the touch screen controller.
+/** \brief The touch controller initialisation.
+ *
+ * \param ports The structure containing the touch controller port details.
+ */
+void touch_lib_init(touch_controller_ports &ports);
+
+/** \brief Get the current touch coordinates from the touch controller.
+ * The returned coordinates are not scaled.
+ *
+ * \param ports The structure containing the touch controller port details.
+ */
+void touch_lib_get_touch_coords(touch_controller_ports &ports,
+    unsigned &x, unsigned &y);
+
+/** \brief A select function that will wait until the touch controller reports
+ * a touch event.
+ *
+ * \param ports The structure containing the touch controller port details.
+ */
+select touch_lib_touch_event(touch_controller_ports &ports);
+
+
+/** \brief This function will block until the controller reports a touch event at
+ * which point it will return the coordinates of that event. The coordinates are
+ * not scaled.
  *
  * \param ports The structure containing the touch controller port details.
  * \param ts_x The X coordinate of point of touch.
  * \param ts_y The Y coordinate of point of touch.
  */
-select touch_lib_req_next_coord(touch_controller_ports &ports, unsigned &ts_x, unsigned &ts_y);
+void touch_lib_get_next_coord(touch_controller_ports &ports,
+		unsigned &x, unsigned &y);
 
-/** \brief The function to fetch the next touch coordinates from the touch screen controller. The delay in touch event is also computed.
- *
- * \param ports The structure carrying the LCD port details.
- * \param ts_x The X coordinate of point of touch.
- * \param ts_y The Y coordinate of point of touch.
- * \param time The delay in touch event in seconds.
- * \param t The timer used to compute the delay in touch event.
- */
-void touch_lib_req_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &time, timer t);
-
-/** \brief The function called by another function to fetch the next touch coordinates from the touch screen controller. The delay in touch event is also computed.
- *
- * \param ports The structure carrying the LCD port details.
- * \param ts_x The X coordinate of point of touch.
- * \param ts_y The Y coordinate of point of touch.
- * \param time The delay in touch event in seconds.
- * \param t The timer used to compute the delay in touch event.
- * \param timerCount A counter variable.
- * \param touched The flag that records the touch status.
- */
-select touch_lib_next_coord_timed(touch_controller_ports &ports, unsigned &ts_x, unsigned &ts_y, unsigned &nSec, timer t, unsigned &timerCount, unsigned &touched);
-
-/** \brief The function to scale coordinate values (from the touch point coordinates to the LCD pixel coordinates)
+/** \brief The function to scale coordinate values (from the touch point
+ * coordinates to the LCD pixel coordinates)
  *
  * \param x The X coordinate value
  * \param y The Y coordinate value
  */
 void touch_lib_scale_coords(unsigned &x, unsigned &y);
 
-enum {
-	TRUE = 1, FALSE = 0
-};
-
-
-#endif /* TOUCHSCREEN_H_ */
+#endif /* TOUCH_CONTROLLER_LIB_H_ */
