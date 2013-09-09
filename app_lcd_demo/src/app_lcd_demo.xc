@@ -2,8 +2,7 @@
 #include "lcd.h"
 #include "sprite.h"
 
-lcd_ports ports = { XS1_PORT_1I, XS1_PORT_1L, XS1_PORT_16B, XS1_PORT_1J,
-    XS1_PORT_1K, XS1_CLKBLK_1 };
+on tile[0]: lcd_ports ports = { XS1_PORT_1I, XS1_PORT_1L, XS1_PORT_16B, XS1_CLKBLK_1 };
 /*
  * Plug XA-SK-SRC480 into the TRIANGLE slot.
  * Build and run.
@@ -21,22 +20,22 @@ static inline void sub(unsigned x, unsigned y, unsigned line, unsigned buffer[])
       buffer[i] = BACK_COLOUR;
 }
 
-void demo(chanend c_lcd) {
+void demo(streaming chanend c_lcd) {
   unsigned buffer[2][LCD_ROW_WORDS];
   unsigned buffer_index = 0, update = 0;
   int x = 20, y = 0, vx = 1, vy = 2;
   for (unsigned i = 0; i < LCD_ROW_WORDS; i++)
     buffer[0][i] = buffer[1][i] = BACK_COLOUR;
-  lcd_init(c_lcd);
+
   while (1) {
     add(x, y, 0, buffer[buffer_index]);
     lcd_req(c_lcd);
     lcd_update(c_lcd, buffer[buffer_index]);
     for (unsigned line = 1; line < LCD_HEIGHT; line++) {
       add(x, y, line, buffer[1 - buffer_index]);
+      sub(x, y, line - 1, buffer[buffer_index]);
       lcd_req(c_lcd);
       lcd_update(c_lcd, buffer[1 - buffer_index]);
-      sub(x, y, line - 1, buffer[buffer_index]);
       buffer_index = 1 - buffer_index;
     }
     sub(x, y, LCD_HEIGHT - 1, buffer[buffer_index]);
@@ -65,11 +64,11 @@ void demo(chanend c_lcd) {
 }
 
 int main() {
-  chan c_lcd;
+  streaming chan c_lcd;
   par {
-    lcd_server(c_lcd, ports);
-    demo(c_lcd);
-    par(int i=0;i<6;i++) while (1);
+	  on tile[0]: lcd_server(c_lcd, ports);
+	  on tile[0]: demo(c_lcd);
+	  on tile[0]: par(int i=0;i<6;i++) while (1);
   }
   return 0;
 }

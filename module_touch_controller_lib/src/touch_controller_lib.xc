@@ -5,6 +5,7 @@ void touch_lib_get_next_coord(touch_controller_ports &ports, unsigned &x, unsign
 {
   touch_lib_touch_event(ports);
   touch_lib_get_touch_coords(ports, x, y);
+
 }
 
 void touch_lib_scale_coords(unsigned &x, unsigned &y){

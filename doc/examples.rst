@@ -38,9 +38,8 @@ This application demonstrates how the module ``module_touch_controller_lib`` is 
 Application Notes
 -----------------
  
-  #. ``touch_lib_init`` must be called before calling ``touch_lib_req_next_coord`` or/and ``touch_lib_req_next_coord_timed``. 
-  #. ``touch_lib_req_next_coord`` and ``touch_lib_req_next_coord_timed`` wait for touch event and then read the touch coordinates stored in the result registers of touch screen controller. ``touch_lib_req_next_coord_timed`` computes the time delay in touch event from the function call. 
-  
+  #. ``touch_lib_init`` must be called first.
+  #. ``touch_lib_get_next_coord`` will wait for touch event and then read the touch coordinates stored in the result registers of touch screen controller. 
 
 Getting Started
 +++++++++++++++
@@ -49,27 +48,4 @@ Getting Started
    #. Plug the XA-SK-XTAG2 Card into the Slicekit Core Board.
    #. Click on the ``app_touch_controller_lib_demo`` and build the project.
    #. Run the demo.
-
-
-app_touch_controller_server_demo
---------------------------------
-
-This application demonstrates how the module ``module_touch_controller_server`` is used to fetch the touch coordinates from the touch screen controller. The purpose of this application is to show how commands are  passed from the application client to the ``touch_controller_server``.
-
-Application Notes
------------------
- 
-  #. ``touch_controller_server`` requires a single logical core.
-  #. ``touch_server_get_next_coord`` wait for touch event and then read the touch coordinates stored in the result registers of touch screen controller. 
-  #. ``touch_server_get_last_coord`` and ``touch_server_get_last_coord_timed`` get the last touch coordinates from the server. ``touch_server_get_last_coord_timed`` gets the time elapsed from the last touch event. 
-  
-
-Getting Started
-+++++++++++++++
-
-   #. Plug the XA-SK-LCD Slice Card into the 'TRIANGLE' slot of the Slicekit Core Board
-   #. Plug the XA-SK-XTAG2 Card into the Slicekit Core Board.
-   #. Click on the ``app_touch_controller_server_demo`` and build the project.
-   #. Run the demo.
-
 

@@ -45,10 +45,10 @@ It is possible to override the default defines when a part number is selected. T
 	The vertical back porch timing requirement given in horizontal time periods.
 
 **LCD_HOR_PULSE_WIDTH**
-	The horizontal pulse width timing requirement given in pixel clocks. This is the duration that the hsync signal should go low to denote the start of the horizontal frame. Set to 0 when hsync is not necessary.
+	The horizontal pulse width timing requirement given in pixel clocks. This is the duration that the hsync signal should go low to denote the start of the horizontal frame. Set to 0 when hsync is not necessary. Setting to 0 will mean that the hsync port is not necessary to be defined.
 
 **LCD_VERT_PULSE_WIDTH**
-	The vertical pulse width timing requirement given in vertical time periods. This is the duration that the vsync signal should go low to denote the start of the vertical frame. Set to 0 when vsync is not necessary.
+	The vertical pulse width timing requirement given in vertical time periods. This is the duration that the vsync signal should go low to denote the start of the vertical frame. Set to 0 when vsync is not necessary.Setting to 0 will mean that the vsync port is not necessary to be defined.
 
 **LCD_FREQ_DIVIDEND**
 	The defines FREQ_DIVIDEND and FREQ_DIVISOR are used to calculate the frequency of the clock used for LCD. The frequency configured = (FREQ_DIVIDEND / FREQ_DIVISOR) in MHz
@@ -58,6 +58,9 @@ It is possible to override the default defines when a part number is selected. T
 
 **LCD_FAST_WRITE**
 	The define enables a faster LCD write function, however, it produces more code. Use when a 25MHz pixel clock is required. It cannot be used with LCD_HOR_PULSE_WIDTH > 0 or LCD_VERT_PULSE_WIDTH > 0 as horizontal and veritcal sync signals are not supported in LCD_FAST_WRITE mode.
+
+**LCD_USE_32_BIT_DATA_PORT**
+	If the data port for the LCD is on a 32 bit port then enable this define. It will result in a working LCD but half the maximum pixel clock due to the loss of port buffering.
 
 API
 +++
@@ -109,53 +112,10 @@ The touch screen module functionality is defined in
 
 where the following functions can be found:
 
-
 .. doxygenfunction:: touch_lib_init
-.. doxygenfunction:: touch_lib_get_touch_coordinates
-.. doxygenfunction:: touch_lib_req_next_coord
-.. doxygenfunction:: touch_lib_req_next_coord_timed
-.. doxygenfunction:: touch_lib_next_coord_timed
+.. doxygenfunction:: touch_lib_get_touch_coords
+.. doxygenfunction:: touch_lib_touch_event
+.. doxygenfunction:: touch_lib_get_next_coord
 .. doxygenfunction:: touch_lib_scale_coords
-
-
-module_touch_controller_server
-------------------------------
-
-The device-specific configuration defines and user defines are listed in ``touch_lib_conf.h``.
-
-
-Configuration Defines
-+++++++++++++++++++++
-
-**TOUCH_SERVER_LCD_WIDTH**
-	This define is used to represent the width of the LCD panel in pixels.
-
-**TOUCH_SERVER_LCD_HEIGHT**
-	This define is used to represent the height of the LCD panel in pixels.
-
-**TOUCH_SERVER_TS_WIDTH**
-     This define is used to represent the width of the touch screen in points.
-
-**TOUCH_SERVER_TS_HEIGHT**
-     This define is used to represent the height of the touch screen in points.
-
-
-API
-+++
-
-The touch screen module functionality is defined in
-  * ``touch_controller_server.xc``
-  * ``touch_controller_server.h``
-  * ``/AD7879-1``
-
-where the following functions can be found:
-
-.. doxygenfunction:: touch_server_get_touch_coordinates
-.. doxygenfunction:: touch_controller_server
-.. doxygenfunction:: touch_server_process_interrupt
-.. doxygenfunction:: touch_server_get_last_coord
-.. doxygenfunction:: touch_server_get_next_coord
-.. doxygenfunction:: touch_server_get_last_coord_timed
-.. doxygenfunction:: touch_server_scale_coords
 
 

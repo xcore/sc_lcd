@@ -8,26 +8,12 @@
             <keyword>RGB565</keyword>
             <keyword>Display</keyword>
         </component>
-        <component name = "Touch Screen Driver Component" type = "component" buildresults_path = "module_touch_controller_server/.module_touch_controller_server.buildinfo" scope = "General Use" path = "module_touch_controller_server" metainfo_path = "module_touch_controller_server/module_touch_controller_server.metainfo" local = "false" id = "module_touch_controller_server" description = "Server-based component for driving touch screen with low voltage controller">
-            <board>XA-SK-SCR480</board>
-            <componentDependency>module_i2c_master</componentDependency>
-            <keyword>Touch screen</keyword>
-            <keyword>Controller</keyword>
-            <keyword>I2C</keyword>
-        </component>
         <component description = "Demonstrates how the module is used to write to an LCD screen." type = "demoCode" scope = "Example" path = "app_lcd_demo" local = "false" id = "app_lcd_demo" name = "LCD Demo">
             <board>XA-SK-SCR480</board>
             <componentDependency>module_slicekit_support</componentDependency>
             <componentDependency>module_lcd</componentDependency>
             <keyword>LCD</keyword>
             <keyword>Screen</keyword>
-        </component>
-        <component description = "Demonstrates how the server-based module is used to read the touch coordinates when the touch screen is touched." type = "demoCode" scope = "Example" path = "app_touch_controller_server_demo" local = "false" id = "app_touch_controller_server_demo" name = "Server-based Touch Screen Demo">
-            <board>XA-SK-SCR480</board>
-            <componentDependency>module_touch_controller_server</componentDependency>
-            <componentDependency>module_i2c_master</componentDependency>
-            <keyword>Touch screen</keyword>
-            <keyword>Touch controller</keyword>
         </component>
         <component name = "Touch Screen Driver Function Library" type = "component" buildresults_path = "module_touch_controller_lib/.module_touch_controller_lib.buildinfo" scope = "General Use" path = "module_touch_controller_lib" metainfo_path = "module_touch_controller_lib/module_touch_controller_lib.metainfo" local = "false" id = "module_touch_controller_lib" description = "Function Library for driving touch screen with low voltage controller">
             <board>XA-SK-SCR480</board>

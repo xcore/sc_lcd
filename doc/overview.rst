@@ -64,7 +64,6 @@ Features
    * Resolution of 4096 * 4096 points
    * Pen-down interrupt signal supported
    * Outputs touch coordinates with time information
-   * ``module_touch_controller_lib`` requires a single core while ``module_touch_controller_server`` requires an additional core for the server.
 
 Memory requirements
 +++++++++++++++++++
@@ -77,16 +76,6 @@ app_touch_controller_lib_demo
 | Stack            | 304 bytes     |
 +------------------+---------------+
 | Program          | 3160 bytes    |
-+------------------+---------------+
-
-app_touch_controller_server_demo
-
-+------------------+---------------+
-| Resource         | Usage         |
-+==================+===============+
-| Stack            | 420 bytes     |
-+------------------+---------------+
-| Program          | 3576 bytes    |
 +------------------+---------------+
 
 
@@ -105,20 +94,6 @@ app_touch_controller_lib_demo
 | Clocks        |   1   |
 +---------------+-------+
 | Logical Cores |   1   |
-+---------------+-------+
-
-app_touch_controller_server_demo
-
-+---------------+-------+
-| Resource      | Usage |
-+===============+=======+
-| Channels      |   1   |
-+---------------+-------+
-| Timers        |   3   |
-+---------------+-------+
-| Clocks        |   1   |
-+---------------+-------+
-| Logical Cores |   2   |
 +---------------+-------+
 
 

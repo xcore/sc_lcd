@@ -7,7 +7,6 @@
 #include "lcd_defines_K430WQAV4F.h"
 #include "lcd_defines_K70DWN0V1F.h"
 
-
 extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb, out port lcd_data_enabled);
 
 #ifndef ADD_SUFFIX
