@@ -3,8 +3,8 @@
 
 <cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
-		<cconfiguration id="com.xmos.cdt.toolchain.70977078">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xmos.cdt.toolchain.70977078" moduleId="org.eclipse.cdt.core.settings" name="Default">
+		<cconfiguration id="com.xmos.cdt.toolchain.34088477">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xmos.cdt.toolchain.34088477" moduleId="org.eclipse.cdt.core.settings" name="Default">
 				<externalSettings/>
 				<extensions>
 					<extension id="com.xmos.cdt.core.XEBinaryParser" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -33,17 +33,17 @@
 				</buildTargets>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration buildProperties="" description="" id="com.xmos.cdt.toolchain.70977078" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
-					<folderInfo id="com.xmos.cdt.toolchain.70977078.1127281840" name="/" resourcePath="">
-						<toolChain id="com.xmos.cdt.toolchain.86138444" name="com.xmos.cdt.toolchain" superClass="com.xmos.cdt.toolchain">
-							<targetPlatform archList="all" binaryParser="com.xmos.cdt.core.XEBinaryParser" id="com.xmos.cdt.core.platform.41089422" isAbstract="false" osList="linux,win32,macosx" superClass="com.xmos.cdt.core.platform"/>
-							<builder arguments="" id="com.xmos.cdt.builder.base.12642191" keepEnvironmentInBuildfile="false" managedBuildOn="false" superClass="com.xmos.cdt.builder.base">
+				<configuration buildProperties="" description="" id="com.xmos.cdt.toolchain.34088477" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
+					<folderInfo id="com.xmos.cdt.toolchain.34088477.1127281840" name="/" resourcePath="">
+						<toolChain id="com.xmos.cdt.toolchain.99109665" name="com.xmos.cdt.toolchain" superClass="com.xmos.cdt.toolchain">
+							<targetPlatform archList="all" binaryParser="com.xmos.cdt.core.XEBinaryParser" id="com.xmos.cdt.core.platform.36483941" isAbstract="false" osList="linux,win32,macosx" superClass="com.xmos.cdt.core.platform"/>
+							<builder arguments="" id="com.xmos.cdt.builder.base.60874647" keepEnvironmentInBuildfile="false" managedBuildOn="false" superClass="com.xmos.cdt.builder.base">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH" kind="outputPath" name="bin"/>
 								</outputEntries>
 							</builder>
-							<tool id="com.xmos.cdt.xc.compiler.18477849" name="com.xmos.cdt.xc.compiler" superClass="com.xmos.cdt.xc.compiler">
-								<option id="com.xmos.c.compiler.option.defined.symbols.38938792" name="com.xmos.c.compiler.option.defined.symbols" superClass="com.xmos.c.compiler.option.defined.symbols" valueType="definedSymbols">
+							<tool id="com.xmos.cdt.xc.compiler.61390812" name="com.xmos.cdt.xc.compiler" superClass="com.xmos.cdt.xc.compiler">
+								<option id="com.xmos.c.compiler.option.defined.symbols.79837591" name="com.xmos.c.compiler.option.defined.symbols" superClass="com.xmos.c.compiler.option.defined.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__SHRT_MAX__=32767"/>
 									<listOptionValue builtIn="false" value="__SCHAR_MAX__=127"/>
 									<listOptionValue builtIn="false" value="__SIZE_TYPE__=unsigned"/>
@@ -153,23 +153,24 @@
 									<listOptionValue builtIn="false" value="__EXCEPTIONS=1"/>
 									<listOptionValue builtIn="false" value="__WCHAR_UNSIGNED__=1"/>
 								</option>
-								<option id="com.xmos.xc.compiler.option.include.paths.67784474" name="com.xmos.xc.compiler.option.include.paths" superClass="com.xmos.xc.compiler.option.include.paths" valueType="includePath">
+								<option id="com.xmos.xc.compiler.option.include.paths.18433891" name="com.xmos.xc.compiler.option.include.paths" superClass="com.xmos.xc.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/gcc&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_lib_demo/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_lib_demo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo/.settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/.settings}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/src/AD7879-1}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/.settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/src/AD7879-1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master/doc}&quot;"/>
 								</option>
-								<inputType id="com.xmos.cdt.xc.compiler.input.1926617" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
+								<inputType id="com.xmos.cdt.xc.compiler.input.63452319" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
 							</tool>
-							<tool id="com.xmos.cdt.c.compiler.72593862" name="com.xmos.cdt.c.compiler" superClass="com.xmos.cdt.c.compiler">
-								<option id="com.xmos.c.compiler.option.defined.symbols.17978910" name="com.xmos.c.compiler.option.defined.symbols" superClass="com.xmos.c.compiler.option.defined.symbols" valueType="definedSymbols">
+							<tool id="com.xmos.cdt.c.compiler.76358342" name="com.xmos.cdt.c.compiler" superClass="com.xmos.cdt.c.compiler">
+								<option id="com.xmos.c.compiler.option.defined.symbols.1812976" name="com.xmos.c.compiler.option.defined.symbols" superClass="com.xmos.c.compiler.option.defined.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__STDC__=1"/>
 									<listOptionValue builtIn="false" value="__STDC_VERSION__=199901L"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__=1"/>
@@ -272,23 +273,24 @@
 									<listOptionValue builtIn="false" value="XCC_VERSION_MINOR=0"/>
 									<listOptionValue builtIn="false" value="__XCC_HAVE_FLOAT__=1"/>
 								</option>
-								<option id="com.xmos.c.compiler.option.include.paths.65209924" name="com.xmos.c.compiler.option.include.paths" superClass="com.xmos.c.compiler.option.include.paths" valueType="includePath">
+								<option id="com.xmos.c.compiler.option.include.paths.13055392" name="com.xmos.c.compiler.option.include.paths" superClass="com.xmos.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/gcc&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_lib_demo/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_lib_demo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo/.settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/.settings}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/src/AD7879-1}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/.settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/src/AD7879-1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master/doc}&quot;"/>
 								</option>
-								<inputType id="com.xmos.cdt.c.compiler.input.c.17275886" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
+								<inputType id="com.xmos.cdt.c.compiler.input.c.51654649" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
-							<tool id="com.xmos.cdt.cxx.compiler.98048998" name="com.xmos.cdt.cxx.compiler" superClass="com.xmos.cdt.cxx.compiler">
-								<option id="com.xmos.cxx.compiler.option.defined.symbols.34714402" name="com.xmos.cxx.compiler.option.defined.symbols" superClass="com.xmos.cxx.compiler.option.defined.symbols" valueType="definedSymbols">
+							<tool id="com.xmos.cdt.cxx.compiler.47940700" name="com.xmos.cdt.cxx.compiler" superClass="com.xmos.cdt.cxx.compiler">
+								<option id="com.xmos.cxx.compiler.option.defined.symbols.60074776" name="com.xmos.cxx.compiler.option.defined.symbols" superClass="com.xmos.cxx.compiler.option.defined.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__STDC__=1"/>
 									<listOptionValue builtIn="false" value="__cplusplus=1"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__=1"/>
@@ -395,22 +397,23 @@
 									<listOptionValue builtIn="false" value="XCC_VERSION_MINOR=0"/>
 									<listOptionValue builtIn="false" value="__XCC_HAVE_FLOAT__=1"/>
 								</option>
-								<option id="com.xmos.cxx.compiler.option.include.paths.4724745" name="com.xmos.cxx.compiler.option.include.paths" superClass="com.xmos.cxx.compiler.option.include.paths" valueType="includePath">
+								<option id="com.xmos.cxx.compiler.option.include.paths.71469925" name="com.xmos.cxx.compiler.option.include.paths" superClass="com.xmos.cxx.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/gcc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/c++/4.2.1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/c++/4.2.1/xcore-xmos-elf&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_lib_demo/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_lib_demo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo/.settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/app_touch_controller_server_demo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/.settings}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/src/AD7879-1}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/.settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/src/AD7879-1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_touch_controller_server}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_i2c_master/doc}&quot;"/>
 								</option>
-								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.43505091" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
+								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.29023101" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -508,6 +511,6 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="app_touch_controller_lib_demo.null.73567862" name="app_touch_controller_lib_demo"/>
+		<project id="app_touch_controller_server_demo.null.79837040" name="app_touch_controller_server_demo"/>
 	</storageModule>
 </cproject>
