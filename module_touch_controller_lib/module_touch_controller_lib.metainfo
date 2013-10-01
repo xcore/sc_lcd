@@ -137,6 +137,7 @@ files = {
 }
 
 api = {
-       'touch_lib_init', 'touch_lib_req_next_coord', 'touch_lib_req_next_coord_timed', 'touch_lib_next_coord_timed', 'scale_coords'
+       'touch_lib_init', 'touch_lib_get_touch_coords', 'touch_lib_touch_event', 'touch_lib_get_next_coord', 'touch_lib_scale_coords'
+
       }
 
