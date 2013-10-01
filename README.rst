@@ -1,7 +1,7 @@
 LCD Driver Component
 ....................
 
-:Latest release: 1.1.0rc0
+:Latest release: 1.1.0rc1
 :Maintainer: andrewstanfordjason
 :Description: Driver component and supporting modules for RGB565 LCDs
 
@@ -36,6 +36,6 @@ Issues may be submitted via the Issues tab in this github repo. Response to any 
 Required software (dependencies)
 ================================
 
-  * sc_util (git@github.com:xcore/sc_util)
   * sc_i2c (git@github.com:xcore/sc_i2c.git)
+  * sc_slicekit_support (https://github.com/xcore/sc_slicekit_support.git)
 

@@ -10,48 +10,46 @@
         </component>
         <component name = "Touch Screen Driver Component" type = "component" buildresults_path = "module_touch_controller_server/.module_touch_controller_server.buildinfo" scope = "General Use" path = "module_touch_controller_server" metainfo_path = "module_touch_controller_server/module_touch_controller_server.metainfo" local = "false" id = "module_touch_controller_server" description = "Server-based component for driving touch screen with low voltage controller">
             <board>XA-SK-SCR480</board>
-            <componentDependency>module_i2c_master</componentDependency>
+            <componentDependency version = "2.2.0">module_i2c_master</componentDependency>
             <keyword>Touch screen</keyword>
             <keyword>Controller</keyword>
             <keyword>I2C</keyword>
         </component>
         <component description = "Demonstrates how the module is used to write to an LCD screen." type = "demoCode" scope = "Example" path = "app_lcd_demo" local = "false" id = "app_lcd_demo" name = "LCD Demo">
             <board>XA-SK-SCR480</board>
-            <componentDependency>module_slicekit_support</componentDependency>
-            <componentDependency>module_lcd</componentDependency>
+            <componentDependency version = "1.1.0">module_lcd</componentDependency>
+            <componentDependency version = "1.0.3">module_slicekit_support</componentDependency>
             <keyword>LCD</keyword>
             <keyword>Screen</keyword>
         </component>
         <component description = "Demonstrates how the server-based module is used to read the touch coordinates when the touch screen is touched." type = "demoCode" scope = "Example" path = "app_touch_controller_server_demo" local = "false" id = "app_touch_controller_server_demo" name = "Server-based Touch Screen Demo">
             <board>XA-SK-SCR480</board>
-            <componentDependency>module_touch_controller_server</componentDependency>
-            <componentDependency>module_i2c_master</componentDependency>
+            <componentDependency version = "2.2.0">module_i2c_master</componentDependency>
+            <componentDependency version = "2.2.0">module_i2c_master</componentDependency>
+            <componentDependency version = "1.1.0">module_touch_controller_server</componentDependency>
             <keyword>Touch screen</keyword>
             <keyword>Touch controller</keyword>
         </component>
         <component name = "Touch Screen Driver Function Library" type = "component" buildresults_path = "module_touch_controller_lib/.module_touch_controller_lib.buildinfo" scope = "General Use" path = "module_touch_controller_lib" metainfo_path = "module_touch_controller_lib/module_touch_controller_lib.metainfo" local = "false" id = "module_touch_controller_lib" description = "Function Library for driving touch screen with low voltage controller">
             <board>XA-SK-SCR480</board>
-            <componentDependency>module_i2c_master</componentDependency>
+            <componentDependency version = "2.2.0">module_i2c_master</componentDependency>
             <keyword>Touch screen</keyword>
             <keyword>Controller</keyword>
             <keyword>I2C</keyword>
         </component>
         <component description = "Demonstrates how the module is used to read the touch coordinates when the touch screen is touched." type = "demoCode" scope = "Example" path = "app_touch_controller_lib_demo" local = "false" id = "app_touch_controller_lib_demo" name = "Touch Screen Demo">
             <board>XA-SK-SCR480</board>
-            <componentDependency>module_touch_controller_lib</componentDependency>
-            <componentDependency>module_i2c_master</componentDependency>
+            <componentDependency version = "2.2.0">module_i2c_master</componentDependency>
+            <componentDependency version = "2.2.0">module_i2c_master</componentDependency>
+            <componentDependency version = "1.1.0">module_touch_controller_lib</componentDependency>
             <keyword>Touch screen</keyword>
             <keyword>Touch controller</keyword>
         </component>
     </components>
-    <dependency repo = "sc_util">
-        <githash>d0531d7c68ab67334582c324828e36d617baf8b3</githash>
-        <uri>git@github.com:xcore/sc_util</uri>
-        <version>1.0.3rc0</version>
-    </dependency>
     <dependency repo = "sc_i2c">
-        <githash>d266213a4d5c4956f3d5980ba42611e24d129a39</githash>
+        <githash>53349e8bd6493701b1ec462187b14c9e74bdc6bd</githash>
         <uri>git@github.com:xcore/sc_i2c.git</uri>
+        <version>2.2.0rc0</version>
     </dependency>
     <dependency repo = "sc_slicekit_support">
         <githash>7920fc4235a96585274d73d25d275ea63b4cd285</githash>
@@ -76,8 +74,10 @@
     <release parenthash = "e9e1fa62fd82f497ffba0fcbdda8bbde3924d131" version = "1.0.2rc0" githash = "261c6e40867185df1b3f5c7f2b8013290aa6a9ee"></release>
     <release parenthash = "587eb35c576339fa427b2838b3660974677ae8a9" version = "1.1.0beta0" githash = "67e86e076aa9a26d8dd0360aa053072c46d46ee1"></release>
     <release parenthash = "67e86e076aa9a26d8dd0360aa053072c46d46ee1" version = "1.1.0rc0" githash = "5db094b21dc868589d4f0ff37711d2df30a642e9"></release>
+    <release parenthash = "c697fdbad3609b02b2306387c5d738072cd29fef" version = "1.1.0rc1"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
+    <version_defines></version_defines>
     <xcore_repo>sc_lcd.git</xcore_repo>
     <xpd_version>1.0</xpd_version>
     <xsoftip_exclude>module_text_display</xsoftip_exclude>

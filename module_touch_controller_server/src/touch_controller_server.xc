@@ -102,14 +102,14 @@ void touch_controller_server(chanend c_server, touch_controller_ports &ports)
 
 				default:
 					break;
-				}	
+				}
 
 				break;
-			}	
+			}
 
-		}	
+		}
 
-	}	
+	}
 
 }
 

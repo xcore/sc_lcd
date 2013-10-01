@@ -82,8 +82,8 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 
 /**
- * The horizontal pulse width timing requirement given in pixel clocks. 
- * This is the duration that the hsync signal should go low to denote the 
+ * The horizontal pulse width timing requirement given in pixel clocks.
+ * This is the duration that the hsync signal should go low to denote the
  * start of the horizontal frame. Set to 0 when hsync is not necessary.
  */
 #ifndef LCD_HOR_PULSE_WIDTH
@@ -91,8 +91,8 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 
 /**
- * The vertical pulse width timing requirement given in vertical time periods. 
- * This is the duration that the vsync signal should go low to denote the start 
+ * The vertical pulse width timing requirement given in vertical time periods.
+ * This is the duration that the vsync signal should go low to denote the start
  * of the vertical frame. Set to 0 when vsync is not necessary.
  */
 #ifndef LCD_VERT_PULSE_WIDTH
@@ -124,7 +124,7 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 #endif
 
-/** 
+/**
  * The total time for HSYNC in terms of pixel clocks.
  */
 #define LCD_HSYNC_TIME (LCD_HOR_BACK_PORCH + LCD_WIDTH + LCD_HOR_FRONT_PORCH)
@@ -139,7 +139,7 @@ extern void lcd_fast_write(unsigned data, int time, out buffered port:32 lcd_rgb
 #endif
 
 /**
- *  
+ *
  */
 #ifndef LCD_FREQ_DIVISOR
 #define LCD_FREQ_DIVISOR ADD_SUFFIX(LCD_FREQ_DIVISOR, LCD_PART_NUMBER)
