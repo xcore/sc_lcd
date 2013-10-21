@@ -1,4 +1,4 @@
-LCD Programming Guide
+ LCD Programming Guide
 =====================
 
 This section provides information on how to program applications using the LCD module.
@@ -74,7 +74,7 @@ The declared variable ``lcd_ports`` is used by the LCD server call to address th
 
 Executing The Project
 ---------------------
-The module by itself cannot be build or executed separately. It must be linked in to an application which needs LCD display. Once the module is linked to the application, the application can be built and tested for driving a LCD screen.
+The module by itself cannot be built or executed separately. It must be linked in to an application which needs LCD display. Once the module is linked to the application, the application can be built and tested for driving a LCD screen.
 
 The following should be done in order to link the component to the application project
   #. The module name ``module_lcd`` should be added to the list of MODULES in the application project build options. 

@@ -34,7 +34,7 @@ void lcd_init(chanend c_lcd);
 /** \brief LCD update function. This sends a buffer of data to the lcd server to to sent to the lcd.
  *
  * \param c_lcd The channel end connecting to the lcd server.
- * \param buffer[] The data to to emitted to the lcd screen, stored in rgb565.
+ * \param buffer[] The data to be emitted to the lcd screen, stored in rgb565.
  *
  * Note, no array bounds checking is performed.
  */
@@ -48,7 +48,7 @@ static inline void lcd_update(chanend c_lcd, unsigned buffer[]) {
 /** \brief C interface for LCD update function. This sends a buffer of data to the lcd server to to sent to the lcd.
  *
  * \param c_lcd The channel end connecting to the lcd server.
- * \param buffer A pointer to data to to emitted to the lcd screen, stored in rgb565.
+ * \param buffer A pointer to data to be emitted to the lcd screen, stored in rgb565.
  *
  * Note, no array bounds checking is performed.
  */

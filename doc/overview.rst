@@ -9,9 +9,9 @@ The LCD component is used to drive a single graphics LCD module up to 800 * 600 
 Features
 ++++++++
 
-   * Standard component to support different LCD displays with RGB 565.
+   * Standard component to support different LCD displays with an RGB interface.
    * Different color depths 32 bpp, 16 bpp, etc. based on user configuration.
-   * Resolution of up to 800 * 600 pixels. See table below for different screen configurations.
+   * Resolution of up to 800 * 600 pixels.
    * Outputs to a CMOS interface.
    * Configurability of 
      * LCD pixel dimensions,
@@ -48,7 +48,7 @@ Resource requirements
 Performance
 +++++++++++
 
-The achievable effective bandwidth varies according to the available XCore MIPS. The maximum pixel clock supported is 25MHz.
+The achievable effective bandwidth varies according to the available xCORE MIPS. The maximum pixel clock supported is 25MHz.
 
 
 Touch screen component
@@ -63,7 +63,7 @@ Features
    * Supports 4-wire resistive touch screens of different sizes
    * Resolution of 4096 * 4096 points
    * Pen-down interrupt signal supported
-   * Outputs touch coordinates with time information
+   * Outputs touch coordinates
    * ``module_touch_controller_lib`` requires a single core while ``module_touch_controller_server`` requires an additional core for the server.
 
 Memory requirements

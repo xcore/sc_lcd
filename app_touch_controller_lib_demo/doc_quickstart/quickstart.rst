@@ -3,21 +3,21 @@ Touch Controller - Simple Demo Quickstart Guide
 
 .. _Slicekit_TouchController_Simple_Demo_Quickstart: 
 
-This demo uses Slicekit Starter Kit, XA-SK-SCR480 Slice Card and Kentec K430WQA-V5-F Display module. xSOFTip I2C Master component is used to communicate with AD7879-1 low voltage controller chip on the slice card for interfacing the touch screen of the Kentec Display/Touchscreen module. 
+This demo uses sliceKIT Starter Kit, XA-SK-SCR480 Slice Card and Kentec K430WQA-V5-F Display module. xSOFTip I2C Master component is used to communicate with AD7879-1 low voltage controller chip on the slice card for interfacing the touch screen of the Kentec Display/Touchscreen module. 
 
 The demo consists of simple functions to read the touch coordinates and also to compute the time delay in touch event from the function call. 
 
 Hardware Setup 
 ++++++++++++++ 
 
-The XP-SKC-L2 Slicekit Core board has four slots: ``SQUARE``, ``CIRCLE``, ``TRIANGLE`` and ``STAR``. 
+The XP-SKC-L2 sliceKIT Core board has four slots: ``SQUARE``, ``CIRCLE``, ``TRIANGLE`` and ``STAR``. 
 To setup up the system: 
 
-#. Connect the XA-SK-SCR480 Slice Card to the ``TRIANGLE`` slot (Tile 0) of the XP-SKC-L2 Slicekit Core board. 
+#. Connect the XA-SK-SCR480 Slice Card to the ``TRIANGLE`` slot (Tile 0) of the XP-SKC-L2 sliceKIT Core board. 
 #. Connect the Kentec K430WQA-V5-F display module to the connector on the slice card. 
-#. Connect the XTAG Adapter to Slicekit Core board, and connect XTAG-2 to XTAG Adapter. 
-#. Connect the XTAG-2 to host PC. Note that a USB cable is not provided with the Slicekit Starter Kit. 
-#. Switch on the power supply to the Slicekit Core board. 
+#. Connect the XTAG Adapter to sliceKIT Core board, and connect XTAG-2 to XTAG Adapter. 
+#. Connect the XTAG-2 to host PC. Note that a USB cable is not provided with the sliceKIT Starter Kit. 
+#. Switch on the power supply to the sliceKIT Core board. 
 
 .. figure:: images/hardware_setup.jpg 
    :align: center 
@@ -34,7 +34,7 @@ Import and Build the Application
 Run the Application 
 +++++++++++++++++++ 
 
-Now that the application has been compiled, the next step is to run it on the Slicekit Core Board using the tools to load the application over JTAG (via the XTAG2 and XTAG Adaptor card) into the xCORE multicore microcontroller. 
+Now that the application has been compiled, the next step is to run it on the sliceKIT Core Board using the tools to load the application over JTAG (via the XTAG2 and XTAG Adaptor card) into the xCORE multicore microcontroller. 
 
 #. Click on the run icon (the white arrow in the green circle). A dialog will appear asking which device to connect to. Select ``XMOS XTAG2``. 
 #. Wait for the message ``Please touch the screen .....`` in the Debug Console window. When the screen is touched, the touch coordinates are displayed. 
@@ -52,7 +52,3 @@ Look at the Code
 #. The functions ``touch_lib_req_next_coord()`` and ``touch_lib_req_next_coord_timed()`` wait for touch event and then read the touch coordinates stored in the result registers of AD7879-1. ``touch_lib_req_next_coord_timed()`` computes the time delay in touch event from the function call. 
 #. The various parameters used are defined in ``touch_lib_conf.h``. You can change their values if necessary. 
 
-Try the Server-based Touch Controller Demo 
-.......................................... 
-
-#. The server-based demo ``app_touch_controller_server_demo`` has a touch controller server running on a separate logical core. Follow the quickstart guide for this application for further information on running this demo.

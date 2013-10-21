@@ -2,7 +2,7 @@
 Project structure
 =================
 
-The component ``sc_lcd`` includes the modules ``module_lcd``, ``module_text_display``, ``module_touch_controller_lib`` and the ``module_touch_controller_server``.
+The component ``sc_lcd`` includes the modules ``module_lcd``, ``module_text_display`` and ``module_touch_controller_lib``.
 
 module_lcd
 ----------
@@ -30,7 +30,7 @@ It is possible to override the default defines when a part number is selected. T
 	This define is used to represent the height of the LCD panel in pixels.
 
 **LCD_BITS_PER_PIXEL**
-	Count of bits used to set a pixels colour, i.e. if the screen was wired for rgb565 then the LCD_BITS_PER_PIXEL would be 16, rgb888 would be 24. This is independant of the actual bit depth of the lcd. 
+	Count of bits used to set a pixels RGB value, i.e. if the screen was wired for rgb565 then the LCD_BITS_PER_PIXEL would be 16, rgb888 would be 24. This is independant of the actual bit depth of the lcd. 
 	
 **LCD_HOR_FRONT_PORCH**
 	The horizontal front porch timing requirement given in pixel clocks.
