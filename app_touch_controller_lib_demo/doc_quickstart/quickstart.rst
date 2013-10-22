@@ -1,7 +1,7 @@
 Touch Controller - Simple Demo Quickstart Guide 
 =============================================== 
 
-.. _Slicekit_TouchController_Simple_Demo_Quickstart: 
+.. _sliceKIT_TouchController_Simple_Demo_Quickstart: 
 
 This demo uses sliceKIT Starter Kit, XA-SK-SCR480 Slice Card and Kentec K430WQA-V5-F Display module. xSOFTip I2C Master component is used to communicate with AD7879-1 low voltage controller chip on the slice card for interfacing the touch screen of the Kentec Display/Touchscreen module. 
 

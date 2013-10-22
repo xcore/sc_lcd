@@ -11,16 +11,16 @@ This simple demonstration of xTIMEcomposer Studio functionality uses the XA-SK-S
 Hardware Setup
 ++++++++++++++
 
-The XP-SKC-L2 Slicekit Core board has four slots with edge connectors: ``SQUARE``, ``CIRCLE``, ``TRIANGLE`` and ``STAR``. 
+The XP-SKC-L2 sliceKIT Core board has four slots with edge connectors: ``SQUARE``, ``CIRCLE``, ``TRIANGLE`` and ``STAR``. 
 
 To setup up the system:
 
-   #. Connect XA-SK-SCR480 Slice Card to the XP-SKC-L2 Slicekit Core board using the connector marked with the ``STAR``.
-   #. Connect the XTAG Adapter to Slicekit Core board, and connect XTAG-2 to the Adapter. 
-   #. Connect the XTAG-2 to host PC. Note that the USB cable is not provided with the Slicekit starter kit.
+   #. Connect XA-SK-SCR480 Slice Card to the XP-SKC-L2 sliceKIT Core board using the connector marked with the ``STAR``.
+   #. Connect the XTAG Adapter to sliceKIT Core board, and connect XTAG-2 to the Adapter. 
+   #. Connect the XTAG-2 to host PC. Note that the USB cable is not provided with the sliceKIT starter kit.
    #. Set the ``XMOS LINK`` to ``OFF`` on the XTAG Adapter.
    #. Ensure the jumper on the XA-SK-SCR480 is bridged if the back light is required.
-   #. Switch on the power supply to the Slicekit Core board.
+   #. Switch on the power supply to the sliceKIT Core board.
 
 .. figure:: images/hardware_setup.jpg
    :width: 400px
@@ -33,7 +33,7 @@ Import and Build the Application
 ++++++++++++++++++++++++++++++++
 
    #. Open xTIMEcomposer and check that it is operating in online mode. Open the edit perspective (Window->Open Perspective->XMOS Edit).
-   #. Locate the ``'Slicekit LCD Demo'`` item in the xSOFTip pane on the bottom left of the window and drag it into the Project Explorer window in the xTIMEcomposer. This will also cause the modules on which this application depends (in this case, module_lcd) to be imported as well. 
+   #. Locate the ``'sliceKIT LCD Demo'`` item in the xSOFTip pane on the bottom left of the window and drag it into the Project Explorer window in the xTIMEcomposer. This will also cause the modules on which this application depends (in this case, module_lcd) to be imported as well. 
    #. Click on the app_lcd_demo item in the Project Explorer pane then click on the build icon (hammer) in xTIMEcomposer. Check the console window to verify that the application has built successfully.
 
 For help in using xTIMEcomposer, try the xTIMEcomposer tutorial, which you can find by selecting Help->Tutorials from the xTIMEcomposer menu.
@@ -43,7 +43,7 @@ Note that the Developer Column in the xTIMEcomposer on the right hand side of yo
 Run the Application
 +++++++++++++++++++
 
-Now that the application has been compiled, the next step is to run it on the Slicekit Core Board using the tools to load the application over JTAG (via the XTAG2 and Xtag Adapter card) into the xCORE multicore microcontroller.
+Now that the application has been compiled, the next step is to run it on the sliceKIT Core Board using the tools to load the application over JTAG (via the XTAG2 and Xtag Adapter card) into the xCORE multicore microcontroller.
 
    #. Select the file ``app_lcd_demo.xc`` in the ``app_lcd_demo`` project from the Project Explorer.
    #. Click on the ``Run`` icon (the white arrow in the green circle). 

@@ -21,8 +21,8 @@ Application Notes
 Getting Started
 +++++++++++++++
 
-   #. Plug the XA-SK-LCD Slice Card into the 'STAR' slot of the Slicekit Core Board
-   #. Plug the XA-SK-XTAG2 Card into the Slicekit Core Board.
+   #. Plug the XA-SK-LCD Slice Card into the 'STAR' slot of the sliceKIT Core Board
+   #. Plug the XA-SK-XTAG2 Card into the sliceKIT Core Board.
    #. Ensure the XMOS LINK switch on the XA-SK-XTAG2 is set to "off".
    #. Ensure the jumper on the XA-SK-SCR480 is bridged if the back light is required.
    #. Open ``app_lcd_demo.xc`` and build the project.
@@ -45,8 +45,8 @@ Application Notes
 Getting Started
 +++++++++++++++
 
-   #. Plug the XA-SK-LCD Slice Card into the 'TRIANGLE' slot of the Slicekit Core Board
-   #. Plug the XA-SK-XTAG2 Card into the Slicekit Core Board.
+   #. Plug the XA-SK-LCD Slice Card into the 'TRIANGLE' slot of the sliceKIT Core Board
+   #. Plug the XA-SK-XTAG2 Card into the sliceKIT Core Board.
    #. Click on the ``app_touch_controller_lib_demo`` and build the project.
    #. Run the demo.
 

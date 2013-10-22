@@ -40,7 +40,7 @@ How to select the LCD target
 ----------------------------
 
 The module has been designed to support multiple LCD targets. Each target has a specific configuration and have been provided
-with the component int the ``/devices`` directory. The module only supports a single LCD target per XCore.
+with the component int the ``/devices`` directory. The module only supports a single LCD target per xCORE.
 
 To select the target the following should be done:
 
