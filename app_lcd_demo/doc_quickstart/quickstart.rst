@@ -1,14 +1,14 @@
-.. _lcd_demo_Quickstart:
+.. _lcd_demo_quickstart:
 
-LCD Demo Quickstart Guide
+LCD demo quickstart guide
 =========================
 
-sc_lcd demo : Quick Start Guide
+sc_lcd demo : quick start guide
 -------------------------------
 
 This simple demonstration of xTIMEcomposer Studio functionality uses the XA-SK-SCR480 Slice Card together with the xSOFTip ``module_lcd`` to demonstrate how the module is used to write to an LCD screen.
 
-Hardware Setup
+Hardware setup
 ++++++++++++++
 
 The XP-SKC-L2 sliceKIT Core board has four slots with edge connectors: ``SQUARE``, ``CIRCLE``, ``TRIANGLE`` and ``STAR``. 
@@ -29,7 +29,7 @@ To setup up the system:
    Hardware Setup for LCD Demo
    
 	
-Import and Build the Application
+Import and build the application
 ++++++++++++++++++++++++++++++++
 
    #. Open xTIMEcomposer and check that it is operating in online mode. Open the edit perspective (Window->Open Perspective->XMOS Edit).
@@ -40,7 +40,7 @@ For help in using xTIMEcomposer, try the xTIMEcomposer tutorial, which you can f
 
 Note that the Developer Column in the xTIMEcomposer on the right hand side of your screen provides information on the xSOFTip components you are using. Select the module_lcd component in the Project Explorer, and you will see its description together with API documentation. Having done this, click the `back` icon until you return to this quickstart guide within the Developer Column.
 
-Run the Application
+Run the application
 +++++++++++++++++++
 
 Now that the application has been compiled, the next step is to run it on the sliceKIT Core Board using the tools to load the application over JTAG (via the XTAG2 and Xtag Adapter card) into the xCORE multicore microcontroller.
@@ -50,16 +50,16 @@ Now that the application has been compiled, the next step is to run it on the sl
    #. At the ``Select Device`` dialog select ``XMOS XTAG-2 connect to L1[0..1]`` and click ``OK``.
    #. The output on the LCD should look like a bouncing "X".
     
-Next Steps
+Next steps
 ++++++++++
 
   #. Examine the application code. In xTIMEcomposer navigate to the ``src`` directory under app_lcd_demo and double click on the ``app_lcd_demo.xc`` file within it. The file will open in the central editor window.
   #. Trying changing the ``int x=20, y=0, vx=1, vy=2;`` variables on line 23, they represent: initial x coord, initial y coord, x velocity and y velocity respectively.
   #. In the ``sub()`` function what would you expect to see if the line: ``buffer[i] = BACK_COLOUR;`` was changed to ``buffer[i] = 0x12345678;``?
 
-Try the Full Display Controller Demo
+Try the full display controller demo
 ....................................
 
 This application is necessarily limited since there is no external memory available for a full framebuffer, and the internal memory of an XCore Tile is too small to buffer a full screen colour image. The Display Controller demo combines the functionality of this LCD module with the SDRAM Controller component and SDRAM Slice Card. Together they implement a fully functioning LCD Display Controller by adding the memory controller and a component that takes care of framebuffer management. 
 
-Once you have both the XA-SK-SDRAM and XA-SK-SCR480 slices you can try the Display Controller demo by :ref:`Display_Controller_Demo_Quickstart`
+Once you have both the XA-SK-SDRAM and XA-SK-SCR480 slices you can try the Display Controller demo by :ref:`Display_controller_demo_quickstart`

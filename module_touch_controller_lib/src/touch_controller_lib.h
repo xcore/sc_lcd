@@ -21,6 +21,8 @@ void touch_lib_init(touch_controller_ports &ports);
  * The returned coordinates are not scaled.
  *
  * \param ports The structure containing the touch controller port details.
+ * \param x The X coordinate of point of touch.
+ * \param y The Y coordinate of point of touch.
  */
 void touch_lib_get_touch_coords(touch_controller_ports &ports,
     unsigned &x, unsigned &y);
@@ -38,8 +40,8 @@ select touch_lib_touch_event(touch_controller_ports &ports);
  * not scaled.
  *
  * \param ports The structure containing the touch controller port details.
- * \param ts_x The X coordinate of point of touch.
- * \param ts_y The Y coordinate of point of touch.
+ * \param x The X coordinate of point of touch.
+ * \param y The Y coordinate of point of touch.
  */
 void touch_lib_get_next_coord(touch_controller_ports &ports,
 		unsigned &x, unsigned &y);
@@ -47,8 +49,8 @@ void touch_lib_get_next_coord(touch_controller_ports &ports,
 /** \brief The function to scale coordinate values (from the touch point
  * coordinates to the LCD pixel coordinates)
  *
- * \param x The X coordinate value
- * \param y The Y coordinate value
+ * \param x The scaled X coordinate value
+ * \param y The scaled Y coordinate value
  */
 void touch_lib_scale_coords(unsigned &x, unsigned &y);
 

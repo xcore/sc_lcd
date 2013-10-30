@@ -20,7 +20,7 @@ typedef struct lcd_ports {
 
 /** \brief The LCD server thread.
  *
- * \param client The channel end connecting to the client.
+ * \param c_client The channel end connecting to the client.
  * \param ports The structure carrying the LCD port details.
  */
 void lcd_server(chanend c_client, lcd_ports &ports);

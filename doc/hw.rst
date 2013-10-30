@@ -1,5 +1,5 @@
 
-Evaluation Platforms
+Evaluation platforms
 ====================
 
 .. _sec_hardware_platforms:
@@ -14,7 +14,7 @@ This module may be evaluated using the sliceKIT Modular Development Platform, av
 
    * XP-SKC-L2 (sliceKIT L16 Core Board) plus XA-SK-SCR480 plus XA-SK-XTAG2 (sliceKIT XTAG adaptor) 
 
-Demonstration Applications
+Demonstration applications
 --------------------------
 
 LCD Demo Application
@@ -26,7 +26,7 @@ The LCD demo application shows how a buffer of image data can be written to the 
    * Application: app_lcd_demo
 
 
-Touch Screen Demo Application
+Touch screen demo application
 +++++++++++++++++++++++++++++
 
 The touch screen demo application shows how a touch event is processed and the touch coordinates are fetched from the touch screen controller chip fitted on the XA-SK-SCR480 Slice Card.
@@ -35,7 +35,7 @@ The touch screen demo application shows how a touch event is processed and the t
    * Applications: app_touch_controller_lib_demo
 
 
-Display Controller Application
+Display controller application
 ++++++++++++++++++++++++++++++
 
 This combination demo employs the ``module_lcd`` along with the ``module_sdram`` and the ``module_display_controller`` framebuffer framework component to implement a 480x272 display controller.

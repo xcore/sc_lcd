@@ -7,7 +7,7 @@ The component ``sc_lcd`` includes the modules ``module_lcd``, ``module_text_disp
 module_lcd
 ----------
 
-Configuration Defines
+Configuration defines
 +++++++++++++++++++++
 
 The ``module_lcd`` includes device support defines, each support header, located in the ``devices`` directory defines a number of parameters. It is sufficient for the user to specify which device to support in the ``lcd_conf.h`` for the device to be correctly supported. To do this ``lcd_conf.h`` must include the define:
@@ -19,7 +19,7 @@ where p is the part the user requires support for. ``lcd_conf.h`` must be locate
   * K430WQAV4F
   * K70DWN0V1F
 
-Implementation Specific Defines
+Implementation specific defines
 +++++++++++++++++++++++++++++++
 It is possible to override the default defines when a part number is selected. The defines available are:
 
@@ -84,7 +84,7 @@ module_touch_controller_lib
 The device-specific configuration defines and user defines are listed in ``touch_lib_conf.h``.
 
 
-Configuration Defines
+Configuration defines
 +++++++++++++++++++++
 
 **TOUCH_LIB_LCD_WIDTH**
@@ -111,51 +111,10 @@ where the following functions can be found:
 
 
 .. doxygenfunction:: touch_lib_init
-.. doxygenfunction:: touch_lib_get_touch_coordinates
-.. doxygenfunction:: touch_lib_req_next_coord
-.. doxygenfunction:: touch_lib_req_next_coord_timed
-.. doxygenfunction:: touch_lib_next_coord_timed
+.. doxygenfunction:: touch_lib_get_touch_coords
+.. doxygenfunction:: touch_lib_touch_event
+.. doxygenfunction:: touch_lib_get_next_coord
 .. doxygenfunction:: touch_lib_scale_coords
 
-
-module_touch_controller_server
-------------------------------
-
-The device-specific configuration defines and user defines are listed in ``touch_lib_conf.h``.
-
-
-Configuration Defines
-+++++++++++++++++++++
-
-**TOUCH_SERVER_LCD_WIDTH**
-	This define is used to represent the width of the LCD panel in pixels.
-
-**TOUCH_SERVER_LCD_HEIGHT**
-	This define is used to represent the height of the LCD panel in pixels.
-
-**TOUCH_SERVER_TS_WIDTH**
-     This define is used to represent the width of the touch screen in points.
-
-**TOUCH_SERVER_TS_HEIGHT**
-     This define is used to represent the height of the touch screen in points.
-
-
-API
-+++
-
-The touch screen module functionality is defined in
-  * ``touch_controller_server.xc``
-  * ``touch_controller_server.h``
-  * ``/AD7879-1``
-
-where the following functions can be found:
-
-.. doxygenfunction:: touch_server_get_touch_coordinates
-.. doxygenfunction:: touch_controller_server
-.. doxygenfunction:: touch_server_process_interrupt
-.. doxygenfunction:: touch_server_get_last_coord
-.. doxygenfunction:: touch_server_get_next_coord
-.. doxygenfunction:: touch_server_get_last_coord_timed
-.. doxygenfunction:: touch_server_scale_coords
 
 

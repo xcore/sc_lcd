@@ -1,4 +1,4 @@
-LCD Driver Component
+LCD driver component
 ....................
 
 :Latest release: 1.1.0rc1
@@ -6,7 +6,7 @@ LCD Driver Component
 :Description: Driver component and supporting modules for RGB565 LCDs
 
 
-Key Features
+Key features
 ============
 
    * Standard component to support different LCD displays with RGB 565.
@@ -18,12 +18,12 @@ Key Features
       * Pen-down interrupt signal supported
       * Outputs touch coordinates with time information
 
-Firmware Overview
+Firmware overview
 =================
 
 The LCD component is used to drive a single graphics LCD module up to 800 * 600 pixels with pixel clocks of up to 25MHz.
 
-Known Issues
+Known issues
 ============
 
 none

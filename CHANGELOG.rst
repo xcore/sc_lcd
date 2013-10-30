@@ -4,6 +4,7 @@ sc_lcd Change Log
 -----
    * Removed touch server
    * Code clean up
+   * Renamed channels
 
 1.1.0
 -----

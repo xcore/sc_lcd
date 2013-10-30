@@ -1,10 +1,11 @@
- LCD Programming Guide
+LCD programming guide
 =====================
 
 This section provides information on how to program applications using the LCD module.
 
 Source code structure
 ---------------------
+
 .. list-table:: Project structure
   :header-rows: 1
   
@@ -27,13 +28,15 @@ Source code structure
     - ``/devices``
     - Folder containing header files of configurations for LCDs
 
-Additional Files
+Additional files
 ----------------
-.. list-table:: Additional Files
-  :header-rows: 1
-  * - 
-    - ``generate.pl``
-    - Perl file for generating a fast write function body for LCD screens of arbitrary width. 
+.. list-table:: Additional files
+   :header-rows: 1
+
+   * - File name
+     - Description
+   * - ``generate.pl``
+     - Perl file for generating a fast write function body for LCD screens of arbitrary width. 
 
 
 How to select the LCD target
@@ -72,7 +75,7 @@ The declared variable ``lcd_ports`` is used by the LCD server call to address th
 	application(c_lcd);
   }
 
-Executing The Project
+Executing the project
 ---------------------
 The module by itself cannot be built or executed separately. It must be linked in to an application which needs LCD display. Once the module is linked to the application, the application can be built and tested for driving a LCD screen.
 
@@ -80,14 +83,14 @@ The following should be done in order to link the component to the application p
   #. The module name ``module_lcd`` should be added to the list of MODULES in the application project build options. 
   #. Now the module is linked to the application and can be directly used
 
-Software Requirements
+Software requirements
 ---------------------
 
 The module is built on XDE Tool version 12.0
 The module can be used in version 12.0 or any higher version of xTIMEcomposer.
 
 
-Touch Controller Programming Guide
+Touch controller programming guide
 ==================================
 
 This section provides information on how to program applications using the touch controller module.
@@ -161,7 +164,7 @@ When ``module_touch_controller_server`` is used, a core should have the ``touch_
 	app(c);
   }
 
-Executing The Project
+Executing the project
 ---------------------
 The touch controller module by itself cannot be built or executed separately. It must be linked into an application. The application also depends on I2C module. Once the modules are linked to the application, the application can be built and run.
 
@@ -170,7 +173,7 @@ The following should be done in order to link the modules to the application pro
   #. The module name ``module_i2c_master`` should also be added.
   #. Now the modules are linked to the application and can be directly used
 
-Software Requirements
+Software requirements
 ---------------------
 
 The modules are built on XDE Tool version 12.0
