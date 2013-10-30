@@ -24,9 +24,9 @@
         </component>
         <component description = "Demonstrates how the module is used to read the touch coordinates when the touch screen is touched." type = "demoCode" scope = "Example" path = "app_touch_controller_lib_demo" local = "false" id = "app_touch_controller_lib_demo" name = "Touch Screen Demo">
             <board>XA-SK-SCR480</board>
+            <componentDependency repo = "git://github.com/xcore/sc_i2c" version = "2.2.0">module_i2c_master</componentDependency>
+            <componentDependency repo = "git://github.com/xcore/sc_i2c" version = "2.2.0">module_i2c_master</componentDependency>
             <componentDependency version = "1.1.0">module_touch_controller_lib</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_i2c" version = "2.2.0">module_i2c_master</componentDependency>
-            <componentDependency repo = "git://github.com/xcore/sc_i2c" version = "2.2.0">module_i2c_master</componentDependency>
             <keyword>Touch screen</keyword>
             <keyword>Touch controller</keyword>
         </component>
@@ -59,6 +59,7 @@
     <release parenthash = "587eb35c576339fa427b2838b3660974677ae8a9" version = "1.1.0beta0" githash = "67e86e076aa9a26d8dd0360aa053072c46d46ee1"></release>
     <release parenthash = "67e86e076aa9a26d8dd0360aa053072c46d46ee1" version = "1.1.0rc0" githash = "5db094b21dc868589d4f0ff37711d2df30a642e9"></release>
     <release parenthash = "c697fdbad3609b02b2306387c5d738072cd29fef" version = "1.1.0rc1" githash = "72d8c1f11adb9e6a07fe5f389f34c1bc1514fbf5"></release>
+    <release parenthash = "08d3a07c2740b6b44557a59143ba5ad83040d96e" version = "1.1.1rc0"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <version_defines></version_defines>
