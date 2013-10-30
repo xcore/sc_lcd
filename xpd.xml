@@ -80,5 +80,4 @@
     <version_defines></version_defines>
     <xcore_repo>sc_lcd.git</xcore_repo>
     <xpd_version>1.0</xpd_version>
-    <xsoftip_exclude>module_text_display</xsoftip_exclude>
 </xpd>

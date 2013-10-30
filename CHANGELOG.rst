@@ -1,5 +1,9 @@
 sc_lcd Change Log
 =============================
+1.1.1
+-----
+   * Removed touch server
+   * Code clean up
 
 1.1.0
 -----
