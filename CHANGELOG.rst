@@ -5,6 +5,12 @@ sc_lcd Change Log
 -----
    * Update i2c dependency
 
+  * Changes to dependencies:
+
+    - sc_i2c: 2.2.0rc0 -> 2.2.1rc0
+
+      + Documentation fixes
+
 1.1.1
 -----
    * Removed touch server
