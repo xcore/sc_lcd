@@ -32,9 +32,9 @@
         </component>
     </components>
     <dependency repo = "sc_i2c">
-        <githash>53349e8bd6493701b1ec462187b14c9e74bdc6bd</githash>
+        <githash>d8e7a39aa0671340d33cf7b40610e15b9bc7a8f0</githash>
         <uri>git@github.com:xcore/sc_i2c.git</uri>
-        <version>2.2.0rc0</version>
+        <version>2.2.1rc0</version>
     </dependency>
     <dependency repo = "sc_slicekit_support">
         <githash>7920fc4235a96585274d73d25d275ea63b4cd285</githash>
@@ -59,7 +59,7 @@
     <release parenthash = "587eb35c576339fa427b2838b3660974677ae8a9" version = "1.1.0beta0" githash = "67e86e076aa9a26d8dd0360aa053072c46d46ee1"></release>
     <release parenthash = "67e86e076aa9a26d8dd0360aa053072c46d46ee1" version = "1.1.0rc0" githash = "5db094b21dc868589d4f0ff37711d2df30a642e9"></release>
     <release parenthash = "c697fdbad3609b02b2306387c5d738072cd29fef" version = "1.1.0rc1" githash = "72d8c1f11adb9e6a07fe5f389f34c1bc1514fbf5"></release>
-    <release parenthash = "08d3a07c2740b6b44557a59143ba5ad83040d96e" version = "1.1.1rc0"></release>
+    <release parenthash = "08d3a07c2740b6b44557a59143ba5ad83040d96e" version = "1.1.1rc0" githash = "f4e03fa27a9fcf827eb8afcc4830867474255475"></release>
     <subpartnumber>XM-001961-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <version_defines></version_defines>
