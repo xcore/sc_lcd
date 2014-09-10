@@ -1,0 +1,7 @@
+#Fri Aug 22 11:26:17 BST 2014
+eclipse.preferences.version=1
+environment/project/com.xmos.cdt.toolchain.829579896/XMOS_MODULE_PATH/delimiter=\:
+environment/project/com.xmos.cdt.toolchain.829579896/XMOS_MODULE_PATH/operation=append
+environment/project/com.xmos.cdt.toolchain.829579896/XMOS_MODULE_PATH/value=/home/andrew/github/sw_display_controller/app_display_controller_benchmark\:/home/andrew/github/sw_display_controller/app_display_controller_demo\:/home/andrew/github/sw_display_controller/app_display_controller_testbench\:/home/andrew/display_controller_update/app_lcd_demo_movable\:/home/andrew/github/sc_sdram_burst/app_sdram_benchmark\:/home/andrew/github/sc_sdram_burst/app_sdram_demo\:/home/andrew/github/sc_sdram_burst/app_sdram_mfg_test\:/home/andrew/github/sc_sdram_burst/app_sdram_multi_client_test\:/home/andrew/github/sc_sdram_burst/app_sdram_testbench\:/home/andrew/github/memory_address_allocator/lib_memory_address_allocator\:/home/andrew/github/sw_display_controller/module_display_controller\:/home/andrew/github/sw_display_controller/module_display_controller_transitions\:/home/andrew/github/sc_sdram_burst/module_sdram\:/home/andrew/github/sc_sdram_burst/module_sdram_slicekit_support\:/home/andrew/github/sc_slicekit_support/module_slicekit_support
+environment/project/com.xmos.cdt.toolchain.829579896/append=true
+environment/project/com.xmos.cdt.toolchain.829579896/appendContributed=true

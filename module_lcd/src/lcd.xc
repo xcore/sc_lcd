@@ -4,117 +4,183 @@
 #include <print.h>
 #include <stdlib.h>
 
-#define LDW(dst, mem, ind) asm("ldw %0, %1[%2]" : "=r"(dst) : "r"(mem), "r"(ind))
+static void init(streaming chanend c_lcd){
+    c_lcd :> int;
+    c_lcd <: 0;
+}
 
-void lcd_init(chanend c_lcd) {
-  outct(c_lcd, XS1_CT_END);
+void lcd_init(streaming chanend c_lcd, unsigned * unsafe buffer){
+    c_lcd <: 0;
+    c_lcd :> int;
+    unsafe {
+        c_lcd <: buffer;
+    }
+}
+
+void lcd_update(streaming chanend c_lcd, unsigned * unsafe buffer){
+    unsafe {
+        c_lcd <: buffer;
+    }
+}
+
+static void return_pointer(streaming chanend c_lcd, unsigned * unsafe buffer){
+    unsafe {
+        c_lcd <: buffer;
+    }
+}
+
+void lcd_req(streaming chanend c_lcd){
+    c_lcd :> int;
+}
+
+static void fetch_pointer(streaming chanend c_lcd, unsigned * unsafe & buffer){
+    c_lcd :> buffer;
+}
+
+void lcd_fast_loop(out buffered port:32 lcd_rgb, unsigned * unsafe buffer, int i);
+
+#pragma unsafe arrays
+static void output_data16_port16(lcd_ports &p, unsigned * unsafe buffer, unsigned &time){
+    unsigned words_per_row = p.s.width>>1;
+    unsafe {
+        p.lcd_rgb @ time <: buffer[0];
+
+        time += p.s.width;
+
+        int i = -(words_per_row-1);
+        buffer += words_per_row;
+
+        if(!isnull(p.lcd_data_enabled))
+            p.lcd_data_enabled @ time <: 0;         //blocking instruction
+
+        while(i){
+            p.lcd_rgb <: buffer[i];
+            i++;
+        }
+    }
 }
 
 #pragma unsafe arrays
-void lcd_server(chanend c_lcd, struct lcd_ports &p) {
+static void output_data16_port32(lcd_ports &p, unsigned * unsafe buffer, unsigned &time){
+    unsigned words_per_row = p.s.width>>1;
+    unsafe {
+        unsigned d = buffer[0];
+        p.lcd_rgb @ time <: d;
+
+        time += p.s.width;
+        if(!isnull(p.lcd_data_enabled))
+            p.lcd_data_enabled @ time <: 0;         //blocking instruction
+
+        p.lcd_rgb @ time <: (d>>16);
+
+        for (unsigned i = 1; i < words_per_row; i++){
+          d = buffer[i];
+          p.lcd_rgb <: d;
+          p.lcd_rgb <:(d>>16);
+        }
+    }
+}
+
+static void output_hsync_pulse(unsigned time, lcd_ports &p){
+    if(p.s.h_pulse_width < 32){
+        partout_timed(p.h_sync, p.s.h_pulse_width + 1, 1 << p.s.h_pulse_width, time);
+    } else {
+        partout_timed(p.h_sync, 1, 0, time);
+        unsigned t = time + p.s.h_pulse_width;
+        partout_timed(p.h_sync, 1, 1, t);
+    }
+}
+
+static void error(){}
+
+#pragma unsafe arrays
+void lcd_server(streaming chanend c_lcd, lcd_ports &p) {
   unsigned time;
 
-  configure_clock_rate_at_least(p.clk_lcd, LCD_FREQ_DIVIDEND, LCD_FREQ_DIVISOR);
+  stop_clock(p.clk_lcd);
 
-  set_port_clock(p.lcd_clk, p.clk_lcd);
-  set_port_mode_clock(p.lcd_clk);
-
-  set_port_clock(p.lcd_rgb, p.clk_lcd);
-  set_port_clock(p.lcd_data_enabled, p.clk_lcd);
+  configure_clock_ref(p.clk_lcd, p.s.clock_divider);
+  configure_port_clock_output(p.lcd_clk, p.clk_lcd);
+  configure_out_port(p.lcd_rgb, p.clk_lcd, 0);
 
   set_port_inv(p.lcd_clk);
 
-#if LCD_HOR_PULSE_WIDTH
-  set_port_clock(p.lcd_hsync, p.clk_lcd);
-#endif
-
-#if LCD_VERT_PULSE_WIDTH
-  set_port_clock(p.lcd_vsync, p.clk_lcd);
-#endif
+  if(!isnull(p.lcd_data_enabled))
+      configure_out_port(p.lcd_data_enabled, p.clk_lcd, 0);
+  if(!isnull(p.h_sync))
+      configure_out_port(p.h_sync, p.clk_lcd, 1);
+  if(!isnull(p.v_sync))
+      configure_out_port(p.v_sync, p.clk_lcd, 1);
 
   start_clock(p.clk_lcd);
 
-  chkct(c_lcd, XS1_CT_END);
-  outct(c_lcd, XS1_CT_END);
-#if LCD_VERT_PULSE_WIDTH
-  partout(p.lcd_vsync, 1, 1);
-#endif
-#if LCD_HOR_PULSE_WIDTH
-  partout(p.lcd_hsync, 1, 1);
-#endif
-  p.lcd_data_enabled <: 0 @ time;
+  // Sanity checks
+  if(isnull(p.h_sync) && p.s.h_pulse_width!=0)
+      error();
+
+  if(isnull(p.v_sync) && p.s.v_pulse_width!=0)
+      error();
+
+  //wait here for the client to say that it is ready
+  init(c_lcd);
+
+  // get the port time
+  p.lcd_rgb <: 0 @ time;
 
   time += 1000;
 
+  //The count of pixel clocks per horizontal scan line
+  unsigned h_sync_clocks = p.s.h_front_porch + p.s.h_back_porch + p.s.width;
+
   while (1) {
-    unsigned ptr;
-    unsigned x;
 
-#if (LCD_VERT_PULSE_WIDTH > 0)
-      partout_timed(p.lcd_vsync, 1, 0, time);
-#endif
-    for (unsigned i = 0; i < LCD_VERT_PULSE_WIDTH; i++) {
-#if (LCD_HOR_PULSE_WIDTH > 0)
-        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH + 1,
-            1 << LCD_HOR_PULSE_WIDTH, time);
-#endif
-      time += LCD_HSYNC_TIME;
-    }
-#if (LCD_VERT_PULSE_WIDTH>0)
-    partout_timed(p.lcd_vsync, 1, 1, time);
-#endif
-#if(LCD_HOR_PULSE_WIDTH)
-      for(unsigned i=0;i<LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH;i++) {
-        if (LCD_HOR_PULSE_WIDTH>0)
-        partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
-        time += LCD_HSYNC_TIME;
-      }
-#else
-      time += LCD_HSYNC_TIME*(LCD_VERT_BACK_PORCH - LCD_VERT_PULSE_WIDTH);
-#endif
+    if(!isnull(p.v_sync))
+        p.v_sync @ time <: 0;
 
-    for (int y = 0; y < LCD_HEIGHT; y++)
-    {
-#if (LCD_HOR_PULSE_WIDTH>0)
-      partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
-#endif
-      time += LCD_HOR_BACK_PORCH;
+    if(!isnull(p.h_sync)){
+         for (unsigned i = 0; i < p.s.v_pulse_width; i++) {
+             output_hsync_pulse(time, p);
+             time += h_sync_clocks;
+         }
+    } else
+        time += h_sync_clocks * p.s.v_pulse_width;
 
-      ptr = inuint(c_lcd);
-      chkct(c_lcd, XS1_CT_END);
+    if(!isnull(p.v_sync))
+        p.v_sync @ time <: 1;
 
-#if LCD_FAST_WRITE==1
-	  lcd_fast_write(ptr, time, p.lcd_rgb, p.lcd_data_enabled);
-	  time += LCD_WIDTH;
-#else
-	  LDW(x, ptr, 0);
+    if(!isnull(p.h_sync)){
+        for(unsigned i=0;i<p.s.v_back_porch - p.s.v_pulse_width;i++) {
+            output_hsync_pulse(time, p);
+            time += h_sync_clocks;
+        }
+    } else
+        time += h_sync_clocks*(p.s.v_back_porch - p.s.v_pulse_width);
 
-	  p.lcd_data_enabled @ time <: 1;
-    p.lcd_rgb @ time <: x;
+    for (int y = 0; y < p.s.height; y++) {
+        if(!isnull(p.h_sync))
+            output_hsync_pulse(time, p);
+        time += p.s.h_back_porch;
 
-#if LCD_USE_32_BIT_DATA_PORT==1
-    p.lcd_rgb  <: x>>16;
-#endif
-	  time += LCD_WIDTH;
-	  p.lcd_data_enabled @ time <: 0;
+        unsigned * unsafe buffer;
+        fetch_pointer(c_lcd, buffer);
 
-	  for (unsigned i = 1; i < LCD_ROW_WORDS; i++) {
-		LDW(x, ptr, i);
-		p.lcd_rgb <: x;
-#if LCD_USE_32_BIT_DATA_PORT==1
-    p.lcd_rgb  <: x>>16;
-#endif
-	  }
-#endif
-      outct(c_lcd, XS1_CT_END);
-      time += LCD_HOR_FRONT_PORCH;
+	    if(!isnull(p.lcd_data_enabled))
+	        p.lcd_data_enabled @ time <: 1;
+
+	    switch(p.s.output_mode){
+          case data16_port16: output_data16_port16(p, buffer, time); break;
+          case data16_port32: output_data16_port32(p, buffer, time); break;
+	    }
+	    return_pointer(c_lcd, buffer);
+
+        time += p.s.h_front_porch;
     }
 
-    for(unsigned i=0;i<LCD_VERT_FRONT_PORCH;i++) {
-#if (LCD_HOR_PULSE_WIDTH>0)
-      partout_timed(p.lcd_hsync, LCD_HOR_PULSE_WIDTH+1, 1<<LCD_HOR_PULSE_WIDTH, time);
-#endif
-      time += LCD_HSYNC_TIME;
+
+    for(unsigned i=0;i<p.s.v_front_porch;i++) {
+        if(!isnull(p.h_sync))
+            output_hsync_pulse(time, p);
+        time += h_sync_clocks;
     }
   }
 }

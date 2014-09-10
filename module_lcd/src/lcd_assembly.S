@@ -4,31 +4,39 @@
 .globl lcd_fast_write
 .type  lcd_fast_write, @function
 lcd_fast_write:
+/*
+ 	//r0 unsigned &time
+	//r1 unsigned * unsafe buffer
+	//r2 lcd_ports &p
 
- 	//r0 buffer pointer
-	//r1 time
-	//r2 resource id of dq
-	//r3 resource id of de
+	//load rgb and de from p
 
-    setpt res[r2], r1
-	setpt res[r3], r1
+    setpt res[rgb], time
+	setpt res[de], 	time
 
-	ldaw r11, cp[0]
-	set cp, r0
-	ldw r0, cp[0]
+	ldc c, 1
+	out c, res[de]
 
-	ldc r1, 1
-	out res[r2], r0
+	ldw c, buffer[0]
+	out c, res[rgb]
 
-	shr r0, r0, 16
-	out res[r3], r1
-	ldc r1, 0
-	out res[r2], r0
+	//load c with the width
+	add time, time, c
 
-	#include "lcd_generated.inc"
-	out res[r3], r1
+	ldc c, 4
 
-	set cp, r11
+	ldaw buffer, buffer[n]
+	ldaw c, c[-n]
+
+	setpt res[de], time	//blocking instruction
+	out c, res[de]		//c has the bottom bit as 0
+
+loop:
+	ldw t, buffer[c]
+	out t, res[rgb]
+	add c, c, 4
+	bt c, loop
+*/
 	retsp 0
 
 .globl lcd_fast_write.nstackwords
@@ -40,4 +48,34 @@ lcd_fast_write:
 .globl lcd_fast_write.maxthreads
 .linkset lcd_fast_write.maxthreads, 1
 
+
+
 .cc_bottom lcd_fast_write
+.cc_top lcd_fast_loop
+.align 4
+.globl lcd_fast_loop
+.type  lcd_fast_loop, @function
+
+#define rgb r0
+#define buffer r1
+#define i r2
+#define t r11
+
+lcd_fast_loop:
+	ldw t, buffer[i]
+	out res[rgb], t
+	add i, i, 1
+	bt i, lcd_fast_loop
+no:
+	retsp 0
+
+.globl lcd_fast_loop.nstackwords
+.linkset lcd_fast_loop.nstackwords, 0
+.globl lcd_fast_loop.maxtimers
+.linkset lcd_fast_loop.maxtimers, 0
+.globl lcd_fast_loop.maxchanends
+.linkset lcd_fast_loop.maxchanends, 0
+.globl lcd_fast_loop.maxthreads
+.linkset lcd_fast_loop.maxthreads, 1
+
+.cc_bottom lcd_fast_loop
